@@ -1,0 +1,402 @@
+fileFormatVersion: 2
+guid: 2012e18f9909ee448b463108eafd5ac3
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: <Root Transform>
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: talk
+      takeName: Take 001
+      internalID: 1827226128182048838
+      firstFrame: 0
+      lastFrame: 210
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human:
+    - boneName: Ella_Pelvis
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Ella_LThigh
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Ella_RThigh
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Ella_LCalf
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Ella_RCalf
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Ella_LFoot
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Ella_RFoot
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Ella_Spine1
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Ella_Spine2
+      humanName: Chest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Ella_Neck
+      humanName: Neck
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Ella_Head
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Ella_LCollarbone
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Ella_RCollarbone
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Ella_LUpperarm
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Ella_RUpperarm
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Ella_LForearm
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Ella_RForearm
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Ella_RPalm
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Ella_Ribcage
+      humanName: UpperChest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Ella_LPalm
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: Daigo@idle(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Ella_Pelvis
+      parentName: Daigo@idle(Clone)
+      position: {x: -0.002096599, y: 0.19008915, z: -0.015865514}
+      rotation: {x: 0.4332803, y: -0.47312945, z: -0.5572713, w: 0.52712953}
+      scale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
+    - name: Ella_LThigh
+      parentName: Ella_Pelvis
+      position: {x: -0.0037926463, y: 0.0103409, z: 0.04519867}
+      rotation: {x: -0.061890278, y: 0.98459655, z: 0.13817571, w: 0.08744582}
+      scale: {x: 1.0000018, y: 0.99999833, z: 1.0000005}
+    - name: Ella_LCalf
+      parentName: Ella_LThigh
+      position: {x: -0.10004563, y: -0.000000093865395, z: 0.000000012111664}
+      rotation: {x: 0.00013869556, y: 0.0017356955, z: 0.15327008, w: 0.98818284}
+      scale: {x: 1.0000045, y: 0.9999953, z: 1.0000001}
+    - name: Ella_LFoot
+      parentName: Ella_LCalf
+      position: {x: -0.09680646, y: -0.00000017561912, z: 0.000000006055832}
+      rotation: {x: -0.07110868, y: 0.08359142, z: -0.67004985, w: 0.7341589}
+      scale: {x: 1.0000117, y: 0.9999882, z: 0.99999976}
+    - name: Ella_RThigh
+      parentName: Ella_Pelvis
+      position: {x: -0.0037926221, y: 0.0103409, z: -0.045198675}
+      rotation: {x: -0.12605304, y: 0.97517604, z: -0.13655189, w: -0.12039952}
+      scale: {x: 1.0000019, y: 0.9999984, z: 0.9999997}
+    - name: Ella_RCalf
+      parentName: Ella_RThigh
+      position: {x: -0.10004562, y: -0.000000036334992, z: -0.000000006055832}
+      rotation: {x: 0.000056481033, y: -0.0038526447, z: 0.29636458, w: 0.9550671}
+      scale: {x: 0.9999972, y: 1.0000027, z: 0.99999976}
+    - name: Ella_RFoot
+      parentName: Ella_RCalf
+      position: {x: -0.09680646, y: 0.00000029067994, z: 0}
+      rotation: {x: 0.019728528, y: -0.060536128, z: -0.7430029, w: 0.6662529}
+      scale: {x: 0.99999595, y: 1.0000042, z: 1}
+    - name: Ella_Spine1
+      parentName: Ella_Pelvis
+      position: {x: -0.01006776, y: -0.0007702912, z: -0.000000003027916}
+      rotation: {x: 0.012692096, y: 0.043322247, z: -0.061305538, w: 0.9970977}
+      scale: {x: 1.0000002, y: 1.0000005, z: 0.99999994}
+    - name: Ella_Spine2
+      parentName: Ella_Spine1
+      position: {x: -0.07480145, y: -0.000000003027916, z: 0}
+      rotation: {x: 0.06161617, y: -0.013141738, z: 0.1617064, w: 0.9848258}
+      scale: {x: 1.0000001, y: 1.0000004, z: 1}
+    - name: Ella_Ribcage
+      parentName: Ella_Spine2
+      position: {x: -0.063720845, y: 0.000000003027916, z: 0}
+      rotation: {x: -0.025787653, y: -0.017095454, z: -0.5203531, w: 0.8533905}
+      scale: {x: 0.9999996, y: 0.99999964, z: 1.0000001}
+    - name: Ella_LCollarbone
+      parentName: Ella_Ribcage
+      position: {x: 0.003823628, y: 0.022358865, z: 0.0066333706}
+      rotation: {x: -0.00019413774, y: 0.7574275, z: 0.11310241, w: 0.6430485}
+      scale: {x: 0.99999964, y: 1.0000002, z: 1.0000005}
+    - name: Ella_LUpperarm
+      parentName: Ella_LCollarbone
+      position: {x: -0.07802616, y: 0, z: 0}
+      rotation: {x: 0.4858538, y: -0.04940457, z: -0.08560999, w: 0.8684332}
+      scale: {x: 0.9999999, y: 1.0000027, z: 0.99999964}
+    - name: Ella_LForearm
+      parentName: Ella_LUpperarm
+      position: {x: -0.09778153, y: 0, z: 0}
+      rotation: {x: 0.054017734, y: -0.016109126, z: 0.0021230981, w: 0.9984078}
+      scale: {x: 0.9999987, y: 1.000011, z: 0.99999034}
+    - name: Ella_LPalm
+      parentName: Ella_LForearm
+      position: {x: -0.08594967, y: -0.000000012111664, z: 0}
+      rotation: {x: -0.5019085, y: 0.043475065, z: -0.13771228, w: 0.8527796}
+      scale: {x: 1.0000015, y: 1.0000249, z: 0.99997294}
+    - name: Ella_RCollarbone
+      parentName: Ella_Ribcage
+      position: {x: 0.003823628, y: 0.022358865, z: -0.0066333646}
+      rotation: {x: 0.00625127, y: -0.76972044, z: 0.110011406, w: 0.62879956}
+      scale: {x: 1.0000005, y: 1.0000005, z: 0.9999998}
+    - name: Ella_RUpperarm
+      parentName: Ella_RCollarbone
+      position: {x: -0.07802615, y: 0, z: -0.000000024223327}
+      rotation: {x: -0.4160628, y: 0.14847064, z: 0.01563672, w: 0.89699715}
+      scale: {x: 1, y: 1.0000038, z: 0.9999963}
+    - name: Ella_RForearm
+      parentName: Ella_RUpperarm
+      position: {x: -0.09778154, y: 0, z: 0}
+      rotation: {x: -0.06664771, y: 0.012086118, z: -0.019132914, w: 0.99751997}
+      scale: {x: 1.0000001, y: 0.9999975, z: 1.0000056}
+    - name: Ella_RPalm
+      parentName: Ella_RForearm
+      position: {x: -0.08594976, y: -0.000000003027916, z: 0}
+      rotation: {x: 0.62152016, y: -0.12717584, z: 0.10929598, w: 0.7652407}
+      scale: {x: 0.9999973, y: 1.0000019, z: 0.9999975}
+    - name: Ella_Neck
+      parentName: Ella_Ribcage
+      position: {x: -0.00017494087, y: -0.0007702927, z: 0}
+      rotation: {x: 0.0036429411, y: 0.018155409, z: -0.098799646, w: 0.9949351}
+      scale: {x: 1.0000002, y: 1.0000006, z: 1.0000001}
+    - name: Ella_Head
+      parentName: Ella_Neck
+      position: {x: -0.013651613, y: 0, z: 0}
+      rotation: {x: 0.003642934, y: 0.018155277, z: -0.098799154, w: 0.9949351}
+      scale: {x: 1.0000001, y: 1.0000001, z: 0.9999999}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: fdf27f70b5d27d742bae35d8d2f6a147,
+    type: 3}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 3
+  humanoidOversampling: 1
+  avatarSetup: 2
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

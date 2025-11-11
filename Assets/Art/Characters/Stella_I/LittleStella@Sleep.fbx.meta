@@ -1,0 +1,1616 @@
+fileFormatVersion: 2
+guid: 74f5081ced66b5b40a32598d7b4f7814
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: MasterJoint
+    animationImportErrors: 
+    animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
+      might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'AnastellaRibcage' is inbetween humanoid
+      transforms and has rotation animation that will be discarded.\n\t'AnastellaNeck2'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n"
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Sleep
+      takeName: Take 001
+      internalID: 1827226128182048838
+      firstFrame: 0
+      lastFrame: 79
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human:
+    - boneName: AnastellaPelvis
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaLThigh
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaRThigh
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaLCalf
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaRCalf
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaLFoot
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaRFoot
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaSpine1
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaSpine2
+      humanName: Chest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaNeck1
+      humanName: Neck
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaHead
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaLCollarbone
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaRCollarbone
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaLUpperarm
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaRUpperarm
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaLForearm
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaRForearm
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaLPalm
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaRPalm
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaLMiddleToe1
+      humanName: LeftToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaRMiddleToe1
+      humanName: RightToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaEye_Left
+      humanName: LeftEye
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaEye_Right
+      humanName: RightEye
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaJaw
+      humanName: Jaw
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaLDigit11
+      humanName: Left Thumb Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaLDigit12
+      humanName: Left Thumb Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaLDigit13
+      humanName: Left Thumb Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaLDigit21
+      humanName: Left Index Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaLDigit22
+      humanName: Left Index Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaLDigit23
+      humanName: Left Index Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaLDigit31
+      humanName: Left Middle Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaLDigit32
+      humanName: Left Middle Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaLDigit33
+      humanName: Left Middle Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaLDigit41
+      humanName: Left Ring Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaLDigit42
+      humanName: Left Ring Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaLDigit43
+      humanName: Left Ring Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaLDigit51
+      humanName: Left Little Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaLDigit52
+      humanName: Left Little Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaLDigit53
+      humanName: Left Little Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaRDigit11
+      humanName: Right Thumb Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaRDigit12
+      humanName: Right Thumb Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaRDigit13
+      humanName: Right Thumb Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaRDigit21
+      humanName: Right Index Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaRDigit22
+      humanName: Right Index Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaRDigit23
+      humanName: Right Index Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaRDigit31
+      humanName: Right Middle Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaRDigit32
+      humanName: Right Middle Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaRDigit33
+      humanName: Right Middle Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaRDigit41
+      humanName: Right Ring Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaRDigit42
+      humanName: Right Ring Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaRDigit43
+      humanName: Right Ring Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaRDigit51
+      humanName: Right Little Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaRDigit52
+      humanName: Right Little Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaRDigit53
+      humanName: Right Little Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: AnastellaSpine3
+      humanName: UpperChest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: LittleStella(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: LittleStella_Eye
+      parentName: LittleStella(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: LittleStella_Hair
+      parentName: LittleStella(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: LittleStella_Body
+      parentName: LittleStella(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: LittleStella_Head
+      parentName: LittleStella(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EyeBrow
+      parentName: LittleStella(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: LittleStella_StarEyes
+      parentName: LittleStella(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: LittleStella_Dress1
+      parentName: LittleStella(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: MasterJoint
+      parentName: LittleStella(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: AnastellaPelvis
+      parentName: MasterJoint
+      position: {x: 3.6770585e-15, y: 0.4078199, z: -0.033680663}
+      rotation: {x: 0.49912703, y: -0.50087154, z: -0.49912694, w: 0.5008715}
+      scale: {x: 1, y: 1, z: 1}
+    - name: AnastellaDress_FrontEdge_Right1
+      parentName: AnastellaPelvis
+      position: {x: -0.112250976, y: 0.06555464, z: -0.065212965}
+      rotation: {x: 0.08772199, y: 0.3076331, z: 0.9345552, w: -0.15579914}
+      scale: {x: 1.0000005, y: 1.0000002, z: 1.0000001}
+    - name: AnastellaDress_FrontEdge_Right2
+      parentName: AnastellaDress_FrontEdge_Right1
+      position: {x: -0.08532105, y: -0.000000038146972, z: 0.000000014305114}
+      rotation: {x: 0.000000038184226, y: 0.000000078231096, z: -0.023642821, w: 0.9997205}
+      scale: {x: 1.0000002, y: 1.0000001, z: 1.0000002}
+    - name: AnastellaDress_FrontEdge_Right3
+      parentName: AnastellaDress_FrontEdge_Right2
+      position: {x: -0.08532105, y: -0.000000019073486, z: 0.000000019073486}
+      rotation: {x: -0.00000005626994, y: 0.000000012726337, z: -0.022737795, w: 0.9997415}
+      scale: {x: 1.0000007, y: 1.0000008, z: 1.0000004}
+    - name: AnastellaDress_FrontEdge_Right4
+      parentName: AnastellaDress_FrontEdge_Right3
+      position: {x: -0.08532105, y: 0, z: 0.000000009536743}
+      rotation: {x: -0.00000012904701, y: 0.000000069234765, z: -0.030425865, w: 0.999537}
+      scale: {x: 1.0000004, y: 1.0000004, z: 1.0000002}
+    - name: AnastellaDress_FrontEdge_Right5
+      parentName: AnastellaDress_FrontEdge_Right4
+      position: {x: -0.085321, y: -0.000000019073486, z: 0.000000009536743}
+      rotation: {x: -0.00000010597631, y: 0.00000009962311, z: -0.021046963, w: 0.9997785}
+      scale: {x: 1.0000004, y: 1.0000005, z: 1.0000001}
+    - name: AnastellaDress_Side_Right1
+      parentName: AnastellaPelvis
+      position: {x: -0.10199448, y: 0.03446218, z: -0.0575354}
+      rotation: {x: 0.23395762, y: 0.80974287, z: 0.51835495, w: -0.14452869}
+      scale: {x: 1, y: 1.0000001, z: 1}
+    - name: AnastellaDress_Side_Right2
+      parentName: AnastellaDress_Side_Right1
+      position: {x: -0.08636957, y: 0, z: 0.0000000047683715}
+      rotation: {x: 0.0000001899898, y: -0.000000022351742, z: -0.014942139, w: 0.9998884}
+      scale: {x: 1.0000005, y: 1.0000005, z: 1}
+    - name: AnastellaDress_Side_Right3
+      parentName: AnastellaDress_Side_Right2
+      position: {x: -0.08636955, y: 0, z: -0.0000000047683715}
+      rotation: {x: 0.00000029040734, y: -0.000000051195002, z: -0.05678745, w: 0.9983863}
+      scale: {x: 1, y: 0.99999994, z: 1}
+    - name: AnastellaDress_Side_Right4
+      parentName: AnastellaDress_Side_Right3
+      position: {x: -0.08636955, y: 0, z: 0.0000000047683715}
+      rotation: {x: 0.00000019443938, y: 0.00000005531485, z: -0.022693092, w: 0.9997425}
+      scale: {x: 0.99999994, y: 0.9999998, z: 1.0000002}
+    - name: AnastellaDress_Side_Right5
+      parentName: AnastellaDress_Side_Right4
+      position: {x: -0.08636955, y: 0, z: 0.000000009536743}
+      rotation: {x: 0.00000018941468, y: 0.000000013386082, z: -0.017630786, w: 0.99984455}
+      scale: {x: 1, y: 1.0000004, z: 0.99999994}
+    - name: AnastellaDress_BackEdge_Right1
+      parentName: AnastellaPelvis
+      position: {x: -0.10851772, y: 0.0039222143, z: -0.041299462}
+      rotation: {x: 0.12298239, y: 0.8446663, z: -0.46337196, w: -0.23811911}
+      scale: {x: 1.0000001, y: 1.0000002, z: 1.0000001}
+    - name: AnastellaDress_BackEdge_Right2
+      parentName: AnastellaDress_BackEdge_Right1
+      position: {x: -0.087948225, y: 0.000000023841856, z: 0.000000057220458}
+      rotation: {x: -0.00000028498468, y: -0.043815117, z: -0.00000008195638, w: 0.99903965}
+      scale: {x: 1.0000006, y: 1.0000005, z: 1.0000007}
+    - name: AnastellaDress_BackEdge_Right3
+      parentName: AnastellaDress_BackEdge_Right2
+      position: {x: -0.0879482, y: 0.000000028610229, z: 0.000000038146972}
+      rotation: {x: -0.00000025541706, y: -0.008276238, z: -0.00000018506304, w: 0.9999657}
+      scale: {x: 1.0000001, y: 1.0000004, z: 1.0000005}
+    - name: AnastellaDress_BackEdge_Right4
+      parentName: AnastellaDress_BackEdge_Right3
+      position: {x: -0.087948225, y: 0.000000023841856, z: 0.000000038146972}
+      rotation: {x: -0.00000018278143, y: -0.04754197, z: -0.00000023996162, w: 0.99886924}
+      scale: {x: 1.0000002, y: 1.0000002, z: 1.0000005}
+    - name: AnastellaDress_BackEdge_Right5
+      parentName: AnastellaDress_BackEdge_Right4
+      position: {x: -0.0879482, y: 0.000000028610229, z: 0.000000057220458}
+      rotation: {x: -0.00000022129556, y: 0.00000022351743, z: -0.0000002099909, w: 1}
+      scale: {x: 1.0000004, y: 1.0000002, z: 1.0000008}
+    - name: AnastellaDress_Back1
+      parentName: AnastellaPelvis
+      position: {x: -0.101919934, y: -0.0030516412, z: -0.000000012708863}
+      rotation: {x: -0.000000029802322, y: 0.00000014901161, z: 0.9536683, w: 0.30086035}
+      scale: {x: 1.0000001, y: 1, z: 1.0000001}
+    - name: AnastellaDress_Back2
+      parentName: AnastellaDress_Back1
+      position: {x: -0.08779455, y: -0.000000019073486, z: -6.82121e-15}
+      rotation: {x: 0.000000004589964, y: -0.000000019833044, z: 0.06339965, w: 0.9979882}
+      scale: {x: 0.99999964, y: 1, z: 0.9999999}
+    - name: AnastellaDress_Back3
+      parentName: AnastellaDress_Back2
+      position: {x: -0.08779449, y: 0, z: -1.364242e-14}
+      rotation: {x: 0.00000002044698, y: 0.00000004202123, z: 0.040868316, w: 0.9991646}
+      scale: {x: 1, y: 0.9999999, z: 1}
+    - name: AnastellaDress_Back4
+      parentName: AnastellaDress_Back3
+      position: {x: -0.08779449, y: 0, z: -9.094947e-15}
+      rotation: {x: -9.680557e-10, y: 0.0000000025811493, z: 0.015206525, w: 0.9998844}
+      scale: {x: 1.0000001, y: 0.9999998, z: 1.0000001}
+    - name: AnastellaDress_Back5
+      parentName: AnastellaDress_Back4
+      position: {x: -0.08779451, y: 0, z: -1.364242e-14}
+      rotation: {x: -0, y: -0, z: 2.498696e-18, w: 1}
+      scale: {x: 1.0000001, y: 1, z: 1.0000002}
+    - name: AnastellaDress_BackEdge_Left1
+      parentName: AnastellaPelvis
+      position: {x: -0.10851772, y: 0.0039222143, z: 0.041299462}
+      rotation: {x: 0.12298241, y: 0.8446663, z: 0.46337196, w: 0.238119}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
+    - name: AnastellaDress_BackEdge_Left2
+      parentName: AnastellaDress_BackEdge_Left1
+      position: {x: -0.087948225, y: 0.000000014305114, z: -0.000000057220458}
+      rotation: {x: 0.00000013597311, y: 0.043815035, z: -0.0000002831221, w: 0.9990397}
+      scale: {x: 1, y: 1.0000001, z: 1.0000001}
+    - name: AnastellaDress_BackEdge_Left3
+      parentName: AnastellaDress_BackEdge_Left2
+      position: {x: -0.0879482, y: 0.000000019073486, z: -0.000000057220458}
+      rotation: {x: 0.00000027125935, y: 0.008276243, z: 0.000000010760541, w: 0.9999658}
+      scale: {x: 1.0000005, y: 1.0000004, z: 1.0000002}
+    - name: AnastellaDress_BackEdge_Left4
+      parentName: AnastellaDress_BackEdge_Left3
+      position: {x: -0.0879482, y: 0.000000014305114, z: -0.000000038146972}
+      rotation: {x: 0.00000033652216, y: 0.04754202, z: -0.00000012164963, w: 0.99886924}
+      scale: {x: 1.0000002, y: 1.0000006, z: 1.0000004}
+    - name: AnastellaDress_BackEdge_Left5
+      parentName: AnastellaDress_BackEdge_Left4
+      position: {x: -0.0879482, y: 0.000000019073486, z: -0.000000057220458}
+      rotation: {x: 0.00000016717662, y: -0.00000026449558, z: -0.000000118062054,
+        w: 1}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1.0000002}
+    - name: AnastellaDress_Side_Left1
+      parentName: AnastellaPelvis
+      position: {x: -0.10199448, y: 0.03446218, z: 0.0575354}
+      rotation: {x: 0.23395757, y: 0.8097429, z: -0.5183549, w: 0.14452863}
+      scale: {x: 1.0000004, y: 1.0000004, z: 1.0000006}
+    - name: AnastellaDress_Side_Left2
+      parentName: AnastellaDress_Side_Left1
+      position: {x: -0.08636955, y: 0, z: 0}
+      rotation: {x: 0.0000003091991, y: -0.000000022351742, z: -0.01494211, w: 0.99988836}
+      scale: {x: 1, y: 0.9999999, z: 0.9999998}
+    - name: AnastellaDress_Side_Left3
+      parentName: AnastellaDress_Side_Left2
+      position: {x: -0.08636955, y: -0.000000019073486, z: 0}
+      rotation: {x: 0.00000006248158, y: 0.0000000056912755, z: -0.056787483, w: 0.9983863}
+      scale: {x: 0.99999994, y: 1.0000001, z: 1.0000005}
+    - name: AnastellaDress_Side_Left4
+      parentName: AnastellaDress_Side_Left3
+      position: {x: -0.08636953, y: 0, z: 0}
+      rotation: {x: 0.0000002586878, y: -0.0000000122894965, z: -0.022693051, w: 0.99974257}
+      scale: {x: 1, y: 1.0000004, z: 1.0000005}
+    - name: AnastellaDress_Side_Left5
+      parentName: AnastellaDress_Side_Left4
+      position: {x: -0.08636953, y: 0, z: 0}
+      rotation: {x: 0.00000023900597, y: 0.00000004142556, z: -0.01763075, w: 0.99984455}
+      scale: {x: 1.0000001, y: 1.0000002, z: 1.0000006}
+    - name: AnastellaDress_FrontEdge_Left1
+      parentName: AnastellaPelvis
+      position: {x: -0.112250976, y: 0.06555464, z: 0.065212965}
+      rotation: {x: 0.087722026, y: 0.30763307, z: -0.9345552, w: 0.155799}
+      scale: {x: 1.0000005, y: 1.0000007, z: 1.0000002}
+    - name: AnastellaDress_FrontEdge_Left2
+      parentName: AnastellaDress_FrontEdge_Left1
+      position: {x: -0.085321, y: 0.000000057220458, z: 0.0000000047683715}
+      rotation: {x: -9.3132246e-10, y: 0.00000007823109, z: -0.023642998, w: 0.99972045}
+      scale: {x: 1.0000004, y: 1.0000002, z: 1.0000005}
+    - name: AnastellaDress_FrontEdge_Left3
+      parentName: AnastellaDress_FrontEdge_Left2
+      position: {x: -0.08532105, y: 0.000000019073486, z: 0.0000000047683715}
+      rotation: {x: -0.00000006600176, y: 0.00000006928081, z: -0.022738222, w: 0.9997415}
+      scale: {x: 1.0000002, y: 1.0000008, z: 1.0000006}
+    - name: AnastellaDress_FrontEdge_Left4
+      parentName: AnastellaDress_FrontEdge_Left3
+      position: {x: -0.08532105, y: 0.000000038146972, z: 0.000000019073486}
+      rotation: {x: 0.00000006574828, y: 0.000000016351343, z: -0.030426133, w: 0.99953705}
+      scale: {x: 1.0000002, y: 1.0000001, z: 0.99999994}
+    - name: AnastellaDress_FrontEdge_Left5
+      parentName: AnastellaDress_FrontEdge_Left4
+      position: {x: -0.08532105, y: 0.000000019073486, z: 0.000000019073486}
+      rotation: {x: -0.00000015501475, y: 0.00000012832415, z: -0.021047274, w: 0.9997785}
+      scale: {x: 1.0000006, y: 1.0000004, z: 1.0000007}
+    - name: AnastellaDress_front1
+      parentName: AnastellaPelvis
+      position: {x: -0.1152935, y: 0.09324148, z: -0.000000019109834}
+      rotation: {x: -0.000000029802322, y: 0.00000016391277, z: 0.9905467, w: -0.13717587}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1}
+    - name: AnastellaDress_front2
+      parentName: AnastellaDress_front1
+      position: {x: -0.08467025, y: -0.000000019073486, z: 4.5474734e-15}
+      rotation: {x: -0.00000006555123, y: 0.00000006768848, z: -0.009452701, w: 0.99995536}
+      scale: {x: 1.0000004, y: 1.0000004, z: 1.0000001}
+    - name: AnastellaDress_front3
+      parentName: AnastellaDress_front2
+      position: {x: -0.084670275, y: 0.000000019073486, z: 0}
+      rotation: {x: 0.000000047132875, y: -0.000000009207002, z: -0.035384182, w: 0.9993738}
+      scale: {x: 1.0000004, y: 1.0000004, z: 1.0000004}
+    - name: AnastellaDress_front4
+      parentName: AnastellaDress_front3
+      position: {x: -0.08467025, y: 0.000000019073486, z: 9.094947e-15}
+      rotation: {x: -0, y: -0, z: 4.3395248e-16, w: 1}
+      scale: {x: 1.0000004, y: 1.0000005, z: 1.0000002}
+    - name: AnastellaDress_front5
+      parentName: AnastellaDress_front4
+      position: {x: -0.084670275, y: 0, z: 0}
+      rotation: {x: 0.000000021215772, y: -0.00000010880845, z: -0.015494399, w: 0.99987996}
+      scale: {x: 1.0000001, y: 1, z: 1}
+    - name: AnastellaLThigh
+      parentName: AnastellaPelvis
+      position: {x: 0.008576355, y: 0.016842747, z: 0.049199052}
+      rotation: {x: -0.028899953, y: 0.99833906, z: -0.012213066, w: 0.048319697}
+      scale: {x: 1.0000007, y: 1.0000004, z: 1.0000006}
+    - name: AnastellaLCalf
+      parentName: AnastellaLThigh
+      position: {x: -0.17573835, y: -0.0000043439863, z: 0.0000004673004}
+      rotation: {x: -0.00020384532, y: -0.00022348389, z: 0.17156488, w: 0.9851728}
+      scale: {x: 1.0000002, y: 1.0000004, z: 1}
+    - name: AnastellaLFoot
+      parentName: AnastellaLCalf
+      position: {x: -0.16678818, y: 0.0000017333031, z: -0.000000095367426}
+      rotation: {x: 0.005882384, y: 0.018860904, z: -0.56296694, w: 0.8262432}
+      scale: {x: 1.0000073, y: 0.9999935, z: 1.0000004}
+    - name: AnastellaLBigToe1
+      parentName: AnastellaLFoot
+      position: {x: -0.08501053, y: 0.0010066843, z: 0.015653467}
+      rotation: {x: -0.037205968, y: -0.025812203, z: -0.08470516, w: 0.9953766}
+      scale: {x: 1.0000039, y: 0.99999684, z: 0.9999998}
+    - name: AnastellaLBigToe2
+      parentName: AnastellaLBigToe1
+      position: {x: -0.010982394, y: 0, z: -0.0000000047683715}
+      rotation: {x: 0.000000461936, y: -0, z: 0.11115362, w: 0.9938033}
+      scale: {x: 0.9999973, y: 1.0000023, z: 1.0000002}
+    - name: AnastellaLIndexToe1
+      parentName: AnastellaLFoot
+      position: {x: -0.08524308, y: -0.0012086153, z: 0.004902172}
+      rotation: {x: -0.07902429, y: -0.027583417, z: -0.1440892, w: 0.9860186}
+      scale: {x: 1.0000013, y: 0.99999946, z: 0.9999998}
+    - name: AnastellaLIndexToe2
+      parentName: AnastellaLIndexToe1
+      position: {x: -0.01148159, y: 0, z: -0.0000000047683715}
+      rotation: {x: 0.0000013262032, y: -0.00000013969837, z: 0.07131169, w: 0.9974541}
+      scale: {x: 0.9999985, y: 1.0000013, z: 1.0000004}
+    - name: AnastellaLMiddleToe1
+      parentName: AnastellaLFoot
+      position: {x: -0.08436033, y: -0.002985109, z: -0.003927765}
+      rotation: {x: -0.05804286, y: -0.049038928, z: -0.077226475, w: 0.99411386}
+      scale: {x: 1.0000049, y: 0.99999636, z: 0.9999996}
+    - name: AnastellaLMiddleToe2
+      parentName: AnastellaLMiddleToe1
+      position: {x: -0.011231999, y: 0, z: 0}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      scale: {x: 0.9999979, y: 1.0000019, z: 1.0000007}
+    - name: AnastellaLRingToe1
+      parentName: AnastellaLFoot
+      position: {x: -0.08075843, y: -0.00845867, z: -0.010835648}
+      rotation: {x: -0.029962761, y: -0.09134952, z: -0.2056477, w: 0.9738925}
+      scale: {x: 0.99999934, y: 1.0000024, z: 0.9999991}
+    - name: AnastellaLRingToe2
+      parentName: AnastellaLRingToe1
+      position: {x: -0.010171194, y: 0, z: 0}
+      rotation: {x: 0.000000020489095, y: -0.000000014901159, z: -0.0000000095460555,
+        w: 1}
+      scale: {x: 1.0000004, y: 0.9999987, z: 1.0000005}
+    - name: AnastellaLLittleToe1
+      parentName: AnastellaLFoot
+      position: {x: -0.07718666, y: -0.01068552, z: -0.017312193}
+      rotation: {x: -0.114766054, y: -0.15945955, z: -0.14277752, w: 0.9700598}
+      scale: {x: 1.0000033, y: 1, z: 0.9999974}
+    - name: AnastellaLLittleToe2
+      parentName: AnastellaLLittleToe1
+      position: {x: -0.007550397, y: -0.0000000023841857, z: 0.000000009536743}
+      rotation: {x: 0.000002324581, y: -0.00000044703478, z: 0.043302216, w: 0.999062}
+      scale: {x: 0.99999803, y: 1.0000006, z: 1.0000017}
+    - name: AnastellaRThigh
+      parentName: AnastellaPelvis
+      position: {x: 0.008576355, y: 0.016842747, z: -0.049199052}
+      rotation: {x: -0.028899997, y: 0.99833906, z: 0.0122131705, w: -0.048319638}
+      scale: {x: 1.0000005, y: 1.0000004, z: 1.0000006}
+    - name: AnastellaRCalf
+      parentName: AnastellaRThigh
+      position: {x: -0.17573835, y: -0.000004324913, z: -0.00000047683716}
+      rotation: {x: 0.00020311316, y: 0.00022320822, z: 0.17156816, w: 0.9851723}
+      scale: {x: 1.0000001, y: 1.0000002, z: 1.0000004}
+    - name: AnastellaRFoot
+      parentName: AnastellaRCalf
+      position: {x: -0.1667881, y: -0.00000059366226, z: -0.000000028610229}
+      rotation: {x: -0.005883685, y: -0.018862296, z: -0.5629719, w: 0.8262398}
+      scale: {x: 0.99999803, y: 1.0000025, z: 1.0000005}
+    - name: AnastellaRBigToe1
+      parentName: AnastellaRFoot
+      position: {x: -0.08500983, y: 0.0010078502, z: -0.015653867}
+      rotation: {x: 0.037205443, y: 0.025809862, z: -0.084714435, w: 0.9953759}
+      scale: {x: 0.9999993, y: 1.000001, z: 1.0000002}
+    - name: AnastellaRBigToe2
+      parentName: AnastellaRBigToe1
+      position: {x: -0.010982394, y: 0.0000000011920929, z: 0.0000000047683715}
+      rotation: {x: 0.00000016391273, y: 0.000000013038513, z: 0.11115598, w: 0.99380296}
+      scale: {x: 1.0000011, y: 0.9999996, z: 1.0000002}
+    - name: AnastellaRIndexToe1
+      parentName: AnastellaRFoot
+      position: {x: -0.08524231, y: -0.0012074613, z: -0.0049025724}
+      rotation: {x: 0.07902284, y: 0.027580809, z: -0.14409983, w: 0.9860173}
+      scale: {x: 1.0000004, y: 0.99999994, z: 1.0000004}
+    - name: AnastellaRIndexToe2
+      parentName: AnastellaRIndexToe1
+      position: {x: -0.011481595, y: 0.0000000011920929, z: 0}
+      rotation: {x: 0.0000003874301, y: -0.00000005029141, z: 0.07131278, w: 0.997454}
+      scale: {x: 1.0000005, y: 0.9999998, z: 0.99999994}
+    - name: AnastellaRMiddleToe1
+      parentName: AnastellaRFoot
+      position: {x: -0.08435951, y: -0.0029839992, z: 0.003927374}
+      rotation: {x: 0.058041528, y: 0.049036954, z: -0.07723517, w: 0.9941133}
+      scale: {x: 0.9999992, y: 1.0000011, z: 1.0000006}
+    - name: AnastellaRMiddleToe2
+      parentName: AnastellaRMiddleToe1
+      position: {x: -0.011231999, y: 0, z: -0.000000009536743}
+      rotation: {x: 0.0000000037252899, y: 0.0000000037252899, z: 0.00000006053596,
+        w: 1}
+      scale: {x: 1.0000008, y: 0.9999997, z: 1.0000001}
+    - name: AnastellaRRingToe1
+      parentName: AnastellaRFoot
+      position: {x: -0.08075751, y: -0.008457652, z: 0.010835256}
+      rotation: {x: 0.029949559, y: 0.091350384, z: -0.20565806, w: 0.9738906}
+      scale: {x: 1.0000015, y: 0.99999887, z: 1.000001}
+    - name: AnastellaRRingToe2
+      parentName: AnastellaRRingToe1
+      position: {x: -0.010171194, y: 0, z: 0.000000009536743}
+      rotation: {x: -0.0000000018626447, y: -0, z: -0.0000000065192567, w: 1}
+      scale: {x: 0.9999992, y: 1.0000004, z: 0.9999998}
+    - name: AnastellaRLittleToe1
+      parentName: AnastellaRFoot
+      position: {x: -0.07718573, y: -0.010684573, z: 0.017311811}
+      rotation: {x: 0.11475961, y: 0.15945928, z: -0.14278683, w: 0.9700593}
+      scale: {x: 0.99999964, y: 0.9999997, z: 1.0000019}
+    - name: AnastellaRLittleToe2
+      parentName: AnastellaRLittleToe1
+      position: {x: -0.007550392, y: -0.0000000011920929, z: 0}
+      rotation: {x: 0.0000007152557, y: -0.00000004470348, z: 0.04330313, w: 0.999062}
+      scale: {x: 1.0000006, y: 1, z: 0.99999887}
+    - name: AnastellaSpine1
+      parentName: AnastellaPelvis
+      position: {x: -0.038113404, y: -0.0029160748, z: -0.0000000072372117}
+      rotation: {x: -0, y: 0.000000104308114, z: 0.14284424, w: -0.9897452}
+      scale: {x: 1.0000008, y: 1.0000008, z: 1.0000004}
+    - name: AnastellaSpine2
+      parentName: AnastellaSpine1
+      position: {x: -0.06711021, y: 0, z: 0}
+      rotation: {x: -0.0000000070808337, y: -0.00000007477318, z: -0.16958547, w: -0.9855155}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
+    - name: AnastellaSpine3
+      parentName: AnastellaSpine2
+      position: {x: -0.05716896, y: -0.0000000047683715, z: 0}
+      rotation: {x: -0.000000026858398, y: 0.000000030464427, z: 0.07143949, w: 0.997445}
+      scale: {x: 1.0000007, y: 1.0000006, z: 1.0000002}
+    - name: AnastellaRibcage
+      parentName: AnastellaSpine3
+      position: {x: -0.06143524, y: 0, z: 0}
+      rotation: {x: -0.000000014973454, y: -0.0000000015184902, z: 0.10015118, w: -0.9949723}
+      scale: {x: 0.9999996, y: 0.9999996, z: 1.0000002}
+    - name: AnastellaLCollarbone
+      parentName: AnastellaRibcage
+      position: {x: 0.014475021, y: 0.028551137, z: 0.02511188}
+      rotation: {x: -0.09714125, y: -0.68251735, z: -0.12504496, w: -0.7135106}
+      scale: {x: 0.9999992, y: 0.9999998, z: 0.9999998}
+    - name: AnastellaLUpperarm
+      parentName: AnastellaLCollarbone
+      position: {x: -0.043367617, y: -0.0000000047683715, z: 0.000000038146972}
+      rotation: {x: 0.072400235, y: 0.038224246, z: -0.16701287, w: 0.98254967}
+      scale: {x: 1.0000006, y: 1.0000013, z: 1.0000006}
+    - name: AnastellaLForearm
+      parentName: AnastellaLUpperarm
+      position: {x: -0.11830955, y: -0.00000013440847, z: -0.00000015258789}
+      rotation: {x: 0.01037199, y: -0.014994519, z: -0.024588725, w: 0.9995314}
+      scale: {x: 0.99999946, y: 1.0000005, z: 0.99999994}
+    - name: AnastellaLPalm
+      parentName: AnastellaLForearm
+      position: {x: -0.09031204, y: -0.00000009059906, z: -0.000000038146972}
+      rotation: {x: -0.62844384, y: 0.05707081, z: 0.11797996, w: 0.7667347}
+      scale: {x: 0.9999996, y: 0.99999934, z: 1.0000008}
+    - name: AnastellaLDigit21
+      parentName: AnastellaLPalm
+      position: {x: -0.027749538, y: 0.00022575379, z: 0.013529558}
+      rotation: {x: 0.03852941, y: 0.05586762, z: 0.0207812, w: 0.99747807}
+      scale: {x: 0.99999905, y: 0.9999991, z: 1.0000012}
+    - name: AnastellaLDigit22
+      parentName: AnastellaLDigit21
+      position: {x: -0.020820789, y: 0, z: -0.000000009536743}
+      rotation: {x: -0.00000079348666, y: 0.0000009164212, z: 0.037915736, w: 0.999281}
+      scale: {x: 0.99999905, y: 0.99999946, z: 1.000001}
+    - name: AnastellaLDigit23
+      parentName: AnastellaLDigit22
+      position: {x: -0.008215942, y: 0.000000038146972, z: 0}
+      rotation: {x: -0.00000072557197, y: -0.00000010605646, z: 0.0076199174, w: 0.999971}
+      scale: {x: 0.9999989, y: 0.99999964, z: 1.0000012}
+    - name: AnastellaLDigit31
+      parentName: AnastellaLPalm
+      position: {x: -0.028760318, y: 0.0030834961, z: 0.004626498}
+      rotation: {x: -0.019932859, y: 0.035499386, z: 0.013404048, w: 0.999081}
+      scale: {x: 0.99999905, y: 0.9999996, z: 1.0000006}
+    - name: AnastellaLDigit32
+      parentName: AnastellaLDigit31
+      position: {x: -0.022255974, y: 0, z: -0.000000014305114}
+      rotation: {x: -0.0000010877848, y: -0.00000077299774, z: 0.040665157, w: 0.99917287}
+      scale: {x: 0.99999905, y: 0.99999976, z: 1.0000008}
+    - name: AnastellaLDigit33
+      parentName: AnastellaLDigit32
+      position: {x: -0.009713573, y: 0.000000038146972, z: 0}
+      rotation: {x: -0.0000008331356, y: -0.000000014272642, z: 0.08290506, w: 0.9965575}
+      scale: {x: 0.99999887, y: 1.0000001, z: 1.0000007}
+    - name: AnastellaLDigit41
+      parentName: AnastellaLPalm
+      position: {x: -0.027854137, y: 0.0011427689, z: -0.0057360646}
+      rotation: {x: -0.12836024, y: 0.045502067, z: 0.02395355, w: 0.9903936}
+      scale: {x: 0.99999917, y: 1.0000005, z: 0.9999997}
+    - name: AnastellaLDigit42
+      parentName: AnastellaLDigit41
+      position: {x: -0.022692775, y: 0, z: -0.000000005960464}
+      rotation: {x: -0.0000012516971, y: -0.0000006817279, z: 0.040520474, w: 0.99917877}
+      scale: {x: 0.9999989, y: 1.0000005, z: 1}
+    - name: AnastellaLDigit43
+      parentName: AnastellaLDigit42
+      position: {x: -0.0095264055, y: 0, z: 0.0000000011920929}
+      rotation: {x: -0.0000009055658, y: 0.00000005599901, z: -0.021689989, w: 0.99976474}
+      scale: {x: 0.9999989, y: 1.0000004, z: 0.99999994}
+    - name: AnastellaLDigit11
+      parentName: AnastellaLPalm
+      position: {x: -0.002438259, y: -0.0024258422, z: 0.012888708}
+      rotation: {x: 0.38829795, y: 0.36635882, z: -0.2659568, w: 0.8026662}
+      scale: {x: 1.0000002, y: 0.9999986, z: 1.0000006}
+    - name: AnastellaLDigit12
+      parentName: AnastellaLDigit11
+      position: {x: -0.014456023, y: 0, z: 0}
+      rotation: {x: 0.0000005662438, y: 0.0000034868697, z: 0.034507297, w: 0.99940443}
+      scale: {x: 1.0000023, y: 0.9999984, z: 1.000001}
+    - name: AnastellaLDigit13
+      parentName: AnastellaLDigit12
+      position: {x: -0.017264022, y: 0, z: 0}
+      rotation: {x: 0.00000063873887, y: 0.00000035191974, z: -0.06520916, w: 0.9978717}
+      scale: {x: 0.99999946, y: 1.0000001, z: 1.0000002}
+    - name: AnastellaLDigit51
+      parentName: AnastellaLPalm
+      position: {x: -0.0260363, y: -0.0028404235, z: -0.013219413}
+      rotation: {x: -0.14511554, y: 0.045672987, z: 0.02130056, w: 0.98813045}
+      scale: {x: 0.9999989, y: 1.0000011, z: 0.9999998}
+    - name: AnastellaLDigit52
+      parentName: AnastellaLDigit51
+      position: {x: -0.018262386, y: 0, z: -0.0000000047683715}
+      rotation: {x: -0.0000012814995, y: 0.0000003129243, z: 0.040021133, w: 0.99919885}
+      scale: {x: 0.9999993, y: 1.0000008, z: 0.9999998}
+    - name: AnastellaLDigit53
+      parentName: AnastellaLDigit52
+      position: {x: -0.008652802, y: -0.000000038146972, z: 0.0000000023841857}
+      rotation: {x: -0.0000007560444, y: 0.00000027599594, z: 0.0023032129, w: 0.9999974}
+      scale: {x: 0.9999991, y: 1.0000005, z: 0.9999996}
+    - name: AnastellaLForearm_Twist
+      parentName: AnastellaLForearm
+      position: {x: -0.047003325, y: -0.00000011920929, z: -0.000000114440915}
+      rotation: {x: 0.000000837259, y: -0.0000003715977, z: 0.0000005029433, w: 1}
+      scale: {x: 0.99999934, y: 1.0000007, z: 0.99999994}
+    - name: AnastellaL_Sleeve_Ruffle
+      parentName: AnastellaLForearm
+      position: {x: -0.0023952292, y: 0.0010937261, z: -0.02528263}
+      rotation: {x: -0.0058310726, y: -0.03547174, z: 0.020341678, w: 0.99914664}
+      scale: {x: 0.9999998, y: 1.0000006, z: 0.99999994}
+    - name: AnastellaL_Sleeve_Ruffle1
+      parentName: AnastellaL_Sleeve_Ruffle
+      position: {x: -0.03993597, y: -0.00000004529953, z: -0.000000076293944}
+      rotation: {x: 0.00000076787535, y: 0.06542479, z: 0.0000007529014, w: 0.9978575}
+      scale: {x: 0.999999, y: 1.0000005, z: 1.0000004}
+    - name: AnastellaL_Sleeve_Ruffle2
+      parentName: AnastellaLForearm
+      position: {x: 0.007759819, y: -0.032354582, z: 0.0009511185}
+      rotation: {x: -0.693116, y: -0.018838668, z: 0.014896863, w: 0.7204259}
+      scale: {x: 0.9999998, y: 0.9999997, z: 1.0000007}
+    - name: AnastellaL_Sleeve_Ruffle3
+      parentName: AnastellaL_Sleeve_Ruffle2
+      position: {x: -0.052316103, y: 0.000000038146972, z: -0.000000057220458}
+      rotation: {x: 0.00000017881392, y: 0.06542537, z: -0.00000025145707, w: 0.99785745}
+      scale: {x: 0.9999992, y: 0.9999996, z: 1.0000011}
+    - name: AnastellaL_Sleeve_Ruffle4
+      parentName: AnastellaLForearm
+      position: {x: -0.00071048737, y: 0.02583653, z: -0.00029003143}
+      rotation: {x: 0.6866746, y: -0.084997274, z: -0.10543842, w: 0.7142383}
+      scale: {x: 0.999999, y: 1.0000005, z: 1.0000015}
+    - name: AnastellaL_Sleeve_Ruffle5
+      parentName: AnastellaL_Sleeve_Ruffle4
+      position: {x: -0.050654735, y: -0.000000038146972, z: 0.000000028610229}
+      rotation: {x: -0.0000011324881, y: 0.065426506, z: 0.000000854954, w: 0.9978574}
+      scale: {x: 0.99999917, y: 0.9999997, z: 1.0000007}
+    - name: AnastellaL_Sleeve_Ruffle6
+      parentName: AnastellaLForearm
+      position: {x: -0.005337353, y: 0.007815187, z: 0.040567245}
+      rotation: {x: -0.98072153, y: -0.04394347, z: 0.19038568, w: 0.002757747}
+      scale: {x: 0.99999934, y: 1.0000008, z: 1.0000006}
+    - name: AnastellaL_Sleeve_Ruffle7
+      parentName: AnastellaL_Sleeve_Ruffle6
+      position: {x: -0.039935913, y: 0.000000017881392, z: 0}
+      rotation: {x: 0.0000010905786, y: 0.065425664, z: -0.00000001117587, w: 0.99785745}
+      scale: {x: 0.9999994, y: 1.0000004, z: 1.0000002}
+    - name: AnastellaL_UpperArmTwist
+      parentName: AnastellaLUpperarm
+      position: {x: -0.05796398, y: -0.00000017642975, z: -0.00000015258789}
+      rotation: {x: 0.00000067800283, y: -0.0000005066395, z: 0.00000055879354, w: 1}
+      scale: {x: 1.0000002, y: 1, z: 1}
+    - name: AnastellaRCollarbone
+      parentName: AnastellaRibcage
+      position: {x: 0.014475021, y: 0.028551137, z: -0.02511188}
+      rotation: {x: -0.09714196, y: -0.68251747, z: 0.12504432, w: 0.7135105}
+      scale: {x: 1.0000014, y: 1.0000001, z: 1.0000006}
+    - name: AnastellaRUpperarm
+      parentName: AnastellaRCollarbone
+      position: {x: -0.043367617, y: 0, z: 0}
+      rotation: {x: -0.07240054, y: -0.03822227, z: -0.16701204, w: 0.9825498}
+      scale: {x: 1.0000001, y: 1.0000001, z: 0.9999998}
+    - name: AnastellaRForearm
+      parentName: AnastellaRUpperarm
+      position: {x: -0.11830951, y: 0.00000013500451, z: -0.000000114440915}
+      rotation: {x: -0.010370669, y: 0.014993317, z: -0.024589049, w: 0.9995314}
+      scale: {x: 1.000001, y: 0.99999934, z: 1.0000001}
+    - name: AnastellaRPalm
+      parentName: AnastellaRForearm
+      position: {x: -0.09031214, y: 0.000000088214875, z: -0.000000038146972}
+      rotation: {x: 0.628445, y: -0.057071626, z: 0.117979735, w: 0.76673365}
+      scale: {x: 1.0000012, y: 1.000001, z: 0.99999994}
+    - name: AnastellaRDigit21
+      parentName: AnastellaRPalm
+      position: {x: -0.027749557, y: 0.00022579193, z: -0.013529573}
+      rotation: {x: -0.038530763, y: -0.055867452, z: 0.020781206, w: 0.99747807}
+      scale: {x: 1.0000007, y: 1.0000004, z: 0.99999803}
+    - name: AnastellaRDigit22
+      parentName: AnastellaRDigit21
+      position: {x: -0.02082077, y: 0, z: -0.000000009536743}
+      rotation: {x: -0.0000005736945, y: 0.00000078976126, z: 0.037911866, w: 0.99928105}
+      scale: {x: 1.0000011, y: 1.0000001, z: 0.99999845}
+    - name: AnastellaRDigit23
+      parentName: AnastellaRDigit22
+      position: {x: -0.008215981, y: 0, z: -0.000000009536743}
+      rotation: {x: -0.00000090333805, y: -0.00000003740594, z: 0.007620327, w: 0.99997103}
+      scale: {x: 1.0000011, y: 1.0000001, z: 0.9999981}
+    - name: AnastellaRDigit31
+      parentName: AnastellaRPalm
+      position: {x: -0.028760375, y: 0.0030834961, z: -0.0046265507}
+      rotation: {x: 0.019931195, y: -0.035498798, z: 0.013404625, w: 0.9990811}
+      scale: {x: 1.0000005, y: 1, z: 0.99999845}
+    - name: AnastellaRDigit32
+      parentName: AnastellaRDigit31
+      position: {x: -0.022256011, y: 0, z: -0.000000009536743}
+      rotation: {x: -0.0000006668269, y: 0.0000003185123, z: 0.0406657, w: 0.99917287}
+      scale: {x: 1.0000012, y: 1.0000001, z: 0.9999996}
+    - name: AnastellaRDigit33
+      parentName: AnastellaRDigit32
+      position: {x: -0.009713612, y: 0, z: 0}
+      rotation: {x: -0.0000010776016, y: -0.00000016696565, z: 0.082905024, w: 0.9965575}
+      scale: {x: 1.0000008, y: 0.9999996, z: 0.99999857}
+    - name: AnastellaRDigit41
+      parentName: AnastellaRPalm
+      position: {x: -0.027854174, y: 0.0011427689, z: 0.005735998}
+      rotation: {x: 0.12835798, y: -0.045501996, z: 0.023954164, w: 0.99039394}
+      scale: {x: 1.0000007, y: 0.99999917, z: 0.99999917}
+    - name: AnastellaRDigit42
+      parentName: AnastellaRDigit41
+      position: {x: -0.022692813, y: 0, z: -0.000000005960464}
+      rotation: {x: -0.00000083446474, y: 0.0000010654327, z: 0.040525217, w: 0.9991785}
+      scale: {x: 1.000001, y: 0.9999994, z: 1.0000004}
+    - name: AnastellaRDigit43
+      parentName: AnastellaRDigit42
+      position: {x: -0.009526386, y: 0, z: 0}
+      rotation: {x: -0.00000093820654, y: -0.00000014778345, z: -0.021689698, w: 0.9997648}
+      scale: {x: 1.0000008, y: 0.9999992, z: 0.99999976}
+    - name: AnastellaRDigit11
+      parentName: AnastellaRPalm
+      position: {x: -0.0024382782, y: -0.002425804, z: -0.012888689}
+      rotation: {x: -0.38830274, y: -0.36635798, z: -0.2659582, w: 0.8026638}
+      scale: {x: 0.99999994, y: 1.0000013, z: 0.9999997}
+    - name: AnastellaRDigit12
+      parentName: AnastellaRDigit11
+      position: {x: -0.014456023, y: -0.000000019073486, z: 0.000000038146972}
+      rotation: {x: 0.0000007450578, y: -0.00000092387165, z: 0.03450567, w: 0.99940455}
+      scale: {x: 0.9999991, y: 1.0000018, z: 0.9999996}
+    - name: AnastellaRDigit13
+      parentName: AnastellaRDigit12
+      position: {x: -0.017264022, y: 0, z: 0}
+      rotation: {x: 0.0000005970996, y: 0.0000005492718, z: -0.06520861, w: 0.99787164}
+      scale: {x: 0.99999994, y: 0.99999994, z: 0.9999996}
+    - name: AnastellaRDigit51
+      parentName: AnastellaRPalm
+      position: {x: -0.026036339, y: -0.0028404999, z: 0.013219346}
+      rotation: {x: 0.14511356, y: -0.045672134, z: 0.021301463, w: 0.98813075}
+      scale: {x: 1.0000012, y: 0.9999984, z: 1.0000006}
+    - name: AnastellaRDigit52
+      parentName: AnastellaRDigit51
+      position: {x: -0.018262444, y: 0.000000038146972, z: -0.0000000047683715}
+      rotation: {x: -0.0000006556511, y: 0.0000005662441, z: 0.040022463, w: 0.99919885}
+      scale: {x: 1.0000008, y: 0.999999, z: 0.9999996}
+    - name: AnastellaRDigit53
+      parentName: AnastellaRDigit52
+      position: {x: -0.008652802, y: 0, z: 0}
+      rotation: {x: -0.0000010543928, y: -0.000000108212745, z: 0.0023028848, w: 0.99999744}
+      scale: {x: 1.0000011, y: 0.9999994, z: 1.0000006}
+    - name: AnastellaRForearm_Twist
+      parentName: AnastellaRForearm
+      position: {x: -0.04700338, y: -0.000000028610229, z: 0.000000076293944}
+      rotation: {x: 0.0000009080393, y: -0.00000027287746, z: -0.000000473883, w: 1}
+      scale: {x: 1.0000011, y: 0.9999992, z: 1.0000001}
+    - name: AnastellaR_Sleeve_Ruffle
+      parentName: AnastellaRForearm
+      position: {x: -0.0023952103, y: 0.0010938167, z: 0.02528263}
+      rotation: {x: 0.005832763, y: 0.035470773, z: 0.020340296, w: 0.9991467}
+      scale: {x: 1.0000011, y: 0.9999998, z: 1.0000004}
+    - name: AnastellaR_Sleeve_Ruffle1
+      parentName: AnastellaR_Sleeve_Ruffle
+      position: {x: -0.039935987, y: 0.0000000500679, z: -0.000000076293944}
+      rotation: {x: 0.00000045308832, y: -0.06542665, z: -0.00000014678514, w: 0.9978574}
+      scale: {x: 1.0000012, y: 0.99999994, z: 0.9999998}
+    - name: AnastellaR_Sleeve_Ruffle2
+      parentName: AnastellaRForearm
+      position: {x: 0.007759895, y: -0.032354563, z: -0.0009512329}
+      rotation: {x: 0.6931168, y: 0.018837234, z: 0.014896684, w: 0.72042525}
+      scale: {x: 1.0000006, y: 1, z: 0.9999996}
+    - name: AnastellaR_Sleeve_Ruffle3
+      parentName: AnastellaR_Sleeve_Ruffle2
+      position: {x: -0.052316178, y: -0.000000076293944, z: -0.000000057220458}
+      rotation: {x: -0.00000032782546, y: -0.065426074, z: 0.0000007115303, w: 0.99785745}
+      scale: {x: 1.0000012, y: 1, z: 0.9999998}
+    - name: AnastellaR_Sleeve_Ruffle4
+      parentName: AnastellaRForearm
+      position: {x: -0.0007105255, y: 0.02583651, z: 0.00029014586}
+      rotation: {x: -0.686673, y: 0.08499697, z: -0.10543902, w: 0.71423966}
+      scale: {x: 1.0000017, y: 1.0000001, z: 0.999999}
+    - name: AnastellaR_Sleeve_Ruffle5
+      parentName: AnastellaR_Sleeve_Ruffle4
+      position: {x: -0.05065484, y: 0.000000038146972, z: 0.000000038146972}
+      rotation: {x: -0.0000016093252, y: -0.06542524, z: -0.000000314787, w: 0.9978575}
+      scale: {x: 1.0000007, y: 0.9999997, z: 0.99999946}
+    - name: AnastellaR_Sleeve_Ruffle6
+      parentName: AnastellaRForearm
+      position: {x: -0.005337448, y: 0.007815051, z: -0.040567283}
+      rotation: {x: 0.98072153, y: 0.043943126, z: 0.19038594, w: 0.002756061}
+      scale: {x: 1.0000013, y: 0.99999946, z: 0.9999998}
+    - name: AnastellaR_Sleeve_Ruffle7
+      parentName: AnastellaR_Sleeve_Ruffle6
+      position: {x: -0.039936047, y: -0.000000019073486, z: 0}
+      rotation: {x: 0.0000007981433, y: -0.06542573, z: 0.00000068545324, w: 0.9978575}
+      scale: {x: 1.000001, y: 0.9999997, z: 0.9999996}
+    - name: AnastellaR_UpperArmTwist
+      parentName: AnastellaRUpperarm
+      position: {x: -0.05796394, y: -0.00000004440546, z: 0}
+      rotation: {x: 0.0000007003544, y: -0.00000044703472, z: -0.00000055506814, w: 1}
+      scale: {x: 0.9999997, y: 1, z: 1}
+    - name: AnastellaNeck1
+      parentName: AnastellaRibcage
+      position: {x: -0.010447197, y: 0.0146405585, z: -0.000000008251161}
+      rotation: {x: 0.000000030749256, y: -0.0000005369409, z: 0.03703496, w: -0.99931395}
+      scale: {x: 1.0000008, y: 1.0000008, z: 1.0000006}
+    - name: AnastellaNeck2
+      parentName: AnastellaNeck1
+      position: {x: -0.02878849, y: 0, z: 0}
+      rotation: {x: 0.000000074505806, y: 0.000000059604645, z: -0.08190945, w: 0.99663985}
+      scale: {x: 1.0000001, y: 1, z: 0.99999994}
+    - name: AnastellaHead
+      parentName: AnastellaNeck2
+      position: {x: -0.028788451, y: 0, z: 0}
+      rotation: {x: 0.00000001098067, y: -0.00000061432644, z: 0.11876372, w: 0.9929226}
+      scale: {x: 1.0000017, y: 1.0000018, z: 1.0000019}
+    - name: AnastellaFringe_Middle1
+      parentName: AnastellaHead
+      position: {x: -0.12631042, y: 0.064132385, z: -0.04268771}
+      rotation: {x: 0.23896863, y: 0.26917338, z: 0.91483635, w: -0.18306863}
+      scale: {x: 0.99999994, y: 1, z: 0.9999998}
+    - name: AnastellaFringe_Middle2
+      parentName: AnastellaFringe_Middle1
+      position: {x: -0.03124378, y: -0.000000038146972, z: -0.000000019073486}
+      rotation: {x: 0.050868213, y: -0.09431964, z: -0.1440472, w: 0.98375136}
+      scale: {x: 1.0000004, y: 1.0000004, z: 1}
+    - name: AnastellaFringe_Middle3
+      parentName: AnastellaFringe_Middle2
+      position: {x: -0.03124382, y: 0, z: -0.000000038146972}
+      rotation: {x: 0.05547126, y: -0.13736789, z: -0.13291049, w: 0.97999376}
+      scale: {x: 1, y: 1.0000002, z: 1}
+    - name: AnastellaFringe_Middle4
+      parentName: AnastellaFringe_Middle3
+      position: {x: -0.03124378, y: 0, z: -0.000000038146972}
+      rotation: {x: 0.09229422, y: 0.15857826, z: -0.11056254, w: 0.9767859}
+      scale: {x: 0.99999994, y: 1.0000004, z: 1.0000004}
+    - name: AnastellaFringe_Middle5
+      parentName: AnastellaFringe_Middle4
+      position: {x: -0.027103653, y: 0, z: -0.000000019073486}
+      rotation: {x: 0.015809296, y: 0.3217725, z: -0.05567587, w: 0.9450465}
+      scale: {x: 0.9999997, y: 1.0000001, z: 1}
+    - name: AnastellaFringe_Right1
+      parentName: AnastellaHead
+      position: {x: -0.1312564, y: 0.035843898, z: -0.041255396}
+      rotation: {x: 0.5071704, y: 0.5041166, z: 0.5366654, w: -0.44792292}
+      scale: {x: 0.9999997, y: 1, z: 0.99999946}
+    - name: AnastellaFringe_Right2
+      parentName: AnastellaFringe_Right1
+      position: {x: -0.031156236, y: 0.000000076293944, z: -0.0000000047683715}
+      rotation: {x: -0.0000002831221, y: 0.000000014901163, z: -0.30854663, w: 0.95120925}
+      scale: {x: 0.9999998, y: 1.0000001, z: 0.9999999}
+    - name: AnastellaFringe_Right3
+      parentName: AnastellaFringe_Right2
+      position: {x: -0.031156195, y: 0, z: -0.000000019073486}
+      rotation: {x: -0.00000020999772, y: -0.0000001915559, z: -0.25460064, w: 0.96704626}
+      scale: {x: 1, y: 1.0000007, z: 0.9999997}
+    - name: AnastellaFringe_Right4
+      parentName: AnastellaFringe_Right3
+      position: {x: -0.031156234, y: 0, z: -0.000000014305114}
+      rotation: {x: -0.010786592, y: -0.057240725, z: -0.1848698, w: 0.98103535}
+      scale: {x: 0.9999998, y: 1.0000002, z: 0.9999999}
+    - name: AnastellaFringe_Right5
+      parentName: AnastellaFringe_Right4
+      position: {x: -0.031592026, y: 0.000000009536743, z: -0.000000038146972}
+      rotation: {x: -0.009542992, y: -0.035470683, z: -0.1094026, w: 0.9933187}
+      scale: {x: 1.0000002, y: 1.0000001, z: 0.9999997}
+    - name: AnastellaFringe_Right6
+      parentName: AnastellaFringe_Right5
+      position: {x: -0.025491409, y: 0.000000019073486, z: -0.000000019073486}
+      rotation: {x: -0.008898112, y: -0.047220763, z: -0.18496987, w: 0.9815688}
+      scale: {x: 1.0000005, y: 1.0000001, z: 0.9999994}
+    - name: AnastellaSideBang_Right1
+      parentName: AnastellaHead
+      position: {x: -0.06380409, y: 0.009935281, z: -0.070274405}
+      rotation: {x: 0.047403008, y: 0.64061666, z: 0.76570183, w: -0.03261867}
+      scale: {x: 1.0000001, y: 1, z: 0.9999997}
+    - name: AnastellaSideBang_Right2
+      parentName: AnastellaSideBang_Right1
+      position: {x: -0.018882217, y: -0.000000009536743, z: 0.000000009536743}
+      rotation: {x: 0.00000004121102, y: 0.00000018626449, z: 0.025362166, w: 0.9996784}
+      scale: {x: 1.0000005, y: 1.0000005, z: 1}
+    - name: AnastellaSideBang_Right3
+      parentName: AnastellaSideBang_Right2
+      position: {x: -0.018882217, y: 0.000000019073486, z: 0.00000000834465}
+      rotation: {x: -0.000000055268735, y: 0.000000272526, z: -0.07401843, w: 0.99725693}
+      scale: {x: 1.0000001, y: 1.0000002, z: 1.0000001}
+    - name: AnastellaSideBang_Right4
+      parentName: AnastellaSideBang_Right3
+      position: {x: -0.018882217, y: 0.000000009536743, z: 0.000000009536743}
+      rotation: {x: -0.000000028450764, y: 0.00000023763548, z: -0.098581545, w: 0.995129}
+      scale: {x: 1.0000005, y: 1.0000005, z: 1}
+    - name: AnastellaSideBang_Right5
+      parentName: AnastellaSideBang_Right4
+      position: {x: -0.018882217, y: -0.000000009536743, z: 0.000000005960464}
+      rotation: {x: -0.000000051238725, y: 0.00000023718965, z: 0.000000044703487,
+        w: 1}
+      scale: {x: 0.9999998, y: 0.9999997, z: 1}
+    - name: AnastellaFringe_Left1
+      parentName: AnastellaHead
+      position: {x: -0.119544595, y: 0.05493345, z: 0.052786138}
+      rotation: {x: 0.25913507, y: 0.49915403, z: -0.8156032, w: 0.13596259}
+      scale: {x: 0.9999996, y: 0.99999994, z: 1.0000002}
+    - name: AnastellaFringe_Left2
+      parentName: AnastellaFringe_Left1
+      position: {x: -0.035692785, y: 0, z: -0.000000019073486}
+      rotation: {x: -0.010190424, y: -0.090964004, z: -0.1108602, w: 0.989612}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1.0000005}
+    - name: AnastellaFringe_Left3
+      parentName: AnastellaFringe_Left2
+      position: {x: -0.035692826, y: 0, z: 0}
+      rotation: {x: -0.035068776, y: -0.18609677, z: -0.18183312, w: 0.9649223}
+      scale: {x: 1.0000005, y: 0.99999994, z: 1.0000007}
+    - name: AnastellaSideBang_Left1
+      parentName: AnastellaHead
+      position: {x: -0.06380409, y: 0.009935281, z: 0.070274405}
+      rotation: {x: 0.0474031, y: 0.64061666, z: -0.76570183, w: 0.032618582}
+      scale: {x: 1.0000004, y: 1.0000002, z: 1.0000007}
+    - name: AnastellaSideBang_Left2
+      parentName: AnastellaSideBang_Left1
+      position: {x: -0.018882217, y: -0.000000009536743, z: 0.00000000834465}
+      rotation: {x: 0.00000001164153, y: 0.000000257045, z: 0.025362058, w: 0.9996783}
+      scale: {x: 1, y: 1, z: 1}
+    - name: AnastellaSideBang_Left3
+      parentName: AnastellaSideBang_Left2
+      position: {x: -0.018882217, y: 0, z: 0.000000010728836}
+      rotation: {x: -0.000000010170116, y: 0.00000024022705, z: -0.074018426, w: 0.9972569}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1.0000002}
+    - name: AnastellaSideBang_Left4
+      parentName: AnastellaSideBang_Left3
+      position: {x: -0.018882217, y: 0.000000009536743, z: 0.000000007152557}
+      rotation: {x: -0.000000072743106, y: 0.00000022336523, z: -0.098581515, w: 0.995129}
+      scale: {x: 1.0000005, y: 1.0000001, z: 1.0000008}
+    - name: AnastellaSideBang_Left5
+      parentName: AnastellaSideBang_Left4
+      position: {x: -0.018882293, y: 0.0000000047683715, z: 0.000000010728836}
+      rotation: {x: -0.000000051872803, y: 0.0000002446278, z: -0.000000029802289,
+        w: 1}
+      scale: {x: 0.99999994, y: 0.9999997, z: 0.9999997}
+    - name: AnastellaSidePony1
+      parentName: AnastellaHead
+      position: {x: -0.11191467, y: -0.022579558, z: 0.06865465}
+      rotation: {x: -0.33920377, y: 0.3565827, z: 0.5999825, w: 0.6307223}
+      scale: {x: 0.9999996, y: 0.99999946, z: 0.9999996}
+    - name: AnastellaSidePony2
+      parentName: AnastellaSidePony1
+      position: {x: -0.010698071, y: -0.000000076293944, z: 0}
+      rotation: {x: 0.000000059604645, y: 0.00000013411045, z: 0.107358515, w: 0.99422044}
+      scale: {x: 1.0000001, y: 0.9999998, z: 1.0000001}
+    - name: AnastellaSidePony3
+      parentName: AnastellaSidePony2
+      position: {x: -0.020219363, y: -0.000000076293944, z: 0.000000009536743}
+      rotation: {x: -0.000000013770398, y: 0.00000016146005, z: 0.30858436, w: 0.95119697}
+      scale: {x: 0.9999998, y: 1, z: 0.99999994}
+    - name: AnastellaSidePony4
+      parentName: AnastellaSidePony3
+      position: {x: -0.021182174, y: 0.000000038146972, z: 0}
+      rotation: {x: 0.00000004076315, y: 0.000000061448084, z: 0.26982078, w: 0.9629106}
+      scale: {x: 1.0000001, y: 0.9999995, z: 0.99999994}
+    - name: AnastellaSidePony5
+      parentName: AnastellaSidePony4
+      position: {x: -0.025782317, y: 0.000000019073486, z: 0.0000000023841857}
+      rotation: {x: 0.000000051679116, y: -0.000000050470693, z: -0.26120687, w: 0.96528286}
+      scale: {x: 0.9999999, y: 0.9999999, z: 0.9999998}
+    - name: AnastellaSidePonyStrand21
+      parentName: AnastellaSidePony1
+      position: {x: -0.011064501, y: 0.0023508454, z: 0.0014220428}
+      rotation: {x: 0.8865327, y: -0.094615795, z: -0.44696298, w: 0.07301901}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1}
+    - name: AnastellaSidePonyStrand22
+      parentName: AnastellaSidePonyStrand21
+      position: {x: -0.01670353, y: 0, z: 0}
+      rotation: {x: 0.000000009313225, y: 0.000000070896924, z: -0.12046201, w: 0.992718}
+      scale: {x: 1.0000001, y: 1.0000006, z: 1.0000002}
+    - name: AnastellaSidePonyStrand23
+      parentName: AnastellaSidePonyStrand22
+      position: {x: -0.016703548, y: 0, z: 0.0000000023841857}
+      rotation: {x: -0.000000010300137, y: 0.000000068119874, z: -0.20517665, w: 0.978725}
+      scale: {x: 1.0000001, y: 1.0000005, z: 1.0000001}
+    - name: AnastellaSidePonyStrand11
+      parentName: AnastellaSidePony1
+      position: {x: -0.01253665, y: 0.0021944428, z: -0.0009507942}
+      rotation: {x: 0.82862645, y: -0.41428214, z: 0.1908248, w: -0.3245528}
+      scale: {x: 1.0000002, y: 0.9999998, z: 1.0000002}
+    - name: AnastellaSidePonyStrand12
+      parentName: AnastellaSidePonyStrand11
+      position: {x: -0.02183998, y: 0, z: 0.000000019073486}
+      rotation: {x: -0.000000029802319, y: -0.00000017881392, z: -0.100668594, w: 0.99492}
+      scale: {x: 1.0000004, y: 1.0000002, z: 1.0000006}
+    - name: AnastellaSidePonyStrand41
+      parentName: AnastellaSidePony1
+      position: {x: -0.008946333, y: 0.0012187194, z: -0.0028343224}
+      rotation: {x: -0.59502333, y: -0.03270973, z: -0.31089088, w: 0.7404217}
+      scale: {x: 1, y: 1.0000001, z: 1}
+    - name: AnastellaSidePonyStrand42
+      parentName: AnastellaSidePonyStrand41
+      position: {x: -0.021423187, y: 0.0000000047683715, z: 0}
+      rotation: {x: 0.040730353, y: 0.4456852, z: 0.08138592, w: -0.8905515}
+      scale: {x: 1.0000004, y: 1.0000004, z: 1}
+    - name: AnastellaSidePonyStrand43
+      parentName: AnastellaSidePonyStrand42
+      position: {x: -0.02107151, y: 0, z: -0.000000076293944}
+      rotation: {x: 0.039838206, y: -0.31267223, z: 0.011708525, w: 0.94895303}
+      scale: {x: 0.9999998, y: 1.0000001, z: 1.0000001}
+    - name: AnastellaSidePonyStrand44
+      parentName: AnastellaSidePonyStrand43
+      position: {x: -0.023444213, y: 0, z: 0}
+      rotation: {x: 0.01947898, y: -0.055714577, z: 0.124442235, w: 0.99046993}
+      scale: {x: 0.99999994, y: 1, z: 0.9999997}
+    - name: AnastellaSidePonyStrand31
+      parentName: AnastellaSidePony1
+      position: {x: -0.01209549, y: 0.0043032835, z: -0.0024784731}
+      rotation: {x: -0.606674, y: 0.6991841, z: -0.26257923, w: 0.27228737}
+      scale: {x: 1, y: 1, z: 1.0000004}
+    - name: AnastellaSidePonyStrand32
+      parentName: AnastellaSidePonyStrand31
+      position: {x: -0.021839904, y: -0.000000019073486, z: -0.000000009536743}
+      rotation: {x: 0.0064899474, y: 0.11597589, z: 0.0123741925, w: 0.9931538}
+      scale: {x: 1, y: 1, z: 1.0000005}
+    - name: AnastellaLowBackStrand11
+      parentName: AnastellaHead
+      position: {x: 0.0074022673, y: -0.013780534, z: 0.034449592}
+      rotation: {x: -0.017195553, y: 0.31358668, z: 0.94611007, w: 0.079016484}
+      scale: {x: 0.99999946, y: 0.99999946, z: 0.9999996}
+    - name: AnastellaLowBackStrand12
+      parentName: AnastellaLowBackStrand11
+      position: {x: -0.013913574, y: 0, z: 0.0000000023841857}
+      rotation: {x: -0.000000012572853, y: -0.00000004470348, z: -0.37202182, w: 0.92822397}
+      scale: {x: 1.0000002, y: 1, z: 1}
+    - name: AnastellaLowBackStrand21
+      parentName: AnastellaHead
+      position: {x: 0.01803772, y: -0.026350083, z: 0.01793184}
+      rotation: {x: -0.068504155, y: 0.13784948, z: 0.9342341, w: 0.321732}
+      scale: {x: 0.9999996, y: 0.9999996, z: 0.9999998}
+    - name: AnastellaLowBackStrand22
+      parentName: AnastellaLowBackStrand21
+      position: {x: -0.013913574, y: 0.000000038146972, z: 0.0000000047683715}
+      rotation: {x: 0.00000016018748, y: 0.00000018626451, z: -0.16666882, w: 0.98601294}
+      scale: {x: 1.0000002, y: 1.0000004, z: 1.0000002}
+    - name: AnastellaLowBackStrand31
+      parentName: AnastellaHead
+      position: {x: 0.019878311, y: -0.033653725, z: 0.0055441377}
+      rotation: {x: -0.031381965, y: 0.023745656, z: 0.97128826, w: 0.23462835}
+      scale: {x: 0.9999997, y: 0.9999997, z: 0.99999994}
+    - name: AnastellaLowBackStrand32
+      parentName: AnastellaLowBackStrand31
+      position: {x: -0.013913574, y: 0, z: -0.0000000023841857}
+      rotation: {x: 0.00000003259629, y: -0.00000004656613, z: -0.16666909, w: 0.98601294}
+      scale: {x: 1.0000006, y: 0.99999994, z: 1.0000005}
+    - name: AnastellaLowBackStrand41
+      parentName: AnastellaHead
+      position: {x: 0.019878311, y: -0.033653725, z: -0.0055441377}
+      rotation: {x: 0.031381994, y: -0.023745745, z: 0.97128826, w: 0.23462823}
+      scale: {x: 1.0000001, y: 0.99999994, z: 1}
+    - name: AnastellaLowBackStrand42
+      parentName: AnastellaLowBackStrand41
+      position: {x: -0.013913612, y: -0.000000019073486, z: -0.0000000023841857}
+      rotation: {x: 0.00000007171183, y: 0.000000024214383, z: -0.16666874, w: 0.98601294}
+      scale: {x: 1.0000005, y: 1.0000002, z: 1.0000006}
+    - name: AnastellaLowBackStrand51
+      parentName: AnastellaHead
+      position: {x: 0.01803772, y: -0.026350083, z: -0.01793184}
+      rotation: {x: 0.068503976, y: -0.13784945, z: 0.934234, w: 0.32173228}
+      scale: {x: 0.9999998, y: 0.99999934, z: 1.0000001}
+    - name: AnastellaLowBackStrand52
+      parentName: AnastellaLowBackStrand51
+      position: {x: -0.013913574, y: -0.000000038146972, z: 0.0000000047683715}
+      rotation: {x: 0.000000115484, y: 0.00000029057264, z: -0.16666923, w: 0.98601294}
+      scale: {x: 1.0000006, y: 0.9999998, z: 1}
+    - name: AnastellaLowBackStrand61
+      parentName: AnastellaHead
+      position: {x: 0.0074022673, y: -0.013780536, z: -0.034449596}
+      rotation: {x: -0.017195538, y: 0.31358668, z: -0.94611, w: -0.07901642}
+      scale: {x: 1.0000001, y: 1.0000002, z: 1.0000004}
+    - name: AnastellaLowBackStrand62
+      parentName: AnastellaLowBackStrand61
+      position: {x: -0.013913574, y: 0.000000009536743, z: 0}
+      rotation: {x: 0.000000022351742, y: -0.00000008940697, z: -0.37202194, w: 0.92822397}
+      scale: {x: 1, y: 0.99999994, z: 1}
+    - name: AnastellaTeeth_Upper
+      parentName: AnastellaHead
+      position: {x: -0.012985992, y: 0.046286706, z: -0.000000006989098}
+      rotation: {x: 0.000000012403232, y: -0.000000046700585, z: -0.771232, w: 0.6365542}
+      scale: {x: 0.99999994, y: 0.9999998, z: 1.0000001}
+    - name: AnastellaJaw
+      parentName: AnastellaHead
+      position: {x: -0.029248504, y: -0.00058359146, z: 0.0000000012305236}
+      rotation: {x: 0.00000009926115, y: -0.000000020647926, z: -0.97846776, w: 0.20640011}
+      scale: {x: 0.9999992, y: 0.9999992, z: 0.99999994}
+    - name: AnastellaTongue
+      parentName: AnastellaJaw
+      position: {x: -0.03704361, y: -0.022543183, z: -0.0000000074973014}
+      rotation: {x: -0.0000000782311, y: 0.000000026077034, z: 0.46522826, w: 0.8851908}
+      scale: {x: 1.0000002, y: 1.0000005, z: 1.0000002}
+    - name: AnastellaTongueBone001
+      parentName: AnastellaTongue
+      position: {x: -0.0180336, y: 0, z: -2.2737367e-15}
+      rotation: {x: -0.0000000018286386, y: 0.000000029379516, z: -0.17363632, w: 0.98480994}
+      scale: {x: 1.0000002, y: 1.0000005, z: 1.0000002}
+    - name: AnastellaTongueBone001Bone001
+      parentName: AnastellaTongueBone001
+      position: {x: -0.008475799, y: 0, z: 0}
+      rotation: {x: -0.0000000059690195, y: -0.00000004827886, z: -0.044528853, w: 0.9990081}
+      scale: {x: 1.0000002, y: 1.0000002, z: 1.0000001}
+    - name: AnastellaJawBone001
+      parentName: AnastellaJaw
+      position: {x: -0.010982437, y: 0.000000019073486, z: 0}
+      rotation: {x: -0.000000056322456, y: -0.00000006683787, z: 0.22660087, w: 0.9739877}
+      scale: {x: 1.0000004, y: 1.0000004, z: 1.0000001}
+    - name: AnastellaTeeth_Lower
+      parentName: AnastellaJawBone001
+      position: {x: -0.042988624, y: -0.012023353, z: -0.000000009461978}
+      rotation: {x: -0.000000048428767, y: -0.0000000037252899, z: 0.23618832, w: 0.97170734}
+      scale: {x: 0.99999994, y: 0.99999994, z: 1.0000001}
+    - name: AnastellaEye_Left
+      parentName: AnastellaHead
+      position: {x: -0.03604225, y: 0.025271146, z: 0.033735283}
+      rotation: {x: -0.000000007426226, y: -0.00000004780968, z: -0.7299174, w: 0.6835354}
+      scale: {x: 1.0000006, y: 1.0000007, z: 1.0000006}
+    - name: AnastellaEye_Right
+      parentName: AnastellaHead
+      position: {x: -0.03604225, y: 0.025271146, z: -0.033735283}
+      rotation: {x: -0.000000007426226, y: -0.00000004780968, z: -0.7299174, w: 0.6835354}
+      scale: {x: 1.0000006, y: 1.0000007, z: 1.0000006}
+    - name: EyeBrowBlenshapes
+      parentName: LittleStella(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: EyeBlendshapes
+      parentName: LittleStella(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: HeadBlendShapes
+      parentName: LittleStella(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: StarBlendshapes
+      parentName: LittleStella(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 7beba08d53eac6841bfc9c933712e19d,
+    type: 3}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 3
+  humanoidOversampling: 1
+  avatarSetup: 2
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

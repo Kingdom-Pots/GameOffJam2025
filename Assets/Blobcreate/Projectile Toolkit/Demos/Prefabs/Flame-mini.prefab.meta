@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: f0279154059da4e4b8e3ca8ce8ca0ed8
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 216129
+  packageName: Projectile Toolkit - Targeting, Prediction, Aerodynamics
+  packageVersion: 3.1
+  assetPath: Assets/Blobcreate/Projectile Toolkit/Demos/Prefabs/Flame-mini.prefab
+  uploadId: 795320
