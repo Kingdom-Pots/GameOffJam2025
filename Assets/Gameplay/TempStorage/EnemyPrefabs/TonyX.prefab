@@ -48,7 +48,7 @@ MonoBehaviour:
   targetPoint: {fileID: 0}
   targetTag: Castle
   targetName: Castle
-  moveSpeed: 3.5
+  moveSpeed: 2
   acceleration: 8
   stoppingDistance: 0.5
   moveOnStart: 1
