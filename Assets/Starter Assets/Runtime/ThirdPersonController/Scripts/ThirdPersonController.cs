@@ -300,6 +300,7 @@ namespace StarterAssets
                 }
 
                 // Jump
+                /*
                 if (_input.jump && _jumpTimeoutDelta <= 0.0f)
                 {
                     // the square root of H * -2 * G = how much velocity needed to reach desired height
@@ -317,6 +318,7 @@ namespace StarterAssets
                 {
                     _jumpTimeoutDelta -= Time.deltaTime;
                 }
+                */
             }
             else
             {
@@ -340,12 +342,12 @@ namespace StarterAssets
                 // if we are not grounded, do not jump
                 _input.jump = false;
             }
-
             // apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
             if (_verticalVelocity < _terminalVelocity)
             {
                 _verticalVelocity += Gravity * Time.deltaTime;
             }
+            
         }
 
         private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
