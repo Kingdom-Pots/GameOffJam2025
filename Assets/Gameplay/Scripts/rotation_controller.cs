@@ -5,6 +5,11 @@ public class MechanicalRotator : MonoBehaviour
     [Header("Rotator Configuration")]
     [SerializeField] private RotationAxis rotationAxis = RotationAxis.Y;
     
+    [Header("Rotation Constraints")]
+    [SerializeField] private bool useConstraints = false;
+    [SerializeField] private float minRotation = -180f;
+    [SerializeField] private float maxRotation = 180f;
+    
     public enum RotationAxis
     {
         X, Y, Z
@@ -16,6 +21,12 @@ public class MechanicalRotator : MonoBehaviour
     void Start()
     {
         initialRotation = transform.localEulerAngles;
+        
+        // Clamp initial rotation if constraints are enabled
+        if (useConstraints)
+        {
+            currentRotation = Mathf.Clamp(currentRotation, minRotation, maxRotation);
+        }
     }
     
     /// <summary>
@@ -25,6 +36,12 @@ public class MechanicalRotator : MonoBehaviour
     public void AddRotation(float rotationAmount)
     {
         currentRotation += rotationAmount;
+        
+        if (useConstraints)
+        {
+            currentRotation = Mathf.Clamp(currentRotation, minRotation, maxRotation);
+        }
+        
         ApplyRotation();
     }
     
@@ -35,6 +52,12 @@ public class MechanicalRotator : MonoBehaviour
     public void SetRotation(float rotation)
     {
         currentRotation = rotation;
+        
+        if (useConstraints)
+        {
+            currentRotation = Mathf.Clamp(currentRotation, minRotation, maxRotation);
+        }
+        
         ApplyRotation();
     }
     
@@ -44,6 +67,22 @@ public class MechanicalRotator : MonoBehaviour
     public float GetRotation()
     {
         return currentRotation;
+    }
+    
+    /// <summary>
+    /// Check if rotation is at minimum limit
+    /// </summary>
+    public bool IsAtMinLimit()
+    {
+        return useConstraints && Mathf.Approximately(currentRotation, minRotation);
+    }
+    
+    /// <summary>
+    /// Check if rotation is at maximum limit
+    /// </summary>
+    public bool IsAtMaxLimit()
+    {
+        return useConstraints && Mathf.Approximately(currentRotation, maxRotation);
     }
     
     private void ApplyRotation()
