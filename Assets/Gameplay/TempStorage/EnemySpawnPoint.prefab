@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2419084379061053972}
+  - component: {fileID: 3534472609436153389}
   m_Layer: 0
   m_Name: EnemySpawnPoint
   m_TagString: Untagged
@@ -24,14 +25,111 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6707767770852707964}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 108.3, y: -11.8, z: 312.3}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.054039538, y: 0.002408266, z: 0.02739177, w: 0.9981601}
+  m_LocalPosition: {x: 71.4, y: -22.504, z: 339.26}
+  m_LocalScale: {x: 1.861, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2644453047481123649}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 6.186, y: 0.448, z: 3.168}
+--- !u!114 &3534472609436153389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6707767770852707964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc2fa2cbd6624024599c4f12341c5fe4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WaveSpawnController
+  waves:
+  - waveName: Wave 1
+    enemies:
+    - enemyPrefab: {fileID: 2635191636435014911, guid: 545cf13f88342254fa0c47bdcf216660,
+        type: 3}
+      count: 2
+    - enemyPrefab: {fileID: 7438577324928062831, guid: a393ea62a40d70b49af8383882f04a00,
+        type: 3}
+      count: 2
+    - enemyPrefab: {fileID: 3376171670033430772, guid: 9f8c2db24e6c82c47b97f9fbcb60e7f9,
+        type: 3}
+      count: 2
+    - enemyPrefab: {fileID: 6008828751597086896, guid: d1cb4d57610360a46b1c64b61085e912,
+        type: 3}
+      count: 0
+    delayBeforeWave: 0
+  - waveName: Wave 2
+    enemies:
+    - enemyPrefab: {fileID: 2635191636435014911, guid: 545cf13f88342254fa0c47bdcf216660,
+        type: 3}
+      count: 4
+    - enemyPrefab: {fileID: 7438577324928062831, guid: a393ea62a40d70b49af8383882f04a00,
+        type: 3}
+      count: 4
+    - enemyPrefab: {fileID: 3376171670033430772, guid: 9f8c2db24e6c82c47b97f9fbcb60e7f9,
+        type: 3}
+      count: 4
+    - enemyPrefab: {fileID: 6008828751597086896, guid: d1cb4d57610360a46b1c64b61085e912,
+        type: 3}
+      count: 1
+    delayBeforeWave: 0
+  - waveName: Wave 3
+    enemies:
+    - enemyPrefab: {fileID: 2635191636435014911, guid: 545cf13f88342254fa0c47bdcf216660,
+        type: 3}
+      count: 6
+    - enemyPrefab: {fileID: 7438577324928062831, guid: a393ea62a40d70b49af8383882f04a00,
+        type: 3}
+      count: 6
+    - enemyPrefab: {fileID: 3376171670033430772, guid: 9f8c2db24e6c82c47b97f9fbcb60e7f9,
+        type: 3}
+      count: 6
+    - enemyPrefab: {fileID: 6008828751597086896, guid: d1cb4d57610360a46b1c64b61085e912,
+        type: 3}
+      count: 2
+    delayBeforeWave: 0
+  - waveName: Wave 4
+    enemies:
+    - enemyPrefab: {fileID: 2635191636435014911, guid: 545cf13f88342254fa0c47bdcf216660,
+        type: 3}
+      count: 8
+    - enemyPrefab: {fileID: 7438577324928062831, guid: a393ea62a40d70b49af8383882f04a00,
+        type: 3}
+      count: 8
+    - enemyPrefab: {fileID: 3376171670033430772, guid: 9f8c2db24e6c82c47b97f9fbcb60e7f9,
+        type: 3}
+      count: 8
+    - enemyPrefab: {fileID: 6008828751597086896, guid: d1cb4d57610360a46b1c64b61085e912,
+        type: 3}
+      count: 3
+    delayBeforeWave: 0
+  - waveName: Wave 5
+    enemies:
+    - enemyPrefab: {fileID: 2635191636435014911, guid: 545cf13f88342254fa0c47bdcf216660,
+        type: 3}
+      count: 10
+    - enemyPrefab: {fileID: 7438577324928062831, guid: a393ea62a40d70b49af8383882f04a00,
+        type: 3}
+      count: 10
+    - enemyPrefab: {fileID: 3376171670033430772, guid: 9f8c2db24e6c82c47b97f9fbcb60e7f9,
+        type: 3}
+      count: 10
+    - enemyPrefab: {fileID: 6008828751597086896, guid: d1cb4d57610360a46b1c64b61085e912,
+        type: 3}
+      count: 4
+    delayBeforeWave: 0
+  delayBetweenWaves: 5
+  autoStartNextWave: 1
+  spawnArea: {fileID: 8191680723731439659}
+  minSpawnDistance: 2
+  maxSpawnAttempts: 30
+  spawnHeightOffset: 0
+  parentToSpawner: 1
+  showDebugInfo: 1
+  showSpawnArea: 1
 --- !u!1 &7810784233769715646
 GameObject:
   m_ObjectHideFlags: 0
@@ -41,9 +139,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2644453047481123649}
-  - component: {fileID: 8014734786226948540}
-  - component: {fileID: 5613720172727920631}
-  - component: {fileID: 2636777076590514176}
+  - component: {fileID: 8191680723731439659}
   m_Layer: 0
   m_Name: EnemySpawnRadius
   m_TagString: Untagged
@@ -59,14 +155,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7810784233769715646}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0.012370389, y: 0.0006742459, z: -0.000096241856, w: 0.9999233}
+  m_LocalPosition: {x: 0.4, y: -0.2, z: -53}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2419084379061053972}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &8014734786226948540
+  m_LocalEulerAnglesHint: {x: -1.418, y: 0.077, z: -0.012}
+--- !u!65 &8191680723731439659
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -81,63 +177,9 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 71.33373, y: 1, z: 54.52359}
-  m_Center: {x: 4.071064, y: 0, z: 16.761795}
---- !u!114 &5613720172727920631
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7810784233769715646}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e77ca550613cd6248a51870f29a62b3d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
-  enemyPrefabs:
-  - {fileID: 6008828751597086896, guid: d1cb4d57610360a46b1c64b61085e912, type: 3}
-  - {fileID: 2635191636435014911, guid: 545cf13f88342254fa0c47bdcf216660, type: 3}
-  - {fileID: 7438577324928062831, guid: a393ea62a40d70b49af8383882f04a00, type: 3}
-  - {fileID: 3376171670033430772, guid: 9f8c2db24e6c82c47b97f9fbcb60e7f9, type: 3}
-  enemiesToSpawn: 10
-  minSpawnDistance: 2
-  spawnHeightOffset: 2
-  spawnArea: {fileID: 8014734786226948540}
-  maxSpawnAttempts: 30
-  spawnOnStart: 1
-  parentToSpawner: 1
---- !u!114 &2636777076590514176
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7810784233769715646}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58defc820b7992a4b9d6aa192ed8a2e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WaveSpawner
-  enemySpawner: {fileID: 5613720172727920631}
-  waves:
-  - waveName: Wave1
-    enemyCount: 5
-    delayBeforeWave: 2
-  - waveName: Wave2
-    enemyCount: 10
-    delayBeforeWave: 2
-  - waveName: Wave3
-    enemyCount: 12
-    delayBeforeWave: 2
-  - waveName: Wave4
-    enemyCount: 15
-    delayBeforeWave: 2
-  - waveName: Wave5
-    enemyCount: 20
-    delayBeforeWave: 2
-  delayBetweenWaves: 10
+  m_Size: {x: 23.350992, y: 1, z: 41.462776}
+  m_Center: {x: 20.378134, y: -0.00000062513226, z: 18.781723}

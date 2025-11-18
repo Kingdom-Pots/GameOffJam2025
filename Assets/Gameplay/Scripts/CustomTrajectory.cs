@@ -2,10 +2,6 @@ using UnityEngine;
 
 namespace ProjectileSystem
 {
-    /// <summary>
-    /// Handles bullet rotation to align with its Rigidbody velocity.
-    /// Optimized for physics-driven projectiles.
-    /// </summary>
     public class CustomTrajectory : MonoBehaviour
     {
         [Header("Rotation Settings")]

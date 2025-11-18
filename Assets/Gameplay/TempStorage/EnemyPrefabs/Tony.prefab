@@ -202,6 +202,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2918433239758510320}
   - component: {fileID: 3597616363229796980}
+  - component: {fileID: 4770209390918485433}
+  - component: {fileID: 4960133430677660202}
   m_Layer: 0
   m_Name: Tony
   m_TagString: Untagged
@@ -219,7 +221,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 107.89661, y: -0.0657, z: 185.63739}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6246680843695988780}
@@ -240,13 +242,77 @@ MonoBehaviour:
   targetPoint: {fileID: 0}
   targetTag: Castle
   targetName: Castle
-  moveSpeed: 2
+  moveSpeed: 4
   acceleration: 8
   stoppingDistance: 0.5
   moveOnStart: 1
   angularSpeed: 120
+  maxHealth: 50
+  currentHealth: 0
+  destroyOnDeath: 1
+  autoSetupChildColliders: 1
+  attackDamage: 5
+  attackCooldown: 1.5
+  attackRange: 4
+  attackableTags:
+  - Castle
+  attackEffectPrefab: {fileID: 0}
+  deathEffectPrefab: {fileID: 0}
+  damageEffectPrefab: {fileID: 0}
+  attackSound: {fileID: 0}
+  deathSound: {fileID: 0}
+  damageSound: {fileID: 0}
   showPath: 1
+  showAttackRange: 1
   pathColor: {r: 0, g: 1, b: 0, a: 1}
+--- !u!65 &4770209390918485433
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2635191636435014911}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1.1039958, z: 1}
+  m_Center: {x: 0, y: 0.051997915, z: 0}
+--- !u!54 &4960133430677660202
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2635191636435014911}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &3550186509267526653
 GameObject:
   m_ObjectHideFlags: 0
@@ -514,8 +580,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6246680843695988780}
   - component: {fileID: 22667484687596118}
-  - component: {fileID: 1184828893886245885}
-  - component: {fileID: 5414566952509529365}
   m_Layer: 0
   m_Name: Tony
   m_TagString: Untagged
@@ -562,54 +626,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!54 &1184828893886245885
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6772142310521895574}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!65 &5414566952509529365
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6772142310521895574}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1.2112463, z: 1}
-  m_Center: {x: 0, y: 0.5208709, z: 0}
 --- !u!1 &7131265864757497386
 GameObject:
   m_ObjectHideFlags: 0
