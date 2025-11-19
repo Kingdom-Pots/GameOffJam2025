@@ -138,4 +138,11 @@ public class Damageable : MonoBehaviour
     {
         return isDead;
     }
+    
+    public void ResetHealth()
+    {
+        currentHealth = maxHealth;
+        isDead = false;
+        gameObject.SetActive(true);
+    }
 }
