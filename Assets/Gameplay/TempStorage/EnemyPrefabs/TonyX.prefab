@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9059445847609060025}
   m_Layer: 0
   m_Name: TonyX
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -49,8 +49,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
   targetPoint: {fileID: 0}
   targetTag: Castle
-  targetName: Castle
-  moveSpeed: 4
+  targetName: PlaceholderCastle
+  moveSpeed: 6
   acceleration: 8
   stoppingDistance: 0.5
   moveOnStart: 1
@@ -72,6 +72,7 @@ MonoBehaviour:
   damageSound: {fileID: 0}
   showPath: 1
   showAttackRange: 1
+  showHealthBar: 1
   pathColor: {r: 0, g: 1, b: 0, a: 1}
 --- !u!65 &3906072274752155600
 BoxCollider:
@@ -92,8 +93,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.4182594, y: 1.1489178, z: 1.2623454}
+  m_Center: {x: 0.01309967, y: 0.0744589, z: 0.051288545}
 --- !u!54 &9059445847609060025
 Rigidbody:
   m_ObjectHideFlags: 0

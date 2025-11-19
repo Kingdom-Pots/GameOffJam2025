@@ -8,6 +8,8 @@ TagManager:
   - LookTarget
   - CinemachineTarget
   - Castle
+  - Enemy
+  - Breakable
   layers:
   - Default
   - TransparentFX

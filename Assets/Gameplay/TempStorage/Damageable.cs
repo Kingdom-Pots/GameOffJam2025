@@ -7,7 +7,11 @@ public class Damageable : MonoBehaviour
     public float currentHealth;
     public bool destroyOnDeath = false;
 
-    [Header("Visual Feedback")]
+    [Header("TargetSettings")]
+    [Tooltip("Only take damage from specific tags (leave empty for all)")]
+    public string[] allowedDamageTags = new string[0];
+
+    [Header("Visual/Audio Feedback")]
     public GameObject deathEffectPrefab;
     public GameObject damageEffectPrefab;
     public AudioClip deathSound;
@@ -19,9 +23,6 @@ public class Damageable : MonoBehaviour
 
     [Tooltip("Called when health reaches 0")]
     public UnityEngine.Events.UnityEvent onDeath;
-
-    [Header("Debug")]
-    public bool showHealthBar = true;
 
     private bool isDead = false;
     private AudioSource audioSource;
@@ -69,6 +70,32 @@ public class Damageable : MonoBehaviour
         }
     }
 
+    public void TakeDamageFrom(float damageAmount, string attackerTag)
+    {
+        // Check if damage is allowed from this tag
+        if (allowedDamageTags.Length > 0)
+        {
+            bool isAllowed = false;
+            foreach (string tag in allowedDamageTags)
+            {
+                if (tag == attackerTag)
+                {
+                    isAllowed = true;
+                    break;
+                }
+            }
+
+            if (!isAllowed)
+            {
+                Debug.Log($"{gameObject.name} ignored damage from {attackerTag}");
+                return;
+            }
+        }
+
+        // Deal damage
+        TakeDamage(damageAmount);
+    }
+
     void Die()
     {
         if (isDead) return;
@@ -110,12 +137,5 @@ public class Damageable : MonoBehaviour
     public bool IsDead()
     {
         return isDead;
-    }
-
-    public void ResetHealth()
-    {
-        currentHealth = maxHealth;
-        isDead = false;
-        gameObject.SetActive(true);
     }
 }

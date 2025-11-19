@@ -27,16 +27,12 @@ public class EnemyController : MonoBehaviour
     public float attackDamage = 10f;
     public float attackCooldown = 1.5f;
     public float attackRange = 2f;
-    public string[] attackableTags = new string[] {"Castle"};
+    [Tooltip("Tags of objects to attack")]
+    public string[] attackableTags = new string[] { "Castle", "Building", "Player" };
 
     [Header("Visual Effects")]
-    [Tooltip("Attack effect prefab")]
     public GameObject attackEffectPrefab;
-
-    [Tooltip("Death effect prefab")]
     public GameObject deathEffectPrefab;
-
-    [Tooltip("Damage effect prefab")]
     public GameObject damageEffectPrefab;
 
     [Header("Audio")]
@@ -93,6 +89,12 @@ public class EnemyController : MonoBehaviour
         if (targetPoint == null)
         {
             FindTarget();
+        }
+
+        // Adjust stopping distance for target size
+        if (targetPoint != null)
+        {
+            AdjustStoppingDistanceForTarget();
         }
 
         if (moveOnStart && targetPoint != null)
@@ -159,7 +161,7 @@ public class EnemyController : MonoBehaviour
         // Check if in attack range
         if (targetPoint != null)
         {
-            float distanceToTarget = Vector3.Distance(transform.position, targetPoint.position);
+            float distanceToTarget = GetDistanceToTargetEdge();
 
             if (distanceToTarget <= attackRange)
             {
@@ -208,6 +210,25 @@ public class EnemyController : MonoBehaviour
                 }
             }
         }
+    }
+
+    float GetDistanceToTargetEdge()
+    {
+        if (targetPoint == null) return float.MaxValue;
+
+        // Calculate distance to center
+        float distanceToCenter = Vector3.Distance(transform.position, targetPoint.position);
+
+        // Get target's collider to subtract its radius
+        Collider targetCollider = targetPoint.GetComponent<Collider>();
+        if (targetCollider != null)
+        {
+            Bounds bounds = targetCollider.bounds;
+            Vector3 closestPoint = bounds.ClosestPoint(transform.position);
+            return Vector3.Distance(transform.position, closestPoint);
+        }
+
+        return distanceToCenter;
     }
 
     void Attack()
@@ -343,7 +364,31 @@ public class EnemyController : MonoBehaviour
     {
         targetPoint = target;
         targetDamageable = null;
+
+        // Adjust stopping distance based on target's collider size
+        AdjustStoppingDistanceForTarget();
+
         MoveToTarget();
+    }
+
+    void AdjustStoppingDistanceForTarget()
+    {
+        if (targetPoint == null) return;
+
+        // Get target's collider to determine size
+        Collider targetCollider = targetPoint.GetComponent<Collider>();
+        if (targetCollider != null)
+        {
+            // Calculate distance to edge of collider
+            Bounds bounds = targetCollider.bounds;
+            float maxExtent = Mathf.Max(bounds.extents.x, bounds.extents.z);
+
+            // Set stopping distance to be outside collider but within attack range
+            float suggestedStoppingDistance = maxExtent + (attackRange * 0.3f);
+            agent.stoppingDistance = Mathf.Max(stoppingDistance, suggestedStoppingDistance);
+
+            Debug.Log($"Adjusted stopping distance to {agent.stoppingDistance} based on target size");
+        }
     }
 
     public bool IsMoving()
