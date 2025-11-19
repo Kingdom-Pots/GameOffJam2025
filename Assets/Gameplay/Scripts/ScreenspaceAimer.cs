@@ -10,10 +10,13 @@ public class ScreenspaceAimer : MonoBehaviour
     [SerializeField] private RectTransform aimerUI;
     [SerializeField] private Camera cam;
     [SerializeField] private Transform gunBarrel;
+    [SerializeField] private Transform collisionFollower;
     
     [Header("Settings")]
     [SerializeField] private float aimDistance = 100f;
     [SerializeField] private float smoothTime = 0.1f;
+    [SerializeField] private float maxFollowDistance = 100f;
+    [SerializeField] private float followerOffset = 0f;
     
     [Header("Screen Bounds")]
     [SerializeField] private bool confineToScreen = true;
@@ -21,7 +24,6 @@ public class ScreenspaceAimer : MonoBehaviour
     
     [Header("Raycast (Optional)")]
     [SerializeField] private LayerMask hitLayers = -1;
-    [SerializeField] private float maxDistance = 500f;
     
     [Header("Debug")]
     [SerializeField] private bool showDebugRay = true;
@@ -43,6 +45,7 @@ public class ScreenspaceAimer : MonoBehaviour
     private void LateUpdate()
     {
         UpdateAimerPosition();
+        UpdateCollisionFollower();
     }
     
     /// <summary>
@@ -115,7 +118,7 @@ public class ScreenspaceAimer : MonoBehaviour
     public bool IsAimingAtTarget(out RaycastHit hit)
     {
         Ray ray = new Ray(gunBarrel.position, gunBarrel.forward);
-        return Physics.Raycast(ray, out hit, maxDistance, hitLayers);
+        return Physics.Raycast(ray, out hit, aimDistance, hitLayers);
     }
     
     /// <summary>
@@ -129,25 +132,71 @@ public class ScreenspaceAimer : MonoBehaviour
         aimerUI.anchoredPosition = GetCanvasPosition(screenPos);
     }
     
+    /// <summary>
+    /// Updates the collision follower transform to track the raycast hit point
+    /// </summary>
+    private void UpdateCollisionFollower()
+    {
+        if (!collisionFollower) return;
+        
+        Ray ray = new Ray(gunBarrel.position, gunBarrel.forward);
+        
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, maxFollowDistance, hitLayers))
+        {
+            // Calculate offset distance along the ray direction
+            float actualDistance = hitInfo.distance + followerOffset;
+            
+            // Position at offset distance along barrel direction
+            collisionFollower.position = gunBarrel.position + gunBarrel.forward * actualDistance;
+            
+            // Optionally align rotation to surface normal
+            collisionFollower.rotation = Quaternion.LookRotation(hitInfo.normal);
+            
+            // Enable if it was disabled
+            if (!collisionFollower.gameObject.activeSelf)
+            {
+                collisionFollower.gameObject.SetActive(true);
+            }
+        }
+        else
+        {
+            // Hide when not hitting anything
+            if (collisionFollower.gameObject.activeSelf)
+            {
+                collisionFollower.gameObject.SetActive(false);
+            }
+        }
+    }
+    
     private void OnDrawGizmos()
     {
         if (!showDebugRay || !gunBarrel) return;
         
         Ray ray = new Ray(gunBarrel.position, gunBarrel.forward);
-        Vector3 aimPoint = gunBarrel.position + gunBarrel.forward * aimDistance;
         
-        // Check if we hit something
-        bool hit = Physics.Raycast(ray, out RaycastHit hitInfo, maxDistance, hitLayers);
+        // Perform raycast
+        bool hit = Physics.Raycast(ray, out RaycastHit hitInfo, aimDistance, hitLayers);
         
-        Gizmos.color = hit ? rayColorHit : rayColorMiss;
-        Gizmos.DrawLine(ray.origin, aimPoint);
-        Gizmos.DrawWireSphere(aimPoint, 0.5f);
-        
-        // Show hit point if we hit something
-        if (hit && hitInfo.distance < aimDistance)
+        // Calculate endpoint - either hit point or aim distance
+        Vector3 endPoint;
+        if (hit)
         {
+            endPoint = hitInfo.point;
             Gizmos.color = rayColorHit;
-            Gizmos.DrawWireSphere(hitInfo.point, 0.3f);
+        }
+        else
+        {
+            endPoint = gunBarrel.position + gunBarrel.forward * aimDistance;
+            Gizmos.color = rayColorMiss;
+        }
+        
+        // Draw ray from origin to endpoint (stops at collision)
+        Gizmos.DrawLine(ray.origin, endPoint);
+        Gizmos.DrawWireSphere(endPoint, 0.5f);
+        
+        // Show hit normal if we hit something
+        if (hit)
+        {
             Gizmos.color = Color.blue;
             Gizmos.DrawLine(hitInfo.point, hitInfo.point + hitInfo.normal * 2f);
         }
