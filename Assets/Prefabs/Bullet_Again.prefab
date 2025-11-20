@@ -146,7 +146,7 @@ MonoBehaviour:
   useDamageFalloff: 1
   damageableLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 276955200
   destroyOnImpact: 1
   destroyDelay: 0.1
 --- !u!1 &4250376251110709649
