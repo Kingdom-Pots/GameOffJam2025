@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: -2873371922163058737}
   - component: {fileID: 745664497191841368}
   - component: {fileID: 7937007973823681307}
+  - component: {fileID: -2052011878296948447}
   m_Layer: 0
   m_Name: Wendifoot
   m_TagString: Enemy
@@ -29,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 108.04458, y: 1.09, z: 250.58868}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5796273735691475167}
@@ -50,12 +51,12 @@ MonoBehaviour:
   targetPoint: {fileID: 0}
   targetTag: Castle
   targetName: PlaceholderCastle
-  moveSpeed: 4
+  moveSpeed: 3
   acceleration: 8
   stoppingDistance: 0.5
   moveOnStart: 1
   angularSpeed: 120
-  maxHealth: 100
+  maxHealth: 200
   currentHealth: 0
   destroyOnDeath: 1
   autoSetupChildColliders: 1
@@ -72,7 +73,6 @@ MonoBehaviour:
   damageSound: {fileID: 0}
   showPath: 1
   showAttackRange: 1
-  showHealthBar: 1
   pathColor: {r: 0, g: 1, b: 0, a: 1}
 --- !u!54 &745664497191841368
 Rigidbody:
@@ -82,7 +82,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6008828751597086896}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 70
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -122,6 +122,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 8.182838, y: 7.999709, z: 5.3868866}
   m_Center: {x: -0.06386948, y: 3.4998546, z: -0.36519623}
+--- !u!114 &-2052011878296948447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6008828751597086896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bb060344b07ca847a7f8c0d5de26ba0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyDamageForwarder
+  parentEnemy: {fileID: 0}
 --- !u!1001 &6339442363163508532
 PrefabInstance:
   m_ObjectHideFlags: 0

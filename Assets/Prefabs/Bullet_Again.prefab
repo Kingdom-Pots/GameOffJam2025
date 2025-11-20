@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 4250376250867435935}
   - component: {fileID: 7427885347389889810}
   - component: {fileID: 4130253441628826880}
+  - component: {fileID: 2166438880651733070}
   m_Layer: 0
   m_Name: Bullet_Again
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -125,6 +126,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileSystem.CustomTrajectory
   rotationSpeed: 14
   alignWithVelocity: 1
+--- !u!114 &2166438880651733070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4250376250867435905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01f6974c4fa257848b2a4ca31f1b56fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArtilleryShell
+  damage: 50
+  explosionRadiusPrefab: {fileID: 7826041005091443006, guid: caa026849e9b13949b4e516dc4926394,
+    type: 3}
+  explosionRadius: 5
+  maxDamageDistance: 8
+  useDamageFalloff: 1
+  damageableLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  destroyOnImpact: 1
+  destroyDelay: 0.1
 --- !u!1 &4250376251110709649
 GameObject:
   m_ObjectHideFlags: 0

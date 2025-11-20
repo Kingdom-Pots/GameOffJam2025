@@ -204,6 +204,7 @@ GameObject:
   - component: {fileID: 3597616363229796980}
   - component: {fileID: 4770209390918485433}
   - component: {fileID: 4960133430677660202}
+  - component: {fileID: -1306734467412962826}
   m_Layer: 0
   m_Name: Tony
   m_TagString: Enemy
@@ -242,7 +243,7 @@ MonoBehaviour:
   targetPoint: {fileID: 0}
   targetTag: Castle
   targetName: PlaceholderCastle
-  moveSpeed: 6
+  moveSpeed: 4
   acceleration: 8
   stoppingDistance: 0.5
   moveOnStart: 1
@@ -264,7 +265,6 @@ MonoBehaviour:
   damageSound: {fileID: 0}
   showPath: 1
   showAttackRange: 1
-  showHealthBar: 1
   pathColor: {r: 0, g: 1, b: 0, a: 1}
 --- !u!65 &4770209390918485433
 BoxCollider:
@@ -314,6 +314,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-1306734467412962826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2635191636435014911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bb060344b07ca847a7f8c0d5de26ba0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyDamageForwarder
+  parentEnemy: {fileID: 0}
 --- !u!1 &3550186509267526653
 GameObject:
   m_ObjectHideFlags: 0

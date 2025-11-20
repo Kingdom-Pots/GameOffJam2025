@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Damageable : MonoBehaviour
+public class Damageable: MonoBehaviour
 {
     [Header("Health Settings")]
     public float maxHealth = 100f;

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 92807530039254095}
   - component: {fileID: 4104799353060783559}
+  - component: {fileID: 1472151111326576294}
   m_Layer: 0
   m_Name: BroccoTree_002
   m_TagString: Untagged
@@ -62,6 +63,22 @@ LODGroup:
     renderers:
     - renderer: {fileID: 5382828249714458354}
   m_Enabled: 1
+--- !u!208 &1472151111326576294
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2501187825801898016}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &3395072524994598257
 GameObject:
   m_ObjectHideFlags: 0
