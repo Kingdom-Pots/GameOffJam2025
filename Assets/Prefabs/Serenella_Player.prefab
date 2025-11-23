@@ -434,6 +434,7 @@ MonoBehaviour:
   InScriptDrivenPause: 0
   FeedbacksList:
   - rid: 1437265573027774550
+  - rid: 1437265638440042569
   KeepPlayModeChanges: 0
   PerformanceMode: 0
   RestoreInitialValuesOnDisable: 0
@@ -596,6 +597,104 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
+    - rid: 1437265638440042569
+      type: {class: MMF_Events, ns: MoreMountains.Feedbacks, asm: MoreMountains.Tools}
+      data:
+        Active: 1
+        UniqueID: -1238735059
+        Label: Unity Events
+        OriginalLabel: Unity Events
+        ChannelMode: 0
+        Channel: 0
+        MMChannelDefinition: {fileID: 0}
+        Chance: 100
+        Timing:
+          TimescaleMode: 0
+          ExcludeFromHoldingPauses: 0
+          ContributeToTotalDuration: 1
+          InitialDelay: 0
+          CooldownDuration: 0
+          InterruptsOnStop: 1
+          NumberOfRepeats: 0
+          RepeatForever: 0
+          DelayBetweenRepeats: 1
+          PlayCount: 0
+          LimitPlayCount: 0
+          MaxPlayCount: 3
+          SetPlayCountToZeroOnReset: 0
+          MMFeedbacksDirectionCondition: 0
+          PlayDirection: 0
+          ConstantIntensity: 0
+          UseIntensityInterval: 0
+          IntensityIntervalMin: 0
+          IntensityIntervalMax: 0
+          Sequence: {fileID: 0}
+          TrackID: 0
+          Quantized: 0
+          TargetBPM: 120
+        AutomatedTargetAcquisition:
+          Mode: 0
+          ChildIndex: 0
+        RandomizeOutput: 0
+        RandomMultiplier: {x: 0.8, y: 1}
+        RandomizeDuration: 0
+        RandomDurationMultiplier: {x: 0.5, y: 2}
+        UseRange: 0
+        RangeDistance: 5
+        UseRangeFalloff: 0
+        RangeFalloff:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        RemapRangeFalloff: {x: 0, y: 1}
+        AutomaticShakerSetupButton:
+          ButtonText: 
+        Owner: {fileID: 4760872525929595496}
+        DebugActive: 0
+        PlayEvents:
+          m_PersistentCalls:
+            m_Calls:
+            - m_Target: {fileID: 3980331027073731988}
+              m_TargetAssemblyTypeName: BlendShapeController, Assembly-CSharp
+              m_MethodName: TriggerActivateAndDecay
+              m_Mode: 5
+              m_Arguments:
+                m_ObjectArgument: {fileID: 0}
+                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+                m_IntArgument: 0
+                m_FloatArgument: 0
+                m_StringArgument: Action
+                m_BoolArgument: 0
+              m_CallState: 2
+        StopEvents:
+          m_PersistentCalls:
+            m_Calls: []
+        InitializationEvents:
+          m_PersistentCalls:
+            m_Calls: []
+        ResetEvents:
+          m_PersistentCalls:
+            m_Calls: []
 --- !u!114 &3363607325930142844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -724,16 +823,74 @@ PrefabInstance:
       propertyPath: 'm_BlendShapeWeights.Array.data[1]'
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 8889105490852192810, guid: 2e287ba7fe1b01341a44ec3b130daa09,
+        type: 3}
+      propertyPath: 'm_BlendShapeWeights.Array.data[6]'
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5866666021909216657, guid: 2e287ba7fe1b01341a44ec3b130daa09, type: 3}
     m_RemovedGameObjects:
     - {fileID: -5539764629200458662, guid: 2e287ba7fe1b01341a44ec3b130daa09, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2e287ba7fe1b01341a44ec3b130daa09,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3980331027073731988}
   m_SourcePrefab: {fileID: 100100000, guid: 2e287ba7fe1b01341a44ec3b130daa09, type: 3}
 --- !u!4 &3617037238668185257 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2e287ba7fe1b01341a44ec3b130daa09,
+    type: 3}
+  m_PrefabInstance: {fileID: 3871113574018459970}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4141513513230996499 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 2e287ba7fe1b01341a44ec3b130daa09,
+    type: 3}
+  m_PrefabInstance: {fileID: 3871113574018459970}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3980331027073731988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4141513513230996499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64094ab44c2ca9f4d8b28e39a68d1ed1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BlendShapeController
+  blendShapeSets:
+  - setName: Action
+    rendererData:
+    - renderer: {fileID: 5684817140652706664}
+      blendShapeIndices: 06000000
+      blendShapeNames: '6: Face_Shapes.Unamused'
+    - renderer: {fileID: 8441388234896265357}
+      blendShapeIndices: 02000000
+      blendShapeNames: '2: Lash_Shape.Lash_Unamused'
+    maxWeight: 100
+    addAmount: 100
+    defaultWeight: 0
+    useInterpolation: 1
+    interpolationSpeed: 400
+    autoDecay: 1
+    decayDelay: 0.24
+    currentWeight: 0
+    targetWeight: 0
+  showDebugInfo: 0
+--- !u!137 &5684817140652706664 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8889105490852192810, guid: 2e287ba7fe1b01341a44ec3b130daa09,
+    type: 3}
+  m_PrefabInstance: {fileID: 3871113574018459970}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &8441388234896265357 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -4567458536716011057, guid: 2e287ba7fe1b01341a44ec3b130daa09,
     type: 3}
   m_PrefabInstance: {fileID: 3871113574018459970}
   m_PrefabAsset: {fileID: 0}

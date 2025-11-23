@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 public class EnemyController : MonoBehaviour
 {
@@ -32,15 +33,15 @@ public class EnemyController : MonoBehaviour
 
     public int currencyAdd;
 
+    [Header("Events")]
+
+    public UnityEvent OnDead;
+    public UnityEvent OnHit;
+    public UnityEvent OnAttack;
+
     [Header("Visual Effects")]
     public GameObject attackEffectPrefab;
-    public GameObject deathEffectPrefab;
     public GameObject damageEffectPrefab;
-
-    [Header("Audio")]
-    public AudioClip attackSound;
-    public AudioClip deathSound;
-    public AudioClip damageSound;
 
     [Header("Debug")]
     public bool showPath = true;
@@ -53,7 +54,6 @@ public class EnemyController : MonoBehaviour
     private bool isDead = false;
     private float lastAttackTime;
     private Damageable targetDamageable;
-    private AudioSource audioSource;
 
     void Start()
     {
@@ -73,13 +73,6 @@ public class EnemyController : MonoBehaviour
         agent.acceleration = acceleration;
         agent.stoppingDistance = stoppingDistance;
         agent.angularSpeed = angularSpeed;
-
-        // Get audio source
-        audioSource = GetComponent<AudioSource>();
-        if (audioSource == null && (attackSound != null || deathSound != null || damageSound != null))
-        {
-            audioSource = gameObject.AddComponent<AudioSource>();
-        }
 
         // Setup child colliders
         if (autoSetupChildColliders)
@@ -243,18 +236,13 @@ public class EnemyController : MonoBehaviour
         // Deal damage
         targetDamageable.TakeDamage(attackDamage);
         Debug.Log($"{gameObject.name} attacked {targetPoint.name} for {attackDamage} damage!");
+        OnAttack.Invoke();
 
         // Spawn attack effect
         if (attackEffectPrefab != null)
         {
             Vector3 effectPos = transform.position + transform.forward * 0.5f;
             Instantiate(attackEffectPrefab, effectPos, Quaternion.identity);
-        }
-
-        // Play attack sound
-        if (audioSource != null && attackSound != null)
-        {
-            audioSource.PlayOneShot(attackSound);
         }
 
         // Trigger animation (if you have animator)
@@ -267,6 +255,7 @@ public class EnemyController : MonoBehaviour
 
         currentHealth -= damageAmount;
         currentHealth = Mathf.Max(0, currentHealth);
+        OnHit.Invoke();
 
         Debug.Log($"{gameObject.name} took {damageAmount} damage. Health: {currentHealth}/{maxHealth}");
 
@@ -276,15 +265,10 @@ public class EnemyController : MonoBehaviour
             Instantiate(damageEffectPrefab, transform.position, Quaternion.identity);
         }
 
-        // Play damage sound
-        if (audioSource != null && damageSound != null)
-        {
-            audioSource.PlayOneShot(damageSound);
-        }
-
         // Check for death
         if (currentHealth <= 0)
         {
+            OnDead.Invoke();
             Die();
         }
     }
@@ -303,17 +287,6 @@ public class EnemyController : MonoBehaviour
             agent.enabled = false;
         }
 
-        // Spawn death effect
-        if (deathEffectPrefab != null)
-        {
-            Instantiate(deathEffectPrefab, transform.position, Quaternion.identity);
-        }
-
-        // Play death sound
-        if (audioSource != null && deathSound != null)
-        {
-            audioSource.PlayOneShot(deathSound);
-        }
 
         // Give player currency
         CurrencyTracker currency = FindAnyObjectByType<CurrencyTracker>();
@@ -321,16 +294,6 @@ public class EnemyController : MonoBehaviour
         {
             currency.Gain(currencyAdd); 
         }
-
-        // Destroy or disable
-        if (destroyOnDeath)
-        {
-            Destroy(gameObject, 0.5f);
-        }
-        else
-        {
-            gameObject.SetActive(false);
-        }  
     }
 
     void OnReachedDestination()
