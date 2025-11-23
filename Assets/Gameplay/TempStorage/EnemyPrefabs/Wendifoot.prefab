@@ -137,6 +137,7 @@ MonoBehaviour:
   FeedbacksList:
   - rid: 1437265638440042584
   - rid: 1437265638440042585
+  - rid: 1437265648794992728
   KeepPlayModeChanges: 0
   PerformanceMode: 0
   RestoreInitialValuesOnDisable: 0
@@ -352,10 +353,115 @@ MonoBehaviour:
         PropertyName: _Tint
         FlickerDuration: 0.2
         FlickerPeriod: 0.04
-        FlickerColor: {r: 16, g: 11.369023, b: 1.2549019, a: 1}
+        FlickerColor: {r: 766.9961, g: 676.36304, b: 60.235275, a: 1}
         MaterialIndexes: 
         UseMaterialPropertyBlocks: 0
         SpriteRendererTextureProperty: _MainTex
+    - rid: 1437265648794992728
+      type: {class: MMF_Animation, ns: MoreMountains.Feedbacks, asm: MoreMountains.Tools}
+      data:
+        Active: 1
+        UniqueID: 93871026
+        Label: Animation Parameter
+        OriginalLabel: Animation Parameter
+        ChannelMode: 0
+        Channel: 0
+        MMChannelDefinition: {fileID: 0}
+        Chance: 100
+        Timing:
+          TimescaleMode: 0
+          ExcludeFromHoldingPauses: 0
+          ContributeToTotalDuration: 1
+          InitialDelay: 0
+          CooldownDuration: 0
+          InterruptsOnStop: 1
+          NumberOfRepeats: 0
+          RepeatForever: 0
+          DelayBetweenRepeats: 1
+          PlayCount: 0
+          LimitPlayCount: 0
+          MaxPlayCount: 3
+          SetPlayCountToZeroOnReset: 0
+          MMFeedbacksDirectionCondition: 0
+          PlayDirection: 0
+          ConstantIntensity: 0
+          UseIntensityInterval: 0
+          IntensityIntervalMin: 0
+          IntensityIntervalMax: 0
+          Sequence: {fileID: 0}
+          TrackID: 0
+          Quantized: 0
+          TargetBPM: 120
+        AutomatedTargetAcquisition:
+          Mode: 0
+          ChildIndex: 0
+        RandomizeOutput: 0
+        RandomMultiplier: {x: 0.8, y: 1}
+        RandomizeDuration: 0
+        RandomDurationMultiplier: {x: 0.5, y: 2}
+        UseRange: 0
+        RangeDistance: 5
+        UseRangeFalloff: 0
+        RangeFalloff:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        RemapRangeFalloff: {x: 0, y: 1}
+        AutomaticShakerSetupButton:
+          ButtonText: 
+        Owner: {fileID: 3564900820642677185}
+        DebugActive: 0
+        BoundAnimator: {fileID: 4958667231988639565}
+        ExtraBoundAnimators: []
+        DeclaredDuration: 0
+        UpdateTrigger: 1
+        TriggerMode: 0
+        TriggerParameterName: Hurt
+        UpdateRandomTrigger: 0
+        RandomTriggerMode: 0
+        RandomTriggerParameterNames: []
+        UpdateBool: 0
+        BoolParameterName: 
+        BoolParameterValue: 1
+        UpdateRandomBool: 0
+        RandomBoolParameterValue: 1
+        RandomBoolParameterNames: []
+        IntValueMode: 0
+        IntParameterName: 
+        IntValue: 0
+        IntValueMin: 0
+        IntValueMax: 5
+        IntIncrement: 1
+        FloatValueMode: 0
+        FloatParameterName: 
+        FloatValue: 0
+        FloatValueMin: 0
+        FloatValueMax: 5
+        FloatIncrement: 1
+        SetLayerWeight: 0
+        TargetLayerIndex: 1
+        LayerName: 
+        NewWeight: 0.5
 --- !u!1 &2593941550818151181
 GameObject:
   m_ObjectHideFlags: 0
@@ -401,7 +507,7 @@ GameObject:
   - component: {fileID: 7937007973823681307}
   - component: {fileID: -2052011878296948447}
   - component: {fileID: 4958667231988639565}
-  m_Layer: 0
+  m_Layer: 23
   m_Name: Wendifoot
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -447,7 +553,7 @@ MonoBehaviour:
   angularSpeed: 120
   maxHealth: 200
   currentHealth: 0
-  destroyOnDeath: 1
+  destroyOnDeath: 0
   autoSetupChildColliders: 1
   attackDamage: 10
   attackCooldown: 2.5
@@ -473,18 +579,6 @@ MonoBehaviour:
   OnHit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 473067713228227237}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: SetTrigger
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Hurt
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 3564900820642677185}
         m_TargetAssemblyTypeName: MoreMountains.Feedbacks.MMF_Player, MoreMountains.Tools
         m_MethodName: PlayFeedbacks
@@ -499,7 +593,19 @@ MonoBehaviour:
         m_CallState: 2
   OnAttack:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4958667231988639565}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Attack
+          m_BoolArgument: 0
+        m_CallState: 2
   attackEffectPrefab: {fileID: 0}
   damageEffectPrefab: {fileID: 0}
   showPath: 1
@@ -840,7 +946,7 @@ MonoBehaviour:
           ButtonText: 
         Owner: {fileID: 2334254830236915799}
         DebugActive: 0
-        BoundAnimator: {fileID: 473067713228227237}
+        BoundAnimator: {fileID: 4958667231988639565}
         ExtraBoundAnimators: []
         DeclaredDuration: 0
         UpdateTrigger: 0
@@ -929,22 +1035,32 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -191801847438800532, guid: 1ba6f1b46fc6e334aa3a5291d50c45e6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 596415235579123336, guid: 1ba6f1b46fc6e334aa3a5291d50c45e6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 23
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1ba6f1b46fc6e334aa3a5291d50c45e6,
         type: 3}
       propertyPath: m_Name
       value: Wendifoot
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 919132149155446097, guid: 1ba6f1b46fc6e334aa3a5291d50c45e6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 23
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5866666021909216657, guid: 1ba6f1b46fc6e334aa3a5291d50c45e6, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ba6f1b46fc6e334aa3a5291d50c45e6, type: 3}
---- !u!95 &473067713228227237 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 1ba6f1b46fc6e334aa3a5291d50c45e6,
-    type: 3}
-  m_PrefabInstance: {fileID: 6339442363163508532}
-  m_PrefabAsset: {fileID: 0}
 --- !u!137 &2343199585597789359 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 8610476382990527387, guid: 1ba6f1b46fc6e334aa3a5291d50c45e6,
