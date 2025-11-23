@@ -10,9 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 159351084f4077d408c7307b464869cb, type: 3}
-  m_Name: ArtilleryBullet3
+  m_Name: ArtilleryGun_D
   m_EditorClassIdentifier: Assembly-CSharp::ShopMenuItemData
-  Name: Big Artillery Bullet
-  Description: A big bullet
-  Cost: 40
-  Sprite: {fileID: 1090767896, guid: 13ffce466226de74fa1fcf2777977e2b, type: 3}
+  Name: Artillery Gun D
+  Description: 
+  Cost: 50
+  Sprite: {fileID: 0}
+  Sprite2: {fileID: 8400000, guid: fcd2d5e4dfea6df4cbe9e72fe6d89dcf, type: 2}
+  GameObject: {fileID: 919132149155446097, guid: 7b28ada896e7aa744b18753810630eab,
+    type: 3}

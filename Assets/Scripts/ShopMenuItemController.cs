@@ -48,3 +48,4 @@ public class ShopMenuItemController
         m_Background.RemoveFromClassList("highlight");
     }
 }
+
