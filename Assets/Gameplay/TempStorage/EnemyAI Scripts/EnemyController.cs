@@ -30,6 +30,8 @@ public class EnemyController : MonoBehaviour
     [Tooltip("Tags of objects to attack")]
     public string[] attackableTags = new string[] { "Castle", "Building", "Player" };
 
+    public int currencyAdd;
+
     [Header("Visual Effects")]
     public GameObject attackEffectPrefab;
     public GameObject deathEffectPrefab;
@@ -313,6 +315,13 @@ public class EnemyController : MonoBehaviour
             audioSource.PlayOneShot(deathSound);
         }
 
+        // Give player currency
+        CurrencyTracker currency = FindAnyObjectByType<CurrencyTracker>();
+        if (currency != null)
+        {
+            currency.Gain(currencyAdd); 
+        }
+
         // Destroy or disable
         if (destroyOnDeath)
         {
@@ -321,7 +330,7 @@ public class EnemyController : MonoBehaviour
         else
         {
             gameObject.SetActive(false);
-        }
+        }  
     }
 
     void OnReachedDestination()
