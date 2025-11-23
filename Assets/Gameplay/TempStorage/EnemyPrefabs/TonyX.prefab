@@ -146,6 +146,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 148069166360256528}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Attacking
+          m_BoolArgument: 0
+        m_CallState: 2
   attackEffectPrefab: {fileID: 0}
   damageEffectPrefab: {fileID: 0}
   showPath: 1
@@ -170,8 +182,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.4182594, y: 0.95437664, z: 1.2623454}
-  m_Center: {x: 0.01309967, y: 0.17172948, z: 0.051288545}
+  m_Size: {x: 0.79, y: 0.9431875, z: 0.79}
+  m_Center: {x: 0.01309967, y: 0.42131734, z: 0.051288545}
 --- !u!54 &9059445847609060025
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1157,7 +1169,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 3b8a752144c6ff04cbe07cad74833db9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.346
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3b8a752144c6ff04cbe07cad74833db9,
         type: 3}
