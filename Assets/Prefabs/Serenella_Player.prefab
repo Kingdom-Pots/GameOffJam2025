@@ -528,6 +528,25 @@ MonoBehaviour:
         - {fileID: 8300000, guid: 426d975d32cb4a04b8502adbb7958ae6, type: 3}
         - {fileID: 8300000, guid: a1e309f835f7bcf49ad6a75821a89991, type: 3}
         - {fileID: 8300000, guid: eee22c006e5c22b4995c1a26425e1e4b, type: 3}
+        - {fileID: 8300000, guid: 94091340ae236b045810e6129741912f, type: 3}
+        - {fileID: 8300000, guid: 7b0d29a640adf814a9b267031935b363, type: 3}
+        - {fileID: 8300000, guid: c6aa993e3d296f447a52f2773d0ab1e4, type: 3}
+        - {fileID: 8300000, guid: 4bc9965af7174e64d8cc8a4cae3401c1, type: 3}
+        - {fileID: 8300000, guid: 2e6e9045c286255489f04abed3f73b00, type: 3}
+        - {fileID: 8300000, guid: 7023ab8e375e72a4fa745311ed88b5be, type: 3}
+        - {fileID: 8300000, guid: cc4e7ccd4fd259e46ba0f4208242e985, type: 3}
+        - {fileID: 8300000, guid: d2530095440ef2e4d95a7a8332bafd2e, type: 3}
+        - {fileID: 8300000, guid: fe5f14b9eaeec0144a18106593dc1033, type: 3}
+        - {fileID: 8300000, guid: 718ac6c856ea6d740970cf0863e65c34, type: 3}
+        - {fileID: 8300000, guid: 93c7af884799d7d4db0d98f9fe6ec308, type: 3}
+        - {fileID: 8300000, guid: 8f54c13ea994cf74ab02e34e4c44ab9a, type: 3}
+        - {fileID: 8300000, guid: 52e4d148fdb2bb54c8577c48c11ac3ac, type: 3}
+        - {fileID: 8300000, guid: 38897228b71336040b34b7623ed34d6b, type: 3}
+        - {fileID: 8300000, guid: c865adb40e9fd3f48ab66460be5a7225, type: 3}
+        - {fileID: 8300000, guid: db0f9a5d01ad22b46a2474bd3934e875, type: 3}
+        - {fileID: 8300000, guid: ec9c667821dca8f4289d553d7ad25cb2, type: 3}
+        - {fileID: 8300000, guid: 0390aede868fb8b48bf13d6e7837d109, type: 3}
+        - {fileID: 8300000, guid: ea5f9c2e342cca749b3ac31bed1d2204, type: 3}
         TestPlayButton:
           ButtonText: Debug Play Sound
         TestStopButton:
