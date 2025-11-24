@@ -512,7 +512,7 @@ MonoBehaviour:
         PropertyName: _Tint
         FlickerDuration: 0.2
         FlickerPeriod: 0.04
-        FlickerColor: {r: 8, g: 4.7471733, b: 0.62745094, a: 1}
+        FlickerColor: {r: 766.99615, g: 455.13297, b: 60.15656, a: 1}
         MaterialIndexes: 
         UseMaterialPropertyBlocks: 0
         SpriteRendererTextureProperty: _MainTex
@@ -561,7 +561,7 @@ GameObject:
   - component: {fileID: 4770209390918485433}
   - component: {fileID: 4960133430677660202}
   - component: {fileID: -1306734467412962826}
-  m_Layer: 0
+  m_Layer: 23
   m_Name: Tony
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -633,6 +633,18 @@ MonoBehaviour:
   OnHit:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 22667484687596118}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Damage
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 6526202623326665727}
         m_TargetAssemblyTypeName: MoreMountains.Feedbacks.MMF_Player, MoreMountains.Tools
         m_MethodName: PlayFeedbacks
@@ -643,18 +655,6 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 22667484687596118}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: Play
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Damage
           m_BoolArgument: 0
         m_CallState: 2
   OnAttack:
@@ -680,12 +680,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.33, y: 0.94921553, z: 0.32}
-  m_Center: {x: 0, y: 0.5683642, z: 0.1000824}
+  m_Center: {x: 0, y: 0.5683642, z: 0}
 --- !u!54 &4960133430677660202
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -709,7 +709,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
