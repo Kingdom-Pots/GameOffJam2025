@@ -12,6 +12,7 @@ public class ShopMenuController
     // UI element references
     ListView m_MenuItemList;
     List<ShopMenuItemData> m_AllItems;
+    ShopMenuItemData m_CurrentSelection;
     
     public void InitializeItemList(VisualElement root, VisualTreeAsset listElementTemplate)
     {
@@ -31,7 +32,6 @@ public class ShopMenuController
     
         // Register to get a callback when an item is selected
         m_MenuItemList.selectionChanged += OnItemSelected;
-        m_BuyButton.clicked += OnClick;
     }
     
     void EnumerateAllItems()
@@ -70,25 +70,28 @@ public class ShopMenuController
         // Set the actual item's source list/array
         m_MenuItemList.itemsSource = m_AllItems;
     }
-    
-    void OnItemSelected(IEnumerable<object> selectedItems)
-    {
-        // Get the currently selected item directly from the ListView
-        var selectedItemData = m_MenuItemList.selectedItem as ShopMenuItemData;
-        m_BuyButton.enabledSelf = true;
-        Debug.Log($"Selected: {string.Join(", ", selectedItemData)}");
-    }
 
-    void OnClick() 
-    {
-        Debug.Log("click");
+    public void RemoveSelectedItem() {
         var selectedIndex = m_MenuItemList.selectedIndex;
-        Debug.Log($"remove index {selectedIndex}");
         if (selectedIndex >= 0) {
             m_AllItems.RemoveAt(selectedIndex);
 
             m_MenuItemList.selectedIndex = -1;
             m_MenuItemList.RefreshItems();
+            m_CurrentSelection = null;
         }
+    }
+
+    public ShopMenuItemData GetItemSelected()
+    {
+        return m_CurrentSelection;
+    }
+    
+    void OnItemSelected(IEnumerable<object> selectedItems)
+    {
+        // Get the currently selected item directly from the ListView
+        m_CurrentSelection = m_MenuItemList.selectedItem as ShopMenuItemData;
+        m_BuyButton.enabledSelf = true;
+        Debug.Log($"Selected: {string.Join(", ", m_CurrentSelection)}");
     }
 }

@@ -15,6 +15,6 @@ MonoBehaviour:
   Name: Artillery Gun C
   Description: A big gun
   Cost: 40
-  Sprite: {fileID: 1090767896, guid: 13ffce466226de74fa1fcf2777977e2b, type: 3}
+  Sprite: {fileID: 1578413687, guid: 13ffce466226de74fa1fcf2777977e2b, type: 3}
   GameObject: {fileID: 919132149155446097, guid: 75e9c153ea656074fa3c955b44204530,
     type: 3}
