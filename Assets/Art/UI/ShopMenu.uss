@@ -1,0 +1,57 @@
+:root {
+}
+
+.border {
+    background-color: rgb(49, 26, 17);
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.unity-list-view {
+    height: 200px;
+}
+
+.item-background:hover {
+    background-color: rgb(113, 113, 113);
+}
+
+.unity-list-view__item:selected > .list-entry > .item-background {
+    background-color: rgb(113, 113, 113);
+}
+
+.item-background {
+    background-color: rgb(38, 38, 38);
+}
+
+.unity-button {
+    background-color: rgb(155, 155, 155);
+    -unity-text-align: middle-center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.unity-button:hover {
+    background-color: rgb(0, 120, 212);
+}
+
+.unity-button:active {
+    background-color: rgb(0, 120, 212);
+    color: white;
+}
+
+.unity-button:disabled {
+    background-color: rgb(42, 42, 42);
+    opacity: 0.5;
+}

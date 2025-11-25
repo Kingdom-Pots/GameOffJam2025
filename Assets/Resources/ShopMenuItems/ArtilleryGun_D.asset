@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: ArtilleryGun_D
   m_EditorClassIdentifier: Assembly-CSharp::ShopMenuItemData
   Name: Artillery Gun D
-  Description: 
+  Description: A gun with a longer range
   Cost: 50
-  Sprite: {fileID: 0}
-  Sprite2: {fileID: 8400000, guid: fcd2d5e4dfea6df4cbe9e72fe6d89dcf, type: 2}
+  Sprite: {fileID: 1393812885, guid: 13ffce466226de74fa1fcf2777977e2b, type: 3}
   GameObject: {fileID: 919132149155446097, guid: 7b28ada896e7aa744b18753810630eab,
     type: 3}

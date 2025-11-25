@@ -7,6 +7,7 @@ public class ShopMenuController
     // UXML template for list entries
     VisualElement m_root;
     VisualTreeAsset m_ListEntryTemplate;
+    Button m_BuyButton;
     
     // UI element references
     ListView m_MenuItemList;
@@ -22,11 +23,15 @@ public class ShopMenuController
         // Store a reference to the character list element
         m_root = root.Q<VisualElement>("ShopMenu");
         m_MenuItemList = root.Q<ListView>("ItemsToBuy");
+        m_BuyButton = root.Q<Button>("BuyButton");
+
+        m_BuyButton.enabledSelf = false;
     
         FillItemList();
     
         // Register to get a callback when an item is selected
         m_MenuItemList.selectionChanged += OnItemSelected;
+        m_BuyButton.clicked += OnClick;
     }
     
     void EnumerateAllItems()
@@ -62,10 +67,6 @@ public class ShopMenuController
             (item.userData as ShopMenuItemController)?.SetMenuItemData(m_AllItems[index]);
         };
     
-        // Set a fixed item height matching the height of the item provided in makeItem. 
-        // For dynamic height, see the virtualizationMethod property.
-        m_MenuItemList.fixedItemHeight = 140;
-    
         // Set the actual item's source list/array
         m_MenuItemList.itemsSource = m_AllItems;
     }
@@ -74,16 +75,20 @@ public class ShopMenuController
     {
         // Get the currently selected item directly from the ListView
         var selectedItemData = m_MenuItemList.selectedItem as ShopMenuItemData;
+        m_BuyButton.enabledSelf = true;
         Debug.Log($"Selected: {string.Join(", ", selectedItemData)}");
     }
 
-    public void ShowPanel() 
+    void OnClick() 
     {
-        m_root.visible = true;
-    }
+        Debug.Log("click");
+        var selectedIndex = m_MenuItemList.selectedIndex;
+        Debug.Log($"remove index {selectedIndex}");
+        if (selectedIndex >= 0) {
+            m_AllItems.RemoveAt(selectedIndex);
 
-    public void HidePanel()
-    {
-        m_root.visible = false;
+            m_MenuItemList.selectedIndex = -1;
+            m_MenuItemList.RefreshItems();
+        }
     }
 }
