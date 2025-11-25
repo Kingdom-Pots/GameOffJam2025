@@ -139,10 +139,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArtilleryShell
   damage: 50
-  explosionRadiusPrefab: {fileID: 7826041005091443006, guid: caa026849e9b13949b4e516dc4926394,
-    type: 3}
+  explosionRadiusPrefab: {fileID: 0}
   explosionRadius: 5
-  maxDamageDistance: 8
+  maxDamageDistance: 1.43
   useDamageFalloff: 1
   damageableLayers:
     serializedVersion: 2

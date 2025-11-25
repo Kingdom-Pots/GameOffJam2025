@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7826041005091443006}
   - component: {fileID: 5686137831410585204}
   - component: {fileID: 1316321897628805927}
+  - component: {fileID: 3039449915208534417}
   m_Layer: 0
   m_Name: ArtilleryExplosion
   m_TagString: Bullet
@@ -4921,6 +4922,28 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &3039449915208534417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 221995391119479338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01f6974c4fa257848b2a4ca31f1b56fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArtilleryShellBehavior
+  damage: 50
+  explosionRadiusPrefab: {fileID: 0}
+  explosionRadius: 5
+  maxDamageDistance: 6
+  useDamageFalloff: 1
+  damageableLayers:
+    serializedVersion: 2
+    m_Bits: 8388672
+  destroyOnImpact: 1
+  destroyDelay: 0.1
 --- !u!1 &1582122142244253784
 GameObject:
   m_ObjectHideFlags: 0
