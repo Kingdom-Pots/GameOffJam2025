@@ -13,16 +13,13 @@ public class EnemyController : MonoBehaviour
     public float moveSpeed = 3.5f;
     public float acceleration = 8f;
     public float stoppingDistance = 2f;
-    public bool moveOnStart = true;
     public float angularSpeed = 120f;
+    public bool moveOnStart = true;
 
     [Header("Health Settings")]
     public float maxHealth = 50f;
     public float currentHealth;
     public bool destroyOnDeath = true;
-
-    [Tooltip("Auto setup child colliders for damage")]
-    public bool autoSetupChildColliders = true;
 
     [Header("Combat Settings")]
     public float attackDamage = 10f;
@@ -31,13 +28,24 @@ public class EnemyController : MonoBehaviour
     [Tooltip("Tags of objects to attack")]
     public string[] attackableTags = new string[] { "Castle", "Building", "Player" };
 
+    [Header("Stagger Settings")]
+    public float staggerDuration = 0.5f;
+    public float staggerSpeedMultiplier = 0.2f;
+
+    [Header("Rewards")]
     public int currencyAdd;
 
-    [Header("Events")]
+    [Header("Setup")]
+    [Tooltip("Auto setup child colliders for damage")]
+    public bool autoSetupChildColliders = true;
 
+    [Header("Events")]
     public UnityEvent OnDead;
     public UnityEvent OnHit;
     public UnityEvent OnAttack;
+    public UnityEvent OnMove;
+    public UnityEvent OnStopMoving;
+    public UnityEvent OnStagger;
 
     [Header("Visual Effects")]
     public GameObject attackEffectPrefab;
@@ -48,19 +56,44 @@ public class EnemyController : MonoBehaviour
     public bool showAttackRange = true;
     public Color pathColor = Color.green;
 
+    // Private state
     private NavMeshAgent agent;
+    private Damageable targetDamageable;
+    
     private bool hasReachedDestination = false;
     private bool isAttacking = false;
     private bool isDead = false;
+    private bool isStaggered = false;
+    private bool wasMovingLastFrame = false;
+    
     private float lastAttackTime;
-    private Damageable targetDamageable;
+    private float staggerEndTime;
+    private float originalSpeed;
+
+    #region Initialization
 
     void Start()
     {
-        // Initialize health
-        currentHealth = maxHealth;
+        InitializeHealth();
+        InitializeAgent();
+        
+        if (autoSetupChildColliders)
+        {
+            SetupChildColliders();
+        }
 
-        // Get or add NavMeshAgent component
+        InitializeTarget();
+        
+        lastAttackTime = -attackCooldown;
+    }
+
+    void InitializeHealth()
+    {
+        currentHealth = maxHealth;
+    }
+
+    void InitializeAgent()
+    {
         agent = GetComponent<NavMeshAgent>();
         if (agent == null)
         {
@@ -68,36 +101,30 @@ public class EnemyController : MonoBehaviour
             Debug.Log("NavMeshAgent component added automatically.");
         }
 
-        // Configure agent settings
         agent.speed = moveSpeed;
         agent.acceleration = acceleration;
         agent.stoppingDistance = stoppingDistance;
         agent.angularSpeed = angularSpeed;
+        
+        originalSpeed = moveSpeed;
+    }
 
-        // Setup child colliders
-        if (autoSetupChildColliders)
-        {
-            SetupChildColliders();
-        }
-
-        // Auto-find target if not assigned
+    void InitializeTarget()
+    {
         if (targetPoint == null)
         {
             FindTarget();
         }
 
-        // Adjust stopping distance for target size
         if (targetPoint != null)
         {
             AdjustStoppingDistanceForTarget();
+            
+            if (moveOnStart)
+            {
+                MoveToTarget();
+            }
         }
-
-        if (moveOnStart && targetPoint != null)
-        {
-            MoveToTarget();
-        }
-
-        lastAttackTime = -attackCooldown;
     }
 
     void SetupChildColliders()
@@ -116,7 +143,6 @@ public class EnemyController : MonoBehaviour
 
     void FindTarget()
     {
-        // Try to find by tag first
         if (!string.IsNullOrEmpty(targetTag))
         {
             GameObject targetObj = GameObject.FindGameObjectWithTag(targetTag);
@@ -128,7 +154,6 @@ public class EnemyController : MonoBehaviour
             }
         }
 
-        // Try to find by name if tag didn't work
         if (!string.IsNullOrEmpty(targetName))
         {
             GameObject targetObj = GameObject.Find(targetName);
@@ -143,88 +168,112 @@ public class EnemyController : MonoBehaviour
         Debug.LogWarning($"{gameObject.name}: Could not find target automatically.");
     }
 
+    #endregion
+
+    #region Update Loop
+
     void Update()
     {
         if (isDead) return;
 
-        // Get target damageable component
+        UpdateStagger();
+        UpdateTargetDamageable();
+        UpdateCombatBehavior();
+        UpdateMovementEvents();
+    }
+
+    void UpdateStagger()
+    {
+        if (isStaggered && Time.time >= staggerEndTime)
+        {
+            EndStagger();
+        }
+    }
+
+    void UpdateTargetDamageable()
+    {
         if (targetPoint != null && targetDamageable == null)
         {
             targetDamageable = targetPoint.GetComponent<Damageable>();
         }
+    }
 
-        // Check if in attack range
-        if (targetPoint != null)
+    void UpdateCombatBehavior()
+    {
+        if (targetPoint == null || !agent.enabled) return;
+
+        float distanceToTarget = GetDistanceToTargetEdge();
+
+        if (distanceToTarget <= attackRange)
         {
-            float distanceToTarget = GetDistanceToTargetEdge();
+            HandleInAttackRange();
+        }
+        else
+        {
+            HandleOutOfAttackRange(distanceToTarget);
+        }
+    }
 
-            if (distanceToTarget <= attackRange)
+    void HandleInAttackRange()
+    {
+        if (!agent.isStopped)
+        {
+            agent.isStopped = true;
+            agent.velocity = Vector3.zero;
+            hasReachedDestination = true;
+        }
+
+        if (Time.time >= lastAttackTime + attackCooldown && !isStaggered)
+        {
+            Attack();
+        }
+    }
+
+    void HandleOutOfAttackRange(float distanceToTarget)
+    {
+        if (agent.isStopped && !isStaggered)
+        {
+            agent.isStopped = false;
+            hasReachedDestination = false;
+        }
+
+        isAttacking = false;
+
+        if (!agent.pathPending && agent.hasPath)
+        {
+            if (agent.remainingDistance <= agent.stoppingDistance)
             {
-                // In attack range - stop moving immediately
-                if (agent.enabled && !agent.isStopped)
+                if (agent.velocity.sqrMagnitude < 0.1f && !hasReachedDestination)
                 {
-                    agent.isStopped = true;
-                    agent.velocity = Vector3.zero; // Stop immediately
-                    hasReachedDestination = true;
-                }
-
-                // Attack if cooldown ready
-                if (Time.time >= lastAttackTime + attackCooldown)
-                {
-                    Attack();
+                    OnReachedDestination();
                 }
             }
             else
             {
-                // Out of range - resume moving
-                if (agent.enabled && agent.isStopped)
-                {
-                    agent.isStopped = false;
-                    hasReachedDestination = false;
-                }
-
-                isAttacking = false;
-
-                // Check if reached stopping distance (but not in attack range)
-                if (agent.enabled && !agent.pathPending && agent.hasPath)
-                {
-                    if (agent.remainingDistance <= agent.stoppingDistance)
-                    {
-                        if (agent.velocity.sqrMagnitude < 0.1f)
-                        {
-                            if (!hasReachedDestination)
-                            {
-                                OnReachedDestination();
-                            }
-                        }
-                    }
-                    else
-                    {
-                        hasReachedDestination = false;
-                    }
-                }
+                hasReachedDestination = false;
             }
         }
     }
 
-    float GetDistanceToTargetEdge()
+    void UpdateMovementEvents()
     {
-        if (targetPoint == null) return float.MaxValue;
+        bool isMovingNow = IsMoving();
 
-        // Calculate distance to center
-        float distanceToCenter = Vector3.Distance(transform.position, targetPoint.position);
-
-        // Get target's collider to subtract its radius
-        Collider targetCollider = targetPoint.GetComponent<Collider>();
-        if (targetCollider != null)
+        if (isMovingNow && !wasMovingLastFrame)
         {
-            Bounds bounds = targetCollider.bounds;
-            Vector3 closestPoint = bounds.ClosestPoint(transform.position);
-            return Vector3.Distance(transform.position, closestPoint);
+            OnMove.Invoke();
+        }
+        else if (!isMovingNow && wasMovingLastFrame)
+        {
+            OnStopMoving.Invoke();
         }
 
-        return distanceToCenter;
+        wasMovingLastFrame = isMovingNow;
     }
+
+    #endregion
+
+    #region Combat
 
     void Attack()
     {
@@ -233,20 +282,16 @@ public class EnemyController : MonoBehaviour
         isAttacking = true;
         lastAttackTime = Time.time;
 
-        // Deal damage
         targetDamageable.TakeDamage(attackDamage);
         Debug.Log($"{gameObject.name} attacked {targetPoint.name} for {attackDamage} damage!");
+        
         OnAttack.Invoke();
 
-        // Spawn attack effect
         if (attackEffectPrefab != null)
         {
             Vector3 effectPos = transform.position + transform.forward * 0.5f;
             Instantiate(attackEffectPrefab, effectPos, Quaternion.identity);
         }
-
-        // Trigger animation (if you have animator)
-        // GetComponent<Animator>()?.SetTrigger("Attack");
     }
 
     public void TakeDamage(float damageAmount)
@@ -255,23 +300,70 @@ public class EnemyController : MonoBehaviour
 
         currentHealth -= damageAmount;
         currentHealth = Mathf.Max(0, currentHealth);
+        
         OnHit.Invoke();
+        Stagger();
 
         Debug.Log($"{gameObject.name} took {damageAmount} damage. Health: {currentHealth}/{maxHealth}");
 
-        // Spawn damage effect
         if (damageEffectPrefab != null)
         {
             Instantiate(damageEffectPrefab, transform.position, Quaternion.identity);
         }
 
-        // Check for death
         if (currentHealth <= 0)
         {
-            OnDead.Invoke();
             Die();
         }
     }
+
+    #endregion
+
+    #region Stagger System
+
+    public void Stagger()
+    {
+        if (isDead || isStaggered) return;
+
+        isStaggered = true;
+        staggerEndTime = Time.time + staggerDuration;
+
+        if (agent != null && agent.enabled)
+        {
+            agent.isStopped = true;
+            agent.velocity = Vector3.zero;
+            agent.speed = originalSpeed * staggerSpeedMultiplier;
+        }
+
+        OnStagger.Invoke();
+        Debug.Log($"{gameObject.name} is staggered for {staggerDuration}s");
+    }
+
+    void EndStagger()
+    {
+        isStaggered = false;
+
+        if (agent != null && agent.enabled && !isDead)
+        {
+            agent.speed = originalSpeed;
+            
+            // Only resume if not in attack range
+            if (targetPoint != null)
+            {
+                float distanceToTarget = GetDistanceToTargetEdge();
+                if (distanceToTarget > attackRange)
+                {
+                    agent.isStopped = false;
+                }
+            }
+        }
+
+        Debug.Log($"{gameObject.name} recovered from stagger");
+    }
+
+    #endregion
+
+    #region Death
 
     void Die()
     {
@@ -280,21 +372,28 @@ public class EnemyController : MonoBehaviour
         isDead = true;
         Debug.Log($"{gameObject.name} has been killed!");
 
-        // Stop movement
         if (agent != null && agent.enabled)
         {
             agent.isStopped = true;
             agent.enabled = false;
         }
 
+        OnDead.Invoke();
+        GiveCurrencyReward();
+    }
 
-        // Give player currency
+    void GiveCurrencyReward()
+    {
         CurrencyTracker currency = FindAnyObjectByType<CurrencyTracker>();
         if (currency != null)
         {
-            currency.Gain(currencyAdd); 
+            currency.Gain(currencyAdd);
         }
     }
+
+    #endregion
+
+    #region Movement
 
     void OnReachedDestination()
     {
@@ -337,9 +436,7 @@ public class EnemyController : MonoBehaviour
         targetPoint = target;
         targetDamageable = null;
 
-        // Adjust stopping distance based on target's collider size
         AdjustStoppingDistanceForTarget();
-
         MoveToTarget();
     }
 
@@ -347,15 +444,12 @@ public class EnemyController : MonoBehaviour
     {
         if (targetPoint == null) return;
 
-        // Get target's collider to determine size
         Collider targetCollider = targetPoint.GetComponent<Collider>();
         if (targetCollider != null)
         {
-            // Calculate distance to edge of collider
             Bounds bounds = targetCollider.bounds;
             float maxExtent = Mathf.Max(bounds.extents.x, bounds.extents.z);
 
-            // Set stopping distance to be outside collider but within attack range
             float suggestedStoppingDistance = maxExtent + (attackRange * 0.3f);
             agent.stoppingDistance = Mathf.Max(stoppingDistance, suggestedStoppingDistance);
 
@@ -363,9 +457,29 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region Utility Methods
+
+    float GetDistanceToTargetEdge()
+    {
+        if (targetPoint == null) return float.MaxValue;
+
+        Collider targetCollider = targetPoint.GetComponent<Collider>();
+        if (targetCollider != null)
+        {
+            Vector3 closestPoint = targetCollider.bounds.ClosestPoint(transform.position);
+            return Vector3.Distance(transform.position, closestPoint);
+        }
+
+        return Vector3.Distance(transform.position, targetPoint.position);
+    }
+
     public bool IsMoving()
     {
-        return agent != null && agent.enabled && agent.hasPath && !hasReachedDestination && !isDead;
+        return agent != null && agent.enabled && agent.hasPath && 
+               agent.velocity.sqrMagnitude > 0.01f && !hasReachedDestination && 
+               !isDead && !isStaggered;
     }
 
     public bool IsDead()
@@ -373,15 +487,22 @@ public class EnemyController : MonoBehaviour
         return isDead;
     }
 
+    public bool IsStaggered()
+    {
+        return isStaggered;
+    }
+
     public float GetHealthPercentage()
     {
         return currentHealth / maxHealth;
     }
 
-    // Visualize in scene
+    #endregion
+
+    #region Gizmos
+
     void OnDrawGizmos()
     {
-        // Path visualization
         if (showPath && agent != null && agent.hasPath)
         {
             Gizmos.color = pathColor;
@@ -399,7 +520,6 @@ public class EnemyController : MonoBehaviour
             }
         }
 
-        // Attack range
         if (showAttackRange)
         {
             Gizmos.color = isAttacking ? Color.red : new Color(1f, 0.5f, 0f, 0.3f);
@@ -415,4 +535,6 @@ public class EnemyController : MonoBehaviour
             Gizmos.DrawWireSphere(transform.position, attackRange);
         }
     }
+
+    #endregion
 }
