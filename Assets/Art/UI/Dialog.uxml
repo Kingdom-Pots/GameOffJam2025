@@ -1,0 +1,12 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement style="flex-grow: 1;">
+        <ui:VisualElement style="flex-grow: 0;">
+            <ui:VisualElement style="flex-grow: 1; border-top-left-radius: 15px; border-top-right-radius: 15px; border-bottom-right-radius: 0; border-bottom-left-radius: 0; background-color: rgba(0, 0, 0, 0.71); width: 181px;">
+                <ui:Label text="Name" name="CharacterName" style="-unity-font-definition: url(&quot;project://database/Assets/Feel/MMTools/Demos/MMTween/Fonts/Lato/TTF/Lato-Bold.ttf?fileID=12800000&amp;guid=ae4e4b833eb9f63448b39edf3f03e309&amp;type=3#Lato-Bold&quot;); padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px; margin-top: 5px; margin-right: 5px; margin-bottom: 5px; margin-left: 5px; color: rgb(255, 255, 255); -unity-font-style: bold; font-size: 20px; -unity-text-align: upper-center; flex-grow: 1; flex-shrink: 1;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-grow: 1; background-color: rgba(94, 93, 93, 0.57); border-top-left-radius: 0; border-top-right-radius: 15px; border-bottom-right-radius: 15px; border-bottom-left-radius: 15px;">
+            <ui:Label text="Text" name="CharacterLine" style="-unity-font-definition: url(&quot;project://database/Assets/Feel/MMTools/Demos/MMTween/Fonts/Lato/TTF/Lato-Regular.ttf?fileID=12800000&amp;guid=5686e06ef14cf104b8e282ee7c41b9a6&amp;type=3#Lato-Regular&quot;); color: rgb(255, 255, 255); padding-left: 10px; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; flex-grow: 1; font-size: 20px; flex-wrap: wrap; flex-shrink: 1; white-space: normal; text-overflow: clip;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

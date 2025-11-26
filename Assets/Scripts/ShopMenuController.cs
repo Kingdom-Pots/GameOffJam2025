@@ -16,8 +16,6 @@ public class ShopMenuController
     
     public void InitializeItemList(VisualElement root, VisualTreeAsset listElementTemplate)
     {
-        EnumerateAllItems();
-    
         // Store a reference to the template for the list entries
         m_ListEntryTemplate = listElementTemplate;
     
@@ -34,7 +32,7 @@ public class ShopMenuController
         m_MenuItemList.selectionChanged += OnItemSelected;
     }
     
-    void EnumerateAllItems()
+    public void EnumerateAllItems()
     {
         m_AllItems = new List<ShopMenuItemData>();
         m_AllItems.AddRange(Resources.LoadAll<ShopMenuItemData>("ShopMenuItems"));
@@ -64,17 +62,28 @@ public class ShopMenuController
         // Set up bind function for a specific list entry
         m_MenuItemList.bindItem = (item, index) =>
         {
-            (item.userData as ShopMenuItemController)?.SetMenuItemData(m_AllItems[index]);
+            if (m_AllItems.Count > 0) 
+            {
+                (item.userData as ShopMenuItemController)?.SetMenuItemData(m_AllItems[index]);
+            }
+            else {
+                m_MenuItemList.Clear();
+            }
         };
     
         // Set the actual item's source list/array
-        m_MenuItemList.itemsSource = m_AllItems;
+        var subListSource = new List<ShopMenuItemData>();
+        if (m_AllItems.Count > 0)
+        {
+            subListSource = m_AllItems.GetRange(0, 1);
+        }
+        m_MenuItemList.itemsSource = subListSource;
     }
 
     public void RemoveSelectedItem() {
         var selectedIndex = m_MenuItemList.selectedIndex;
         if (selectedIndex >= 0) {
-            m_AllItems.RemoveAt(selectedIndex);
+            m_AllItems.RemoveAt(0/*selectedIndex*/);
 
             m_MenuItemList.selectedIndex = -1;
             m_MenuItemList.RefreshItems();

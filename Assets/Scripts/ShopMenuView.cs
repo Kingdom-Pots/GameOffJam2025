@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
     
 public class ShopMenuView : MonoBehaviour
 {
@@ -12,17 +14,19 @@ public class ShopMenuView : MonoBehaviour
     // UI element references
     Button m_BuyButton;
     ShopMenuController m_ShopMenuController;
+
+    void Awake() {
+        // Initialize the character list controller
+        m_ShopMenuController = new ShopMenuController();
+        m_ShopMenuController.EnumerateAllItems();
+    }
     
     void OnEnable()
     {
         // The UXML is already instantiated by the UIDocument component
         var uiDocument = GetComponent<UIDocument>();
-
-    
-        // Initialize the character list controller
-        m_ShopMenuController = new ShopMenuController();
         m_ShopMenuController.InitializeItemList(uiDocument.rootVisualElement, m_ListEntryTemplate);
-        
+
         var root = uiDocument.rootVisualElement;
         m_BuyButton = root.Q<Button>("BuyButton");
         m_BuyButton.clicked += OnClick;
@@ -37,8 +41,24 @@ public class ShopMenuView : MonoBehaviour
         Debug.Log("click");
         
         ShopMenuItemData selectedItemData = m_ShopMenuController.GetItemSelected();
-        m_ShopMenuController.RemoveSelectedItem();
+        if (selectedItemData) 
+        {
+            m_ShopMenuController.RemoveSelectedItem();
 
-        m_TargetArtilleryGun = selectedItemData.GameObject;
+            var oldGunTransform = m_TargetArtilleryGun.transform;
+            var newGun = Instantiate(selectedItemData.GameObject, oldGunTransform.position, oldGunTransform.rotation, oldGunTransform.parent);
+            foreach (Transform child in oldGunTransform)
+            {
+                child.SetParent(newGun.transform);
+            }
+            Destroy(m_TargetArtilleryGun);
+            m_TargetArtilleryGun = newGun;
+
+            /*
+            GameObject shopNPC = GameObject.Find("ShopNPC");
+            shopNPC.SetActive(false);
+            */
+            InputSystem.QueueStateEvent(Keyboard.current, new KeyboardState(Key.Escape));
+        }
     }
 }
