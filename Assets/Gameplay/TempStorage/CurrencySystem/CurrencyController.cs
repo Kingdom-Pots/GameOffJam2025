@@ -1,10 +1,10 @@
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class CurrencyTracker : MonoBehaviour
 {
     // Currency Text UI
-    public Text txt_Currency;
+    public TMP_Text txt_Currency;
 
     // Default currency
     public int defaultCurrency;
