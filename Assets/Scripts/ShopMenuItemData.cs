@@ -5,7 +5,7 @@ public class ShopMenuItemData : ScriptableObject
 {
     public string Name;
     public string Description;
-    public float Cost;
+    public int Cost;
     public float DamageGain;
     public float SpeedGain;
     public float ZoomGain;

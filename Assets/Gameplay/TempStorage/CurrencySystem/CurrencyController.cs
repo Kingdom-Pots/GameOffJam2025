@@ -12,7 +12,7 @@ public class CurrencyTracker : MonoBehaviour
     // current currency value
     public int currency;
 
-    public void Init()
+    public void Awake()
     {
         currency = defaultCurrency;
         UpdateUI();
@@ -43,8 +43,8 @@ public class CurrencyTracker : MonoBehaviour
     // Check availability of currency
     public bool EnoughCurrency(int val)
     {
-        //Checks if value is equal to or more than currency
-        if (val >= currency)
+        //Checks if value is equal to or lower than currency
+        if (val <= currency)
             return true;
         else 
             return false;

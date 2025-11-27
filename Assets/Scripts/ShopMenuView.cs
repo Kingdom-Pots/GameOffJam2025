@@ -15,13 +15,21 @@ public class ShopMenuView : MonoBehaviour
     [SerializeField]
     GameObject m_Artillery;
 
+    [SerializeField]
+    GameObject m_CurrencySystem;
+
     // UI element references
     Button m_BuyButton;
     ShopMenuController m_ShopMenuController;
+    CurrencyTracker m_CurrencyTracker;
 
     void Awake() {
+        m_CurrencyTracker = m_CurrencySystem.GetComponent<CurrencyTracker>();
+        Debug.Log($"Currency: {m_CurrencyTracker.currency}");
+
         // Initialize the character list controller
         m_ShopMenuController = new ShopMenuController();
+        m_ShopMenuController.SetCurrencyTracker(m_CurrencyTracker);
         m_ShopMenuController.EnumerateAllItems();
     }
     
@@ -33,19 +41,17 @@ public class ShopMenuView : MonoBehaviour
 
         var root = uiDocument.rootVisualElement;
         m_BuyButton = root.Q<Button>("BuyButton");
-        m_BuyButton.clicked += OnClick;
+        m_BuyButton.clicked += OnBuyItemClicked;
     }
 
     void OnDisable() {
-        m_BuyButton.clicked -= OnClick;
+        m_BuyButton.clicked -= OnBuyItemClicked;
     }
 
-    void OnClick() 
+    void OnBuyItemClicked() 
     {
-        Debug.Log("click");
-        
         ShopMenuItemData selectedItemData = m_ShopMenuController.GetItemSelected();
-        if (selectedItemData) 
+        if (selectedItemData && m_CurrencyTracker.Use(selectedItemData.Cost)) 
         {
             m_ShopMenuController.RemoveSelectedItem();
 

@@ -13,6 +13,9 @@ public class ShopMenuController
     ListView m_MenuItemList;
     List<ShopMenuItemData> m_AllItems;
     ShopMenuItemData m_CurrentSelection;
+    CurrencyTracker m_CurrencyTracker;
+
+    public void SetCurrencyTracker(CurrencyTracker currencyTracker) => m_CurrencyTracker = currencyTracker;
     
     public void InitializeItemList(VisualElement root, VisualTreeAsset listElementTemplate)
     {
@@ -100,7 +103,10 @@ public class ShopMenuController
     {
         // Get the currently selected item directly from the ListView
         m_CurrentSelection = m_MenuItemList.selectedItem as ShopMenuItemData;
-        m_BuyButton.enabledSelf = true;
-        Debug.Log($"Selected: {string.Join(", ", m_CurrentSelection)}");
+        if (m_CurrentSelection && m_CurrencyTracker.EnoughCurrency(m_CurrentSelection.Cost)) 
+        {
+            Debug.Log($"Selected: {string.Join(", ", m_CurrentSelection)}");
+            m_BuyButton.enabledSelf = true;
+        }
     }
 }
