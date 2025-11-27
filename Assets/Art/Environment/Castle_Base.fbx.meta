@@ -17,7 +17,27 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: CastleGate_Mat2
+    second: {fileID: 2100000, guid: d96d41e102bc01a4abcdcd1766383fb1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CastleGate_Mat3
+    second: {fileID: 2100000, guid: 11647ce02c724914f957b2980723b525, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: lambert1
+    second: {fileID: 2100000, guid: fcec3cc488797e246bb1877160343e6c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert17
+    second: {fileID: 2100000, guid: 11647ce02c724914f957b2980723b525, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert18
     second: {fileID: 2100000, guid: fcec3cc488797e246bb1877160343e6c, type: 2}
   - first:
       type: UnityEngine:Material

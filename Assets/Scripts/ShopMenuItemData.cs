@@ -7,4 +7,5 @@ public class ShopMenuItemData : ScriptableObject
     public string Description;
 	public string Cost;
     public Sprite Sprite;
+    public GameObject GameObject;
 }

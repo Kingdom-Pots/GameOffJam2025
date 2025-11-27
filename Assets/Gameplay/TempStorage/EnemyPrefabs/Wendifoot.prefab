@@ -350,11 +350,11 @@ MonoBehaviour:
         DebugActive: 0
         BoundRenderer: {fileID: 2343199585597789359}
         ExtraBoundRenderers: []
-        Mode: 0
-        PropertyName: _Tint
+        Mode: 1
+        PropertyName: _Emissive_Color
         FlickerDuration: 0.2
         FlickerPeriod: 0.04
-        FlickerColor: {r: 1024, g: 896, b: 0, a: 1}
+        FlickerColor: {r: 12.413598, g: 9.378225, b: 4.1573844, a: 1}
         MaterialIndexes: 
         UseMaterialPropertyBlocks: 0
         SpriteRendererTextureProperty: _MainTex

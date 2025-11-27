@@ -11,12 +11,6 @@ public class Damageable: MonoBehaviour
     [Tooltip("Only take damage from specific tags (leave empty for all)")]
     public string[] allowedDamageTags = new string[0];
 
-    [Header("Visual/Audio Feedback")]
-    public GameObject deathEffectPrefab;
-    public GameObject damageEffectPrefab;
-    public AudioClip deathSound;
-    public AudioClip damageSound;
-
     [Header("Events")]
     [Tooltip("Called when damage is taken")]
     public UnityEngine.Events.UnityEvent<float> onDamageTaken;
@@ -25,18 +19,10 @@ public class Damageable: MonoBehaviour
     public UnityEngine.Events.UnityEvent onDeath;
 
     private bool isDead = false;
-    private AudioSource audioSource;
 
     void Start()
     {
         currentHealth = maxHealth;
-
-        // Get or add audio source
-        audioSource = GetComponent<AudioSource>();
-        if (audioSource == null && (deathSound != null || damageSound != null))
-        {
-            audioSource = gameObject.AddComponent<AudioSource>();
-        }
     }
 
     public void TakeDamage(float damageAmount)
@@ -50,18 +36,6 @@ public class Damageable: MonoBehaviour
 
         // Invoke damage event
         onDamageTaken?.Invoke(damageAmount);
-
-        // Play damage effect
-        if (damageEffectPrefab != null)
-        {
-            Instantiate(damageEffectPrefab, transform.position, Quaternion.identity);
-        }
-
-        // Play damage sound
-        if (audioSource != null && damageSound != null)
-        {
-            audioSource.PlayOneShot(damageSound);
-        }
 
         // Check for death
         if (currentHealth <= 0)
@@ -105,28 +79,6 @@ public class Damageable: MonoBehaviour
 
         // Invoke death event
         onDeath?.Invoke();
-
-        // Play death effect
-        if (deathEffectPrefab != null)
-        {
-            Instantiate(deathEffectPrefab, transform.position, Quaternion.identity);
-        }
-
-        // Play death sound
-        if (audioSource != null && deathSound != null)
-        {
-            audioSource.PlayOneShot(deathSound);
-        }
-
-        // Destroy or disable
-        if (destroyOnDeath)
-        {
-            Destroy(gameObject, 0.5f); // Delay to allow sound/effects to play
-        }
-        else
-        {
-            gameObject.SetActive(false);
-        }
     }
 
     public float GetHealthPercentage()

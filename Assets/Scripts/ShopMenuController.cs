@@ -7,21 +7,24 @@ public class ShopMenuController
     // UXML template for list entries
     VisualElement m_root;
     VisualTreeAsset m_ListEntryTemplate;
+    Button m_BuyButton;
     
     // UI element references
     ListView m_MenuItemList;
     List<ShopMenuItemData> m_AllItems;
+    ShopMenuItemData m_CurrentSelection;
     
     public void InitializeItemList(VisualElement root, VisualTreeAsset listElementTemplate)
     {
-        EnumerateAllItems();
-    
         // Store a reference to the template for the list entries
         m_ListEntryTemplate = listElementTemplate;
     
         // Store a reference to the character list element
         m_root = root.Q<VisualElement>("ShopMenu");
         m_MenuItemList = root.Q<ListView>("ItemsToBuy");
+        m_BuyButton = root.Q<Button>("BuyButton");
+
+        m_BuyButton.enabledSelf = false;
     
         FillItemList();
     
@@ -29,7 +32,7 @@ public class ShopMenuController
         m_MenuItemList.selectionChanged += OnItemSelected;
     }
     
-    void EnumerateAllItems()
+    public void EnumerateAllItems()
     {
         m_AllItems = new List<ShopMenuItemData>();
         m_AllItems.AddRange(Resources.LoadAll<ShopMenuItemData>("ShopMenuItems"));
@@ -59,31 +62,45 @@ public class ShopMenuController
         // Set up bind function for a specific list entry
         m_MenuItemList.bindItem = (item, index) =>
         {
-            (item.userData as ShopMenuItemController)?.SetMenuItemData(m_AllItems[index]);
+            if (m_AllItems.Count > 0) 
+            {
+                (item.userData as ShopMenuItemController)?.SetMenuItemData(m_AllItems[index]);
+            }
+            else {
+                m_MenuItemList.Clear();
+            }
         };
     
-        // Set a fixed item height matching the height of the item provided in makeItem. 
-        // For dynamic height, see the virtualizationMethod property.
-        m_MenuItemList.fixedItemHeight = 140;
-    
         // Set the actual item's source list/array
-        m_MenuItemList.itemsSource = m_AllItems;
+        var subListSource = new List<ShopMenuItemData>();
+        if (m_AllItems.Count > 0)
+        {
+            subListSource = m_AllItems.GetRange(0, 1);
+        }
+        m_MenuItemList.itemsSource = subListSource;
+    }
+
+    public void RemoveSelectedItem() {
+        var selectedIndex = m_MenuItemList.selectedIndex;
+        if (selectedIndex >= 0) {
+            m_AllItems.RemoveAt(0/*selectedIndex*/);
+
+            m_MenuItemList.selectedIndex = -1;
+            m_MenuItemList.RefreshItems();
+            m_CurrentSelection = null;
+        }
+    }
+
+    public ShopMenuItemData GetItemSelected()
+    {
+        return m_CurrentSelection;
     }
     
     void OnItemSelected(IEnumerable<object> selectedItems)
     {
         // Get the currently selected item directly from the ListView
-        var selectedItemData = m_MenuItemList.selectedItem as ShopMenuItemData;
-        Debug.Log($"Selected: {string.Join(", ", selectedItemData)}");
-    }
-
-    public void ShowPanel() 
-    {
-        m_root.visible = true;
-    }
-
-    public void HidePanel()
-    {
-        m_root.visible = false;
+        m_CurrentSelection = m_MenuItemList.selectedItem as ShopMenuItemData;
+        m_BuyButton.enabledSelf = true;
+        Debug.Log($"Selected: {string.Join(", ", m_CurrentSelection)}");
     }
 }

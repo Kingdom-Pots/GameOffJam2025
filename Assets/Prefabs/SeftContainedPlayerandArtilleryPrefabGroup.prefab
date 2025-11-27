@@ -2456,6 +2456,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8753658978354071951}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8814084528513283791
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7672457449540902047}
+  m_Layer: 0
+  m_Name: ArtilleryCamLocator2_Static
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7672457449540902047
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8814084528513283791}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: -10.63, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2011826036121275310}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8927508213464315545
 GameObject:
   m_ObjectHideFlags: 0
@@ -2598,11 +2629,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CinemachineZoomController
   defaultPosition: {fileID: 2622926905189877078}
-  zoomedPosition: {fileID: 1154186363341610333}
+  zoomedPosition: {fileID: 7672457449540902047}
   cinemachineCamera: {fileID: 715530532645479520}
   zoomInputAction: {fileID: 7866331830451329279, guid: 4419d82f33d36e848b3ed5af4c8da37e,
     type: 3}
+  scrollInputAction: {fileID: 428146998548927182, guid: 052faaac586de48259a63d0c4782560b,
+    type: 3}
   transitionSpeed: 5
+  enableFOVZoom: 1
+  minFOV: 55
+  maxFOV: 60
+  defaultZoomedFOV: 60
+  zoomSensitivity: 5
+  fovSmoothSpeed: 10
 --- !u!114 &5856436007312168767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6250,6 +6289,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1154186363341610333}
+    - targetCorrespondingSourceObject: {fileID: -826811011351354201, guid: e5b2845fc2b6612478ef56265b63d2d3,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7672457449540902047}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e5b2845fc2b6612478ef56265b63d2d3,
         type: 3}
@@ -6353,6 +6396,48 @@ MonoBehaviour:
   shell: {fileID: 4250376250867435935, guid: e2a817361a2883f419baf25118697b68, type: 3}
   launchPoint: {fileID: 6660211593462046755}
   launchSpeed: 140
+  horizontalRotator: {fileID: 8143940121686234396}
+  verticalRotator: {fileID: 2011826036121275310}
+  rotationSpeed: 5
+  constrainHorizontal: 0
+  horizontalMin: -50
+  horizontalMax: 50
+  constrainVertical: 1
+  verticalMin: -40
+  verticalMax: 45
+  rotateAction: {fileID: 452691650221020401, guid: 052faaac586de48259a63d0c4782560b,
+    type: 3}
+  fireAction: {fileID: 0}
+  OnMove:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6569645697711896299}
+        m_TargetAssemblyTypeName: MoreMountains.Feedbacks.MMF_Player, MoreMountains.Tools
+        m_MethodName: PlayFeedbacks
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnStopMoving:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6569645697711896299}
+        m_TargetAssemblyTypeName: MoreMountains.Feedbacks.MMF_Player, MoreMountains.Tools
+        m_MethodName: StopFeedbacks
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7670906605693694366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6402,6 +6487,19 @@ MonoBehaviour:
             m_TargetAssemblyTypeName: CameraManager, Assembly-CSharp
             m_MethodName: SwitchToCamera
             m_Mode: 3
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 1
+              m_FloatArgument: 0
+              m_StringArgument: Artillery
+              m_BoolArgument: 0
+            m_CallState: 2
+          - m_Target: {fileID: 521739547064942121}
+            m_TargetAssemblyTypeName: Blobcreate.ProjectileToolkit.Demo.ArtilleryManager,
+              Assembly-CSharp
+            m_MethodName: EnableInput
+            m_Mode: 1
             m_Arguments:
               m_ObjectArgument: {fileID: 0}
               m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -6472,228 +6570,25 @@ MonoBehaviour:
               m_StringArgument: Artillery
               m_BoolArgument: 0
             m_CallState: 2
+          - m_Target: {fileID: 521739547064942121}
+            m_TargetAssemblyTypeName: Blobcreate.ProjectileToolkit.Demo.ArtilleryManager,
+              Assembly-CSharp
+            m_MethodName: DisableInput
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: Artillery
+              m_BoolArgument: 0
+            m_CallState: 2
       onHold:
         m_PersistentCalls:
           m_Calls: []
       onRelease:
         m_PersistentCalls:
           m_Calls: []
-      onCooldownEnd:
-        m_PersistentCalls:
-          m_Calls: []
-      isHeld: 0
-      isOnCooldown: 0
-      cooldownEndTime: 0
-    - inputAction: {fileID: 412192038102063266, guid: 052faaac586de48259a63d0c4782560b,
-        type: 3}
-      cooldownTime: 0
-      onPress:
-        m_PersistentCalls:
-          m_Calls:
-          - m_Target: {fileID: 6569645697711896299}
-            m_TargetAssemblyTypeName: MoreMountains.Feedbacks.MMF_Player, MoreMountains.Tools
-            m_MethodName: PlayFeedbacks
-            m_Mode: 1
-            m_Arguments:
-              m_ObjectArgument: {fileID: 0}
-              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-              m_IntArgument: 0
-              m_FloatArgument: 0
-              m_StringArgument: 
-              m_BoolArgument: 0
-            m_CallState: 2
-      onHold:
-        m_PersistentCalls:
-          m_Calls:
-          - m_Target: {fileID: 7283496899679838458}
-            m_TargetAssemblyTypeName: MechanicalRotator, Assembly-CSharp
-            m_MethodName: AddRotation
-            m_Mode: 4
-            m_Arguments:
-              m_ObjectArgument: {fileID: 0}
-              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-              m_IntArgument: 0
-              m_FloatArgument: 0.5
-              m_StringArgument: 
-              m_BoolArgument: 0
-            m_CallState: 2
-      onRelease:
-        m_PersistentCalls:
-          m_Calls:
-          - m_Target: {fileID: 6569645697711896299}
-            m_TargetAssemblyTypeName: MoreMountains.Feedbacks.MMF_Player, MoreMountains.Tools
-            m_MethodName: StopFeedbacks
-            m_Mode: 1
-            m_Arguments:
-              m_ObjectArgument: {fileID: 0}
-              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-              m_IntArgument: 0
-              m_FloatArgument: 0
-              m_StringArgument: 
-              m_BoolArgument: 0
-            m_CallState: 2
-      onCooldownEnd:
-        m_PersistentCalls:
-          m_Calls: []
-      isHeld: 0
-      isOnCooldown: 0
-      cooldownEndTime: 0
-    - inputAction: {fileID: -5847066617480590018, guid: 052faaac586de48259a63d0c4782560b,
-        type: 3}
-      cooldownTime: 0
-      onPress:
-        m_PersistentCalls:
-          m_Calls:
-          - m_Target: {fileID: 6569645697711896299}
-            m_TargetAssemblyTypeName: MoreMountains.Feedbacks.MMF_Player, MoreMountains.Tools
-            m_MethodName: PlayFeedbacks
-            m_Mode: 1
-            m_Arguments:
-              m_ObjectArgument: {fileID: 0}
-              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-              m_IntArgument: 0
-              m_FloatArgument: 0
-              m_StringArgument: 
-              m_BoolArgument: 0
-            m_CallState: 2
-      onHold:
-        m_PersistentCalls:
-          m_Calls:
-          - m_Target: {fileID: 7283496899679838458}
-            m_TargetAssemblyTypeName: MechanicalRotator, Assembly-CSharp
-            m_MethodName: AddRotation
-            m_Mode: 4
-            m_Arguments:
-              m_ObjectArgument: {fileID: 0}
-              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-              m_IntArgument: 0
-              m_FloatArgument: -0.5
-              m_StringArgument: 
-              m_BoolArgument: 0
-            m_CallState: 2
-      onRelease:
-        m_PersistentCalls:
-          m_Calls:
-          - m_Target: {fileID: 6569645697711896299}
-            m_TargetAssemblyTypeName: MoreMountains.Feedbacks.MMF_Player, MoreMountains.Tools
-            m_MethodName: StopFeedbacks
-            m_Mode: 1
-            m_Arguments:
-              m_ObjectArgument: {fileID: 0}
-              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-              m_IntArgument: 0
-              m_FloatArgument: 0
-              m_StringArgument: 
-              m_BoolArgument: 0
-            m_CallState: 2
-      onCooldownEnd:
-        m_PersistentCalls:
-          m_Calls: []
-      isHeld: 0
-      isOnCooldown: 0
-      cooldownEndTime: 0
-    - inputAction: {fileID: 5129733249440573899, guid: 052faaac586de48259a63d0c4782560b,
-        type: 3}
-      cooldownTime: 0
-      onPress:
-        m_PersistentCalls:
-          m_Calls:
-          - m_Target: {fileID: 6569645697711896299}
-            m_TargetAssemblyTypeName: MoreMountains.Feedbacks.MMF_Player, MoreMountains.Tools
-            m_MethodName: PlayFeedbacks
-            m_Mode: 1
-            m_Arguments:
-              m_ObjectArgument: {fileID: 0}
-              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-              m_IntArgument: 0
-              m_FloatArgument: 0
-              m_StringArgument: 
-              m_BoolArgument: 0
-            m_CallState: 2
-      onHold:
-        m_PersistentCalls:
-          m_Calls:
-          - m_Target: {fileID: 6683731402706739824}
-            m_TargetAssemblyTypeName: MechanicalRotator, Assembly-CSharp
-            m_MethodName: AddRotation
-            m_Mode: 4
-            m_Arguments:
-              m_ObjectArgument: {fileID: 0}
-              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-              m_IntArgument: 0
-              m_FloatArgument: -0.5
-              m_StringArgument: 
-              m_BoolArgument: 0
-            m_CallState: 2
-      onRelease:
-        m_PersistentCalls:
-          m_Calls:
-          - m_Target: {fileID: 6569645697711896299}
-            m_TargetAssemblyTypeName: MoreMountains.Feedbacks.MMF_Player, MoreMountains.Tools
-            m_MethodName: StopFeedbacks
-            m_Mode: 1
-            m_Arguments:
-              m_ObjectArgument: {fileID: 0}
-              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-              m_IntArgument: 0
-              m_FloatArgument: 0
-              m_StringArgument: 
-              m_BoolArgument: 0
-            m_CallState: 2
-      onCooldownEnd:
-        m_PersistentCalls:
-          m_Calls: []
-      isHeld: 0
-      isOnCooldown: 0
-      cooldownEndTime: 0
-    - inputAction: {fileID: 4803194515167388483, guid: 052faaac586de48259a63d0c4782560b,
-        type: 3}
-      cooldownTime: 0
-      onPress:
-        m_PersistentCalls:
-          m_Calls:
-          - m_Target: {fileID: 6569645697711896299}
-            m_TargetAssemblyTypeName: MoreMountains.Feedbacks.MMF_Player, MoreMountains.Tools
-            m_MethodName: PlayFeedbacks
-            m_Mode: 1
-            m_Arguments:
-              m_ObjectArgument: {fileID: 0}
-              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-              m_IntArgument: 0
-              m_FloatArgument: 0
-              m_StringArgument: 
-              m_BoolArgument: 0
-            m_CallState: 2
-      onHold:
-        m_PersistentCalls:
-          m_Calls:
-          - m_Target: {fileID: 6683731402706739824}
-            m_TargetAssemblyTypeName: MechanicalRotator, Assembly-CSharp
-            m_MethodName: AddRotation
-            m_Mode: 4
-            m_Arguments:
-              m_ObjectArgument: {fileID: 0}
-              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-              m_IntArgument: 0
-              m_FloatArgument: 0.5
-              m_StringArgument: 
-              m_BoolArgument: 0
-            m_CallState: 2
-      onRelease:
-        m_PersistentCalls:
-          m_Calls:
-          - m_Target: {fileID: 6569645697711896299}
-            m_TargetAssemblyTypeName: MoreMountains.Feedbacks.MMF_Player, MoreMountains.Tools
-            m_MethodName: StopFeedbacks
-            m_Mode: 1
-            m_Arguments:
-              m_ObjectArgument: {fileID: 0}
-              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-              m_IntArgument: 0
-              m_FloatArgument: 0
-              m_StringArgument: 
-              m_BoolArgument: 0
-            m_CallState: 2
       onCooldownEnd:
         m_PersistentCalls:
           m_Calls: []
@@ -6924,6 +6819,12 @@ Animator:
 --- !u!4 &7559111274972055778 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e5b2845fc2b6612478ef56265b63d2d3,
+    type: 3}
+  m_PrefabInstance: {fileID: 8029323140442189577}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8143940121686234396 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2191270317975517717, guid: e5b2845fc2b6612478ef56265b63d2d3,
     type: 3}
   m_PrefabInstance: {fileID: 8029323140442189577}
   m_PrefabAsset: {fileID: 0}

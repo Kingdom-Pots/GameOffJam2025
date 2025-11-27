@@ -18,10 +18,6 @@ public class ShopMenuItemController
         m_CostLabel = visualElement.Q<Label>("ItemCost");
         m_Sprite = visualElement.Q<VisualElement>("ItemSprite");
         m_Background = visualElement.Q<VisualElement>("Background");
-
-        // callback for highlight
-        m_Background.RegisterCallback<PointerEnterEvent>(OnPointerEnter);
-        m_Background.RegisterCallback<PointerLeaveEvent>(OnPointerLeave);
     }
     
     // This function receives the item whose name this list 
@@ -35,16 +31,5 @@ public class ShopMenuItemController
         m_CostLabel.text = itemData.Cost;
         m_Sprite.style.backgroundImage = new StyleBackground(itemData.Sprite);
     }
-
-    private void OnPointerEnter(PointerEnterEvent evt)
-    {
-        m_Background.AddToClassList("highlight");
-        m_Background.RemoveFromClassList("normal");
-    }
-
-    private void OnPointerLeave(PointerLeaveEvent evt)
-    {
-        m_Background.AddToClassList("normal");
-        m_Background.RemoveFromClassList("highlight");
-    }
 }
+
