@@ -15,6 +15,9 @@ MonoBehaviour:
   Name: Artillery Gun D
   Description: A gun with a longer range
   Cost: 50
+  DamageGain: 10
+  SpeedGain: 10
+  ZoomGain: 10
   Sprite: {fileID: 1821430290, guid: 13ffce466226de74fa1fcf2777977e2b, type: 3}
   GameObject: {fileID: 919132149155446097, guid: 7b28ada896e7aa744b18753810630eab,
     type: 3}

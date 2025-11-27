@@ -15,6 +15,9 @@ MonoBehaviour:
   Name: Artillery Gun B
   Description: A better gun
   Cost: 30
+  DamageGain: 10
+  SpeedGain: 10
+  ZoomGain: 10
   Sprite: {fileID: 1902452542, guid: 13ffce466226de74fa1fcf2777977e2b, type: 3}
   GameObject: {fileID: 919132149155446097, guid: b69bdf82e41928f41b75320acc2606e7,
     type: 3}

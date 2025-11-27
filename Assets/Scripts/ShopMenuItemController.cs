@@ -28,7 +28,7 @@ public class ShopMenuItemController
     {
         m_NameLabel.text = itemData.Name;
         m_DescriptionLabel.text = itemData.Description;
-        m_CostLabel.text = itemData.Cost;
+        m_CostLabel.text = itemData.Cost.ToString();
         m_Sprite.style.backgroundImage = new StyleBackground(itemData.Sprite);
     }
 }
