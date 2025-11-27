@@ -20,16 +20,36 @@ public class WaveSpawnController: MonoBehaviour
         public float delayBeforeWave = 2f;
     }
 
+    [System.Serializable]
+    public class EnemyPool
+    {
+        public string poolName = "Enemy Pool";
+        [Tooltip("Wave number this pool unlocks at (e.g., 10)")]
+        public int unlockAtWave = 1;
+        [Tooltip("Enemies available in this pool")]
+        public List<GameObject> enemyPrefabs = new List<GameObject>();
+        [Tooltip("Number of enemies to spawn from this pool each wave")]
+        public int enemiesPerWave = 3;
+    }
+
     [Header("Wave Configuration")]
-    [Tooltip("List of all waves")]
+    [Tooltip("Pre-configured waves (optional - used first if present)")]
     public List<Wave> waves = new List<Wave>();
 
-    [Tooltip("Delay after all enemies die before next wave")]
+    [Tooltip("Generate unlimited waves after pre-configured waves")]
+    public bool unlimitedWaves = true;
+
+    [Tooltip("Enemy pools for procedural wave generation")]
+    public List<EnemyPool> enemyPools = new List<EnemyPool>();
+
+    [Header("Procedural Wave Settings")]
+    [Tooltip("Note: Enemy count = sum of all unlocked pool amounts")]
+    public bool showPoolNote = true;
     public float delayBetweenWaves = 5f;
     public bool autoStartNextWave = true;
 
     [Header("Spawn Settings")]
-    [Tooltip("Enemy Spawn Area (Box Collider)")]
+    [Tooltip("Box collider defining spawn area")]
     public BoxCollider spawnArea;
 
     [Tooltip("Minimum distance between spawned enemies")]
@@ -42,9 +62,12 @@ public class WaveSpawnController: MonoBehaviour
     [Tooltip("Parent spawned enemies to this object")]
     public bool parentToSpawner = true;
 
-    [Header("Debug Stuff")]
+    [Header("Debug")]
     public bool showDebugInfo = true;
     public bool showSpawnArea = true;
+
+    [Tooltip("Automatically start waves on Start")]
+    public bool startOnAwake = true;
 
     private int currentWaveIndex = 0;
     private bool isSpawning = false;
@@ -74,8 +97,11 @@ public class WaveSpawnController: MonoBehaviour
             enemyContainer.localPosition = Vector3.zero;
         }
 
-        //Start enemy spawns
-        StartWaves();
+        // Start waves automatically if enabled
+        if (startOnAwake)
+        {
+            StartWaves();
+        }
     }
 
     void Update()
@@ -85,7 +111,8 @@ public class WaveSpawnController: MonoBehaviour
         {
             CleanUpDeadEnemies();
 
-            if (activeEnemies.Count == 0)
+            // Check if all enemies are dead (health <= 0) instead of destroyed
+            if (AreAllEnemiesDead())
             {
                 if (showDebugInfo)
                     Debug.Log("All enemies defeated! Starting next wave...");
@@ -109,38 +136,102 @@ public class WaveSpawnController: MonoBehaviour
 
     void SpawnNextWave()
     {
-        if (currentWaveIndex >= waves.Count)
+        // Check if using pre-configured waves
+        if (currentWaveIndex < waves.Count)
         {
+            // Use pre-configured wave
+            Wave wave = waves[currentWaveIndex];
+            if (showDebugInfo)
+                Debug.Log($"Spawning Pre-Configured Wave {currentWaveIndex + 1}: {wave.waveName}");
+
+            SpawnWaveEnemies(wave);
+        }
+        else if (unlimitedWaves)
+        {
+            // Generate procedural wave
+            Wave proceduralWave = GenerateProceduralWave(currentWaveIndex + 1);
+            if (showDebugInfo)
+                Debug.Log($"Spawning Procedural Wave {currentWaveIndex + 1}: {proceduralWave.waveName}");
+
+            SpawnWaveEnemies(proceduralWave);
+        }
+        else
+        {
+            // No more waves
             isSpawning = false;
             if (showDebugInfo)
                 Debug.Log("All waves completed!");
             return;
         }
 
-        Wave wave = waves[currentWaveIndex];
-        if (showDebugInfo)
-            Debug.Log($"Spawning Wave {currentWaveIndex + 1}: {wave.waveName}");
-
-        // Spawn all enemies in this wave
-        SpawnWaveEnemies(wave);
-
         currentWaveIndex++;
 
         // Setup next wave trigger
-        if (autoStartNextWave && currentWaveIndex < waves.Count)
+        if (currentWaveIndex < waves.Count || unlimitedWaves)
         {
             waitingForWaveClear = true;
-        }
-        else if (!autoStartNextWave && currentWaveIndex < waves.Count)
-        {
-            // Time-based waves
-            Invoke(nameof(SpawnNextWave), delayBetweenWaves + waves[currentWaveIndex].delayBeforeWave);
         }
         else
         {
-            // Last wave - just wait for clear
-            waitingForWaveClear = true;
+            isSpawning = false;
         }
+    }
+
+    Wave GenerateProceduralWave(int waveNumber)
+    {
+        Wave ProcWave = new Wave();
+        ProcWave.waveName = $"Wave {waveNumber}";
+        ProcWave.delayBeforeWave = 2f;
+        ProcWave.enemies = new List<EnemySpawnInfo>();
+
+        if (showDebugInfo)
+            Debug.Log($"Generating wave {waveNumber}");
+
+        // Get available enemy pools for this wave
+        List<EnemyPool> availablePools = GetAvailablePoolsForWave(waveNumber);
+
+        if (availablePools.Count == 0)
+        {
+            Debug.LogWarning($"No enemy pools available for wave {waveNumber}! Make sure at least one pool has unlockAtWave <= 1");
+            return ProcWave;
+        }
+
+        // Spawn exact amount from each pool
+        foreach (EnemyPool pool in availablePools)
+        {
+            if (pool.enemyPrefabs.Count == 0) continue;
+
+            int countFromPool = pool.enemiesPerWave;
+
+            // Pick random enemy from pool
+            GameObject randomEnemy = pool.enemyPrefabs[Random.Range(0, pool.enemyPrefabs.Count)];
+
+            EnemySpawnInfo spawnInfo = new EnemySpawnInfo();
+            spawnInfo.enemyPrefab = randomEnemy;
+            spawnInfo.count = countFromPool;
+
+            ProcWave.enemies.Add(spawnInfo);
+
+            if (showDebugInfo)
+                Debug.Log($"  - {countFromPool}x {randomEnemy.name} from {pool.poolName}");
+        }
+
+        return ProcWave;
+    }
+
+    List<EnemyPool> GetAvailablePoolsForWave(int waveNumber)
+    {
+        List<EnemyPool> available = new List<EnemyPool>();
+
+        foreach (EnemyPool pool in enemyPools)
+        {
+            if (waveNumber >= pool.unlockAtWave)
+            {
+                available.Add(pool);
+            }
+        }
+
+        return available;
     }
 
     void SpawnWaveEnemies(Wave wave)
@@ -191,13 +282,13 @@ public class WaveSpawnController: MonoBehaviour
 
         for (int attempt = 0; attempt < maxSpawnAttempts; attempt++)
         {
-            // Generates random position
+            // Generate random position
             float randomX = Random.Range(bounds.min.x, bounds.max.x);
             float randomY = bounds.min.y + spawnHeightOffset;
             float randomZ = Random.Range(bounds.min.z, bounds.max.z);
             Vector3 position = new Vector3(randomX, randomY, randomZ);
 
-            // Checks if the spawn position is valid
+            // Check if valid
             if (IsValidSpawnPosition(position))
             {
                 return position;
@@ -209,7 +300,7 @@ public class WaveSpawnController: MonoBehaviour
 
     bool IsValidSpawnPosition(Vector3 position)
     {
-        // Checks distance to all active enemies
+        // Check distance to all active enemies
         foreach (GameObject enemy in activeEnemies)
         {
             if (enemy != null)
@@ -227,7 +318,54 @@ public class WaveSpawnController: MonoBehaviour
 
     void CleanUpDeadEnemies()
     {
+        // Remove null enemies (if they do get destroyed)
         activeEnemies.RemoveAll(enemy => enemy == null);
+    }
+
+    bool AreAllEnemiesDead()
+    {
+        // If no enemies in list, consider wave complete
+        if (activeEnemies.Count == 0)
+            return true;
+
+        // Check if all enemies have 0 health or are dead
+        foreach (GameObject enemy in activeEnemies)
+        {
+            if (enemy == null) continue;
+
+            // Check for EnemyController component
+            EnemyController controller = enemy.GetComponent<EnemyController>();
+            if (controller != null)
+            {
+                // If enemy is still alive, wave is not complete
+                if (!controller.IsDead())
+                {
+                    return false;
+                }
+            }
+        }
+
+        // All enemies are dead
+        return true;
+    }
+
+    public int GetAliveEnemyCount()
+    {
+        int aliveCount = 0;
+
+        foreach (GameObject enemy in activeEnemies)
+        {
+            if (enemy != null)
+            {
+                EnemyController controller = enemy.GetComponent<EnemyController>();
+                if (controller != null && !controller.IsDead())
+                {
+                    aliveCount++;
+                }
+            }
+        }
+
+        return aliveCount;
     }
 
     public void StopWaves()
@@ -252,7 +390,7 @@ public class WaveSpawnController: MonoBehaviour
     public int GetActiveEnemyCount()
     {
         CleanUpDeadEnemies();
-        return activeEnemies.Count;
+        return GetAliveEnemyCount();
     }
 
     public int GetCurrentWaveNumber()
@@ -262,6 +400,8 @@ public class WaveSpawnController: MonoBehaviour
 
     public int GetTotalWaves()
     {
+        if (unlimitedWaves)
+            return -1; // Infinite
         return waves.Count;
     }
 

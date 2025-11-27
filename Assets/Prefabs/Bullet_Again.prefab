@@ -142,7 +142,7 @@ MonoBehaviour:
   explosionRadiusPrefab: {fileID: 0}
   explosionRadius: 5
   maxDamageDistance: 1.43
-  useDamageFalloff: 1
+  useDamageFalloff: 0
   damageableLayers:
     serializedVersion: 2
     m_Bits: 276955200
