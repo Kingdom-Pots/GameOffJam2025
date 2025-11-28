@@ -27,8 +27,8 @@ Transform:
   m_GameObject: {fileID: 6879057728405489195}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 200, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -71,3 +71,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ShopMenuView
   m_ListEntryTemplate: {fileID: 9197481963319205126, guid: 0247af613cb345d4ea40796e8e443f1f,
     type: 3}
+  m_TargetArtilleryGun: {fileID: 0}
+  m_Artillery: {fileID: 0}
+  m_CurrencySystem: {fileID: 0}

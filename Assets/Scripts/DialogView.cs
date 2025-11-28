@@ -20,4 +20,10 @@ public class DialogView : MonoBehaviour
         m_CharacterName.text = "My Character";
         m_CharacterLine.text = "Hello !";
     }
+
+    public void Talk(string character, string text)
+    {
+        m_CharacterName.text = character;
+        m_CharacterLine.text = text;
+    }
 }

@@ -18,14 +18,20 @@ public class ShopMenuView : MonoBehaviour
     [SerializeField]
     GameObject m_CurrencySystem;
 
+    [SerializeField]
+    GameObject m_NPCDialog;
+
     // UI element references
     Button m_BuyButton;
     ShopMenuController m_ShopMenuController;
     CurrencyTracker m_CurrencyTracker;
+    DialogView m_NPCDialogView;
 
     void Awake() {
         m_CurrencyTracker = m_CurrencySystem.GetComponent<CurrencyTracker>();
         Debug.Log($"Currency: {m_CurrencyTracker.currency}");
+
+        m_NPCDialogView = m_NPCDialog.GetComponent<DialogView>();
 
         // Initialize the character list controller
         m_ShopMenuController = new ShopMenuController();
@@ -42,6 +48,8 @@ public class ShopMenuView : MonoBehaviour
         var root = uiDocument.rootVisualElement;
         m_BuyButton = root.Q<Button>("BuyButton");
         m_BuyButton.clicked += OnBuyItemClicked;
+
+        m_NPCDialogView.Talk("Mary", "Welcome to my store, Serenella !");
     }
 
     void OnDisable() {
@@ -51,14 +59,21 @@ public class ShopMenuView : MonoBehaviour
     void OnBuyItemClicked() 
     {
         ShopMenuItemData selectedItemData = m_ShopMenuController.GetItemSelected();
-        if (selectedItemData && m_CurrencyTracker.Use(selectedItemData.Cost)) 
+        if (selectedItemData)
         {
-            m_ShopMenuController.RemoveSelectedItem();
+            if (m_CurrencyTracker.Use(selectedItemData.Cost)) {
+                m_ShopMenuController.RemoveSelectedItem();
 
-            UpgradeArtillery(selectedItemData);
+                UpgradeArtillery(selectedItemData);
 
-            // send the cancel event to quit menu
-            InputSystem.QueueStateEvent(Keyboard.current, new KeyboardState(Key.Escape));
+                // send the cancel event to quit menu
+                m_NPCDialogView.Talk("Mary", "Thanks a lot !!");
+                InputSystem.QueueStateEvent(Keyboard.current, new KeyboardState(Key.Escape));
+            }
+            else
+            {
+                m_NPCDialogView.Talk("Mary", "You don't have enough coins, go kill monster !!");
+            }
         }
     }
 
