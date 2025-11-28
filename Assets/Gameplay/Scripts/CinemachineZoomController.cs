@@ -6,6 +6,15 @@ using UnityEngine.UI;
 
 public class CinemachineZoomController : MonoBehaviour
 {
+    #region Serialized Fields
+    
+    [Header("Camera References")]
+    [Tooltip("The CinemachineCamera to control")]
+    [SerializeField] private CinemachineCamera cinemachineCamera;
+    
+    [Tooltip("The UI Camera to sync FOV with")]
+    [SerializeField] private Camera uiCamera;
+    
     [Header("Camera Positions")]
     [Tooltip("Transform for the default (zoomed out) camera position")]
     [SerializeField] private Transform defaultPosition;
@@ -13,37 +22,38 @@ public class CinemachineZoomController : MonoBehaviour
     [Tooltip("Transform for the zoomed in camera position")]
     [SerializeField] private Transform zoomedPosition;
     
-    [Header("Settings")]
-    [Tooltip("The CinemachineCamera to move")]
-    [SerializeField] private CinemachineCamera cinemachineCamera;
-    
+    [Header("Input Actions")]
     [Tooltip("Input action for zoom (press to zoom in, release to zoom out)")]
     [SerializeField] private InputActionReference zoomInputAction;
     
     [Tooltip("Input action for mousewheel scroll")]
     [SerializeField] private InputActionReference scrollInputAction;
     
+    [Header("Transition Settings")]
     [Tooltip("How fast the camera moves between positions")]
     [SerializeField] private float transitionSpeed = 5f;
     
-    [Header("FOV Zoom Settings")]
+    [Tooltip("How fast FOV changes")]
+    [SerializeField] private float fovSmoothSpeed = 10f;
+    
+    [Header("FOV Settings")]
     [Tooltip("Enable mousewheel FOV zoom when zoomed in")]
     [SerializeField] private bool enableFOVZoom = true;
     
-    [Tooltip("Minimum FOV value")]
-    [SerializeField] private float minFOV = 20f;
-    
-    [Tooltip("Maximum FOV value")]
-    [SerializeField] private float maxFOV = 60f;
+    [Tooltip("Default FOV when not zoomed")]
+    [SerializeField] private float defaultFOV = 60f;
     
     [Tooltip("Default FOV when entering zoomed state")]
     [SerializeField] private float defaultZoomedFOV = 40f;
     
+    [Tooltip("Minimum FOV value (maximum zoom)")]
+    [SerializeField] private float minFOV = 20f;
+    
+    [Tooltip("Maximum FOV value (minimum zoom)")]
+    [SerializeField] private float maxFOV = 60f;
+    
     [Tooltip("How sensitive the mousewheel zoom is")]
     [SerializeField] private float zoomSensitivity = 5f;
-    
-    [Tooltip("How fast FOV changes")]
-    [SerializeField] private float fovSmoothSpeed = 10f;
     
     [Header("UI Elements")]
     [Tooltip("Optional UI Scrollbar to display zoom level")]
@@ -62,48 +72,113 @@ public class CinemachineZoomController : MonoBehaviour
     [Tooltip("Event with float parameter for FOV changes (normalized 0-1)")]
     public UnityEvent<float> onFOVChanged;
     
-    private Transform targetTransform;
+    #endregion
+    
+    #region Private Fields
+    
     private Transform cameraTransform;
+    private Transform targetTransform;
     private bool isZoomedIn = false;
     private float currentFOV;
     private float targetFOV;
     private CinemachineOrbitalFollow orbitalFollow;
-
+    
+    #endregion
+    
+    #region Unity Lifecycle
+    
     void Awake()
+    {
+        if (!ValidateReferences())
+        {
+            enabled = false;
+            return;
+        }
+        
+        InitializeComponents();
+        InitializeFOV();
+        SetupScrollbar();
+    }
+
+    void OnEnable()
+    {
+        RegisterInputActions();
+    }
+
+    void OnDisable()
+    {
+        UnregisterInputActions();
+    }
+
+    void Update()
+    {
+        HandleMousewheelZoom();
+        UpdateFOV();
+    }
+
+    void LateUpdate()
+    {
+        UpdateCameraTransform();
+    }
+    
+    #endregion
+    
+    #region Initialization
+    
+    private bool ValidateReferences()
     {
         if (cinemachineCamera == null)
         {
             Debug.LogError("CinemachineCamera not assigned!", this);
-            enabled = false;
-            return;
+            return false;
         }
         
         if (defaultPosition == null || zoomedPosition == null)
         {
             Debug.LogError("Default Position and Zoomed Position must be assigned!", this);
-            enabled = false;
-            return;
+            return false;
         }
         
+        return true;
+    }
+    
+    private void InitializeComponents()
+    {
         cameraTransform = cinemachineCamera.transform;
         targetTransform = defaultPosition;
-        
-        // Get the orbital follow component if it exists
         orbitalFollow = cinemachineCamera.GetComponent<CinemachineOrbitalFollow>();
+    }
+    
+    private void InitializeFOV()
+    {
+        // Ensure maxFOV is set to defaultFOV
+        maxFOV = defaultFOV;
         
-        // Initialize FOV
-        currentFOV = cinemachineCamera.Lens.FieldOfView;
-        targetFOV = currentFOV;
+        // Initialize both cameras to default FOV
+        currentFOV = defaultFOV;
+        targetFOV = defaultFOV;
+        cinemachineCamera.Lens.FieldOfView = defaultFOV;
         
-        // Setup scrollbar listener if assigned
+        if (uiCamera != null)
+        {
+            uiCamera.fieldOfView = defaultFOV;
+        }
+    }
+    
+    private void SetupScrollbar()
+    {
         if (zoomScrollbar != null)
         {
             zoomScrollbar.onValueChanged.AddListener(OnScrollbarValueChanged);
             UpdateScrollbarValue();
         }
     }
-
-    void OnEnable()
+    
+    #endregion
+    
+    #region Input Handling
+    
+    private void RegisterInputActions()
     {
         if (zoomInputAction != null)
         {
@@ -117,8 +192,8 @@ public class CinemachineZoomController : MonoBehaviour
             scrollInputAction.action.Enable();
         }
     }
-
-    void OnDisable()
+    
+    private void UnregisterInputActions()
     {
         if (zoomInputAction != null)
         {
@@ -132,61 +207,59 @@ public class CinemachineZoomController : MonoBehaviour
             scrollInputAction.action.Disable();
         }
     }
-
-    void OnZoomPressed(InputAction.CallbackContext context)
+    
+    private void OnZoomPressed(InputAction.CallbackContext context)
     {
-        targetTransform = zoomedPosition;
-        isZoomedIn = true;
-        targetFOV = defaultZoomedFOV;
-        
-        // Invoke zoom in event
-        onZoomIn?.Invoke();
+        EnterZoomState();
     }
 
-    void OnZoomReleased(InputAction.CallbackContext context)
+    private void OnZoomReleased(InputAction.CallbackContext context)
     {
-        targetTransform = defaultPosition;
-        isZoomedIn = false;
-        // Reset FOV when zooming out
-        targetFOV = cinemachineCamera.Lens.FieldOfView;
-        
-        // Invoke zoom out event
-        onZoomOut?.Invoke();
+        ExitZoomState();
     }
-
-    void Update()
+    
+    #endregion
+    
+    #region Update Methods
+    
+    private void HandleMousewheelZoom()
     {
-        // Handle mousewheel FOV zoom only when zoomed in
-        if (enableFOVZoom && isZoomedIn && scrollInputAction != null)
+        if (!enableFOVZoom || !isZoomedIn || scrollInputAction == null)
+            return;
+        
+        float scrollInput = scrollInputAction.action.ReadValue<Vector2>().y;
+        
+        if (scrollInput != 0)
         {
-            float scrollInput = scrollInputAction.action.ReadValue<Vector2>().y;
-            
-            if (scrollInput != 0)
-            {
-                targetFOV -= scrollInput * zoomSensitivity;
-                targetFOV = Mathf.Clamp(targetFOV, minFOV, maxFOV);
-            }
+            targetFOV -= scrollInput * zoomSensitivity;
+            targetFOV = Mathf.Clamp(targetFOV, minFOV, maxFOV);
         }
-        
-        // Smoothly interpolate FOV
+    }
+    
+    private void UpdateFOV()
+    {
         float previousFOV = currentFOV;
         currentFOV = Mathf.Lerp(currentFOV, targetFOV, Time.deltaTime * fovSmoothSpeed);
-        cinemachineCamera.Lens.FieldOfView = currentFOV;
         
-        // Update scrollbar and trigger event if FOV changed
+        // Sync both cameras
+        cinemachineCamera.Lens.FieldOfView = currentFOV;
+        if (uiCamera != null)
+        {
+            uiCamera.fieldOfView = currentFOV;
+        }
+        
+        // Update UI and trigger events if FOV changed significantly
         if (Mathf.Abs(currentFOV - previousFOV) > 0.01f)
         {
             UpdateScrollbarValue();
             
-            // Invoke FOV changed event with normalized value (0 = min zoom, 1 = max zoom)
             float normalizedFOV = GetNormalizedFOV();
             onFOVChanged?.Invoke(normalizedFOV);
         }
     }
-
-    void LateUpdate()
+    
+    private void UpdateCameraTransform()
     {
-        // Smoothly move camera to target position and rotation
         cameraTransform.position = Vector3.Lerp(
             cameraTransform.position, 
             targetTransform.position, 
@@ -199,64 +272,92 @@ public class CinemachineZoomController : MonoBehaviour
             Time.deltaTime * transitionSpeed
         );
     }
-
-    /// <summary>
-    /// Updates the scrollbar to match current FOV
-    /// </summary>
+    
+    #endregion
+    
+    #region Scrollbar Handling
+    
     private void UpdateScrollbarValue()
     {
-        if (zoomScrollbar != null && isZoomedIn)
+        if (zoomScrollbar == null || !isZoomedIn)
+            return;
+        
+        float normalizedValue = Mathf.InverseLerp(minFOV, maxFOV, currentFOV);
+        
+        // Invert if needed (scrollbar at 1 = most zoomed in = lowest FOV)
+        if (!invertScrollbar)
         {
-            // Inverse lerp to get normalized value (0-1)
-            float normalizedValue = Mathf.InverseLerp(minFOV, maxFOV, currentFOV);
-            
-            // Invert if needed (scrollbar at 1 = most zoomed in = lowest FOV)
-            if (!invertScrollbar)
-            {
-                normalizedValue = 1f - normalizedValue;
-            }
-            
-            zoomScrollbar.SetValueWithoutNotify(normalizedValue);
+            normalizedValue = 1f - normalizedValue;
         }
+        
+        zoomScrollbar.SetValueWithoutNotify(normalizedValue);
     }
-
-    /// <summary>
-    /// Called when the scrollbar value is changed by user interaction
-    /// </summary>
+    
     private void OnScrollbarValueChanged(float value)
     {
-        if (isZoomedIn)
-        {
-            // Convert scrollbar value (0-1) to FOV range
-            float normalizedValue = invertScrollbar ? value : (1f - value);
-            targetFOV = Mathf.Lerp(minFOV, maxFOV, normalizedValue);
-        }
+        if (!isZoomedIn)
+            return;
+        
+        float normalizedValue = invertScrollbar ? value : (1f - value);
+        targetFOV = Mathf.Lerp(minFOV, maxFOV, normalizedValue);
     }
-
+    
+    #endregion
+    
+    #region Public API
+    
     /// <summary>
-    /// Gets the normalized FOV value (0 = min zoom/max FOV, 1 = max zoom/min FOV)
+    /// Manually enter zoomed state
     /// </summary>
-    private float GetNormalizedFOV()
+    public void EnterZoomState()
     {
-        float normalized = Mathf.InverseLerp(minFOV, maxFOV, currentFOV);
-        return 1f - normalized; // Invert so 1 = most zoomed in
+        targetTransform = zoomedPosition;
+        isZoomedIn = true;
+        targetFOV = defaultZoomedFOV;
+        
+        onZoomIn?.Invoke();
     }
 
     /// <summary>
-    /// Increases the FOV zoom by the specified amount (decreases FOV value)
+    /// Manually exit zoomed state and reset FOV to default
     /// </summary>
-    /// <param name="amount">Amount to zoom in (positive values zoom in, negative zoom out)</param>
+    public void ExitZoomState()
+    {
+        targetTransform = defaultPosition;
+        isZoomedIn = false;
+        
+        // Reset FOV to default
+        targetFOV = defaultFOV;
+        currentFOV = defaultFOV;
+        
+        // Immediately set both cameras to default FOV
+        cinemachineCamera.Lens.FieldOfView = defaultFOV;
+        if (uiCamera != null)
+        {
+            uiCamera.fieldOfView = defaultFOV;
+        }
+        
+        onZoomOut?.Invoke();
+    }
+
+    /// <summary>
+    /// Adjusts the minimum FOV limit (increases maximum zoom capability)
+    /// </summary>
+    /// <param name="amount">Amount to decrease minFOV by (positive values allow more zoom)</param>
     public void IncreaseZoom(float amount)
     {
-        if (isZoomedIn)
+        minFOV -= amount;
+        minFOV = Mathf.Max(minFOV, 5f); // Prevent going below 5 degrees
+        
+        // Clamp current target if needed
+        if (targetFOV < minFOV)
         {
-            targetFOV -= amount;
-            targetFOV = Mathf.Clamp(targetFOV, minFOV, maxFOV);
+            targetFOV = minFOV;
         }
     }
 
     /// <summary>
-    /// Sets the FOV to a specific value
+    /// Sets the FOV to a specific value (only works when zoomed in)
     /// </summary>
     /// <param name="fov">The target FOV value</param>
     public void SetFOV(float fov)
@@ -282,30 +383,15 @@ public class CinemachineZoomController : MonoBehaviour
     {
         return isZoomedIn;
     }
-
+    
     /// <summary>
-    /// Manually enter zoomed state
+    /// Gets the normalized FOV value (0 = min zoom/max FOV, 1 = max zoom/min FOV)
     /// </summary>
-    public void EnterZoomState()
+    public float GetNormalizedFOV()
     {
-        targetTransform = zoomedPosition;
-        isZoomedIn = true;
-        targetFOV = defaultZoomedFOV;
-        
-        // Invoke zoom in event
-        onZoomIn?.Invoke();
+        float normalized = Mathf.InverseLerp(minFOV, maxFOV, currentFOV);
+        return 1f - normalized; // Invert so 1 = most zoomed in
     }
-
-    /// <summary>
-    /// Manually exit zoomed state
-    /// </summary>
-    public void ExitZoomState()
-    {
-        targetTransform = defaultPosition;
-        isZoomedIn = false;
-        targetFOV = cinemachineCamera.Lens.FieldOfView;
-        
-        // Invoke zoom out event
-        onZoomOut?.Invoke();
-    }
+    
+    #endregion
 }

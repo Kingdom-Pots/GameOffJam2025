@@ -3576,7 +3576,7 @@ MonoBehaviour:
     ScreenPosition: {x: 0, y: 0}
     DeadZone:
       Enabled: 1
-      Size: {x: 0.2, y: 0.08}
+      Size: {x: 0.35, y: 0.08}
     HardLimits:
       Enabled: 0
       Size: {x: 1.05, y: 0.5}
@@ -3602,7 +3602,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CinemachineRotationConfiner
   minPitch: 0
-  maxPitch: 20
+  maxPitch: 22
   minYaw: -20
   maxYaw: 20
   constrainPitch: 1
@@ -3620,20 +3620,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67ed296210c43eb4ebfbc9cb5e1d70bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CinemachineZoomController
+  cinemachineCamera: {fileID: 715530532645479520}
+  uiCamera: {fileID: 5401076399104626912}
   defaultPosition: {fileID: 2622926905189877078}
   zoomedPosition: {fileID: 7672457449540902047}
-  cinemachineCamera: {fileID: 715530532645479520}
   zoomInputAction: {fileID: 7866331830451329279, guid: 4419d82f33d36e848b3ed5af4c8da37e,
     type: 3}
   scrollInputAction: {fileID: 428146998548927182, guid: 052faaac586de48259a63d0c4782560b,
     type: 3}
   transitionSpeed: 5
+  fovSmoothSpeed: 10
   enableFOVZoom: 1
+  defaultFOV: 60
+  defaultZoomedFOV: 60
   minFOV: 55
   maxFOV: 60
-  defaultZoomedFOV: 60
   zoomSensitivity: 5
-  fovSmoothSpeed: 10
   zoomScrollbar: {fileID: 4088627539020150460}
   invertScrollbar: 0
   onZoomIn:
@@ -4284,7 +4286,7 @@ PrefabInstance:
     - target: {fileID: 5799230654676080790, guid: 64d6f2d98b1c4ff459fff2ba7544e87f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 115.809814
+      value: 115.459
       objectReference: {fileID: 0}
     - target: {fileID: 5799230654676080790, guid: 64d6f2d98b1c4ff459fff2ba7544e87f,
         type: 3}
@@ -6501,7 +6503,7 @@ PrefabInstance:
     - target: {fileID: 8538961615754487424, guid: 9861455ac7ac93f4c86bc785c297780d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 115.809814
+      value: 115.459
       objectReference: {fileID: 0}
     - target: {fileID: 8538961615754487424, guid: 9861455ac7ac93f4c86bc785c297780d,
         type: 3}

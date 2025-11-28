@@ -78,7 +78,7 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 268435456
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
@@ -105,12 +105,12 @@ MonoBehaviour:
   forceUplit: 0.6
   scanMask:
     serializedVersion: 2
-    m_Bits: 8454145
+    m_Bits: 8454144
   damage: 20
   isPlayerWeapon: 0
   selfMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1
   selfDamageRatio: 0.25
 --- !u!114 &4130253441628826880
 MonoBehaviour:
@@ -145,7 +145,7 @@ MonoBehaviour:
   useDamageFalloff: 0
   damageableLayers:
     serializedVersion: 2
-    m_Bits: 276955200
+    m_Bits: 8519744
   destroyOnImpact: 1
   destroyDelay: 0.1
 --- !u!1 &4250376251110709649
