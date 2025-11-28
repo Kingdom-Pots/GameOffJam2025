@@ -24,7 +24,23 @@ public class ShopMenuItemController
     // element is supposed to display. Since the elements list 
     // in a `ListView` are pooled and reused, it's necessary to 
     // have a `Set` function to change which character's data to display.
-    public void SetMenuItemData(ShopMenuItemData itemData)
+    public void SetMenuGunItemData(ShopMenuGunItemData itemData)
+    {
+        m_NameLabel.text = itemData.Name;
+        m_DescriptionLabel.text = itemData.Description;
+        m_CostLabel.text = itemData.Cost.ToString();
+        m_Sprite.style.backgroundImage = new StyleBackground(itemData.Sprite);
+    }
+
+    public void SetMenuCastleItemData(ShopMenuCastleItemData itemData)
+    {
+        m_NameLabel.text = itemData.Name;
+        m_DescriptionLabel.text = itemData.Description;
+        m_CostLabel.text = itemData.Cost.ToString();
+        m_Sprite.style.backgroundImage = new StyleBackground(itemData.Sprite);
+    }
+
+    public void SetMenuZoomItemData(ShopMenuZoomItemData itemData)
     {
         m_NameLabel.text = itemData.Name;
         m_DescriptionLabel.text = itemData.Description;

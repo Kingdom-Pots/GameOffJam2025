@@ -483,6 +483,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3671349186396995963, guid: 6e4cc339daf7dca4a8c1c2e801dc9e01,
         type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3671349186396995963, guid: 6e4cc339daf7dca4a8c1c2e801dc9e01,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -531,6 +536,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4619009199619547346, guid: 6e4cc339daf7dca4a8c1c2e801dc9e01,
+        type: 3}
+      propertyPath: m_PanelSettings
+      value: 
+      objectReference: {fileID: 11400000, guid: 34f8af425f4594331ac532e00b9e83bf,
+        type: 2}
     - target: {fileID: 6879057728405489195, guid: 6e4cc339daf7dca4a8c1c2e801dc9e01,
         type: 3}
       propertyPath: m_Name

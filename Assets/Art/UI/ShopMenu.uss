@@ -53,5 +53,7 @@
 
 .unity-button:disabled {
     background-color: rgb(42, 42, 42);
+    border-color: rgb(155, 155, 155);
+    border-radius: 2px;
     opacity: 0.5;
 }

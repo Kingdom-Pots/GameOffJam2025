@@ -58,11 +58,11 @@ public class ShopMenuView : MonoBehaviour
 
     void OnBuyItemClicked() 
     {
-        ShopMenuItemData selectedItemData = m_ShopMenuController.GetItemSelected();
+        ShopMenuGunItemData selectedItemData = m_ShopMenuController.GetGunItemSelected();
         if (selectedItemData)
         {
             if (m_CurrencyTracker.Use(selectedItemData.Cost)) {
-                m_ShopMenuController.RemoveSelectedItem();
+                m_ShopMenuController.RemoveSelectedGunItem();
 
                 UpgradeArtillery(selectedItemData);
 
@@ -77,10 +77,10 @@ public class ShopMenuView : MonoBehaviour
         }
     }
 
-    void UpgradeArtillery(ShopMenuItemData item) {
+    void UpgradeArtillery(ShopMenuGunItemData item) {
         UpgradeArtilleryGun(item.GameObject);
-        UpgradeArtilleryZoom(item.ZoomGain);
-        UpgradeArtillerySpeed(item.SpeedGain);
+        //UpgradeArtilleryZoom(item.ZoomGain);
+        //UpgradeArtillerySpeed(item.SpeedGain);
         UpgradeArtilleryShellDamage(item.DamageGain);
     }
 

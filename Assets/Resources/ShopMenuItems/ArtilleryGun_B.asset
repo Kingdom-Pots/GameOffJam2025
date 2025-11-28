@@ -9,15 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 159351084f4077d408c7307b464869cb, type: 3}
+  m_Script: {fileID: 11500000, guid: e7f8d9890c2f33848adf23a4ade1ee83, type: 3}
   m_Name: ArtilleryGun_B
-  m_EditorClassIdentifier: Assembly-CSharp::ShopMenuItemData
+  m_EditorClassIdentifier: Assembly-CSharp::ShopMenuGunItemData
   Name: Artillery Gun B
   Description: A better gun
   Cost: 30
+  Sprite: {fileID: 1902452542, guid: 13ffce466226de74fa1fcf2777977e2b, type: 3}
   DamageGain: 10
   SpeedGain: 10
-  ZoomGain: 10
-  Sprite: {fileID: 1902452542, guid: 13ffce466226de74fa1fcf2777977e2b, type: 3}
   GameObject: {fileID: 919132149155446097, guid: b69bdf82e41928f41b75320acc2606e7,
     type: 3}
