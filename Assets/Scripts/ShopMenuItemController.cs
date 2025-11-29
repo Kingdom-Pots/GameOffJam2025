@@ -8,9 +8,11 @@ public class ShopMenuItemController
     Label m_CostLabel;
     VisualElement m_Sprite;
     VisualElement m_Background;
-    
+
+    bool m_Selected = false;
+
     // This function retrieves a reference to the 
-    // character name label inside the UI element.
+    // root visual element containg all the other elements
     public void SetVisualElement(VisualElement visualElement)
     {
         m_NameLabel = visualElement.Q<Label>("ItemName");
@@ -20,11 +22,8 @@ public class ShopMenuItemController
         m_Background = visualElement.Q<VisualElement>("Background");
     }
     
-    // This function receives the item whose name this list 
-    // element is supposed to display. Since the elements list 
-    // in a `ListView` are pooled and reused, it's necessary to 
-    // have a `Set` function to change which character's data to display.
-    public void SetMenuGunItemData(ShopMenuGunItemData itemData)
+    // This function receives the item with all infos to display
+    public void SetMenuItemData(ShopMenuItemData itemData)
     {
         m_NameLabel.text = itemData.Name;
         m_DescriptionLabel.text = itemData.Description;
@@ -32,20 +31,22 @@ public class ShopMenuItemController
         m_Sprite.style.backgroundImage = new StyleBackground(itemData.Sprite);
     }
 
-    public void SetMenuCastleItemData(ShopMenuCastleItemData itemData)
+    public void ToggleSelection()
     {
-        m_NameLabel.text = itemData.Name;
-        m_DescriptionLabel.text = itemData.Description;
-        m_CostLabel.text = itemData.Cost.ToString();
-        m_Sprite.style.backgroundImage = new StyleBackground(itemData.Sprite);
+        m_Selected = !m_Selected;
+        if (m_Selected) 
+        {
+            m_Background.AddToClassList("selected");
+        }
+        else 
+        {
+            m_Background.RemoveFromClassList("selected");
+        }
     }
 
-    public void SetMenuZoomItemData(ShopMenuZoomItemData itemData)
+    public bool IsSelected() 
     {
-        m_NameLabel.text = itemData.Name;
-        m_DescriptionLabel.text = itemData.Description;
-        m_CostLabel.text = itemData.Cost.ToString();
-        m_Sprite.style.backgroundImage = new StyleBackground(itemData.Sprite);
+        return m_Selected;
     }
 }
 

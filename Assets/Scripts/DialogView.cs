@@ -1,7 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
-    
+
+public enum Character {
+    Mary,
+    Daigo,
+    Serenella,
+    Karen,
+}
+
 public class DialogView : MonoBehaviour
 {
     // UI element references
@@ -22,11 +29,11 @@ public class DialogView : MonoBehaviour
         m_CharacterLine.text = "Hello !";
     }
 
-    public void Talk(string character, string text)
+    public void Talk(Character character, string text)
     {
         // StartCoroutine(FactionService.GetFactions(OnFactionsLoaded));
         // StartCoroutine(FactionService.AddToFactionTotal("United States of South America", 5, OnFactionUpdated));
-        m_CharacterName.text = character;
+        m_CharacterName.text = character.ToString();
         m_CharacterLine.text = text;
     }
     // void OnFactionsLoaded(List<Faction> factions)
