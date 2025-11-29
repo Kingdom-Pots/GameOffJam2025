@@ -18,24 +18,42 @@ public class ShopMenuView : MonoBehaviour
     [SerializeField]
     GameObject m_NPCDialog;
 
+    [SerializeField]
+    GameObject m_Castle;
+
+    /// number of times the castle health item can be used
+    [SerializeField]
+    int m_CastleHealthItemRecycling;
+
+    /// number of times the castle defense item can be used
+    [SerializeField]
+    int m_CastleDefenseItemRecycling;
+
     // UI element references
     VisualElement m_GunItem;
     VisualElement m_ZoomItem;
-    VisualElement m_CastleItem;
+    VisualElement m_CastleHealthItem;
+    VisualElement m_CastleDefenseItem;
     Button m_BuyButton;
 
     ShopMenuController m_ShopMenuController;
     CurrencyTracker m_CurrencyTracker;
-    
+    Damageable m_CastleDamageable;
+
     DialogView m_NPCDialogView;
 
     void Awake() {
+        // get currency tracker
         m_CurrencyTracker = m_CurrencySystem.GetComponent<CurrencyTracker>();
         Debug.Log($"Currency: {m_CurrencyTracker.currency}");
 
+        // get NPC dialog view
         m_NPCDialogView = m_NPCDialog.GetComponent<DialogView>();
 
-        // Initialize the character list controller
+        // get castle damageable script
+        m_CastleDamageable = m_Castle.GetComponent<Damageable>();
+
+        // Initialize the shop controller
         m_ShopMenuController = new ShopMenuController();
         m_ShopMenuController.EnumerateAllItems();
     }
@@ -44,7 +62,7 @@ public class ShopMenuView : MonoBehaviour
     {
         // The UXML is already instantiated by the UIDocument component
         var uiDocument = GetComponent<UIDocument>();
-        m_ShopMenuController.InitializeItems(uiDocument.rootVisualElement);
+        m_ShopMenuController.InitializeItems(uiDocument.rootVisualElement, m_CastleHealthItemRecycling, m_CastleDefenseItemRecycling);
 
         m_GunItem = m_ShopMenuController.GetGunItem();
         m_GunItem.RegisterCallback<ClickEvent>(OnGunItemSelected);
@@ -52,8 +70,11 @@ public class ShopMenuView : MonoBehaviour
         m_ZoomItem = m_ShopMenuController.GetZoomItem();
         m_ZoomItem.RegisterCallback<ClickEvent>(OnZoomItemSelected);
 
-        m_CastleItem = m_ShopMenuController.GetCastleItem();
-        m_CastleItem.RegisterCallback<ClickEvent>(OnCastleItemSelected);
+        m_CastleHealthItem = m_ShopMenuController.GetCastleHealthItem();
+        m_CastleHealthItem.RegisterCallback<ClickEvent>(OnCastleHealthItemSelected);
+
+        m_CastleDefenseItem = m_ShopMenuController.GetCastleDefenseItem();
+        m_CastleDefenseItem.RegisterCallback<ClickEvent>(OnCastleDefenseItemSelected);
 
         m_BuyButton = m_ShopMenuController.GetBuyButton();
         m_BuyButton.clicked += OnBuyItemClicked;
@@ -64,7 +85,8 @@ public class ShopMenuView : MonoBehaviour
     void OnDisable() {
         m_GunItem.UnregisterCallback<ClickEvent>(OnGunItemSelected);
         m_ZoomItem.UnregisterCallback<ClickEvent>(OnZoomItemSelected);
-        m_CastleItem.UnregisterCallback<ClickEvent>(OnCastleItemSelected);
+        m_CastleHealthItem.UnregisterCallback<ClickEvent>(OnCastleHealthItemSelected);
+        m_CastleDefenseItem.UnregisterCallback<ClickEvent>(OnCastleDefenseItemSelected);
         m_BuyButton.clicked -= OnBuyItemClicked;
     }
 
@@ -100,9 +122,15 @@ public class ShopMenuView : MonoBehaviour
         CheckBuyButton();
     }
 
-    void OnCastleItemSelected(ClickEvent evt)
+    void OnCastleHealthItemSelected(ClickEvent evt)
     {
-        m_ShopMenuController.ToggleCastleItemSelection();
+        m_ShopMenuController.ToggleCastleHealthItemSelection();
+        CheckBuyButton();
+    }
+
+    void OnCastleDefenseItemSelected(ClickEvent evt)
+    {
+        m_ShopMenuController.ToggleCastleDefenseItemSelection();
         CheckBuyButton();
     }
 
@@ -128,12 +156,21 @@ public class ShopMenuView : MonoBehaviour
             }
         }
 
-        // check for castle
-        if (m_ShopMenuController.IsCastleItemSelected()) {
-            ShopMenuCastleItemData selectedItemData = m_ShopMenuController.GetSelectedCastleItem();
+        // check for castle health
+        if (m_ShopMenuController.IsCastleHealthItemSelected()) {
+            ShopMenuCastleHealthItemData selectedItemData = m_ShopMenuController.GetSelectedCastleHealthItem();
             if (m_CurrencyTracker.Use(selectedItemData.Cost)) {
-                m_ShopMenuController.RemoveSelectedCastleItem();
-                UpgradeCastleHP(selectedItemData.DefenseGain);
+                m_ShopMenuController.RemoveSelectedCastleHealthItem();
+                HealCastle(selectedItemData.HealthGain);
+            }
+        }
+
+        // check for castle
+        if (m_ShopMenuController.IsCastleDefenseItemSelected()) {
+            ShopMenuCastleDefenseItemData selectedItemData = m_ShopMenuController.GetSelectedCastleDefenseItem();
+            if (m_CurrencyTracker.Use(selectedItemData.Cost)) {
+                m_ShopMenuController.RemoveSelectedCastleDefenseItem();
+                UpgradeCastleDefense(selectedItemData.DefenseGain);
             }
         }
 
@@ -174,7 +211,11 @@ public class ShopMenuView : MonoBehaviour
         artilleryManager.IncreaseDamage(damageGain);
     }
 
-    void UpgradeCastleHP(float defenseGain) {
-        
+    void UpgradeCastleDefense(float defenseGain) {
+        m_CastleDamageable.IncreaseMaxHealth(defenseGain);
+    }
+
+    void HealCastle(float healthGain) {
+        m_CastleDamageable.Heal(healthGain);
     }
 }

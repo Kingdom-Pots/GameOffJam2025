@@ -13,16 +13,22 @@ public class ShopMenuController
     ShopMenuItemController m_ZoomItemController;
     List<ShopMenuZoomItemData> m_AllZoomsItems;
 
-    VisualElement m_CastleItem;
-    ShopMenuItemController m_CastleItemController;
-    List<ShopMenuCastleItemData> m_AllCastlesItems;
+    VisualElement m_CastleHealthItem;
+    ShopMenuItemController m_CastleHealthItemController;
+    List<ShopMenuCastleHealthItemData> m_AllCastlesHealthItems;
+    int m_CastleHealthItemsCount; // temp
+
+    VisualElement m_CastleDefenseItem;
+    ShopMenuItemController m_CastleDefenseItemController;
+    List<ShopMenuCastleDefenseItemData> m_AllCastlesDefenseItems;
+    int m_CastleDefenseItemsCount; // temp
 
     Button m_BuyButton;
     Label m_TotalCostLabel;
 
     int m_TotalCost = 0;
 
-    public void InitializeItems(VisualElement root)
+    public void InitializeItems(VisualElement root, int nbCastleHealthItems, int nbCastleDefenseItems)
     {
         // bind controllers to visual elements and to callbacks
         // gun
@@ -39,10 +45,17 @@ public class ShopMenuController
 
 
         // castle
-        m_CastleItem = root.Q<VisualElement>("CastleItem");
+        m_CastleHealthItem = root.Q<VisualElement>("CastleHealthItem");
 
-        m_CastleItemController = new ShopMenuItemController();
-        m_CastleItemController.SetVisualElement(m_CastleItem);
+        m_CastleHealthItemController = new ShopMenuItemController();
+        m_CastleHealthItemController.SetVisualElement(m_CastleHealthItem);
+        m_CastleHealthItemsCount = nbCastleHealthItems;
+        
+        m_CastleDefenseItem = root.Q<VisualElement>("CastleDefenseItem");
+
+        m_CastleDefenseItemController = new ShopMenuItemController();
+        m_CastleDefenseItemController.SetVisualElement(m_CastleDefenseItem);
+        m_CastleDefenseItemsCount = nbCastleDefenseItems;
 
         // total cost
         m_TotalCostLabel = root.Q<Label>("TotalCost");
@@ -61,8 +74,11 @@ public class ShopMenuController
         m_AllZoomsItems = new List<ShopMenuZoomItemData>();
         m_AllZoomsItems.AddRange(Resources.LoadAll<ShopMenuZoomItemData>("ShopMenuItems"));
 
-        m_AllCastlesItems = new List<ShopMenuCastleItemData>();
-        m_AllCastlesItems.AddRange(Resources.LoadAll<ShopMenuCastleItemData>("ShopMenuItems"));
+        m_AllCastlesHealthItems = new List<ShopMenuCastleHealthItemData>();
+        m_AllCastlesHealthItems.AddRange(Resources.LoadAll<ShopMenuCastleHealthItemData>("ShopMenuItems"));
+
+        m_AllCastlesDefenseItems = new List<ShopMenuCastleDefenseItemData>();
+        m_AllCastlesDefenseItems.AddRange(Resources.LoadAll<ShopMenuCastleDefenseItemData>("ShopMenuItems"));
     }
 
     public void FillStore()
@@ -84,12 +100,20 @@ public class ShopMenuController
             m_ZoomItem.visible = false;
         }
 
-        if (m_AllCastlesItems.Count > 0) {
-            m_CastleItemController.SetMenuItemData(m_AllCastlesItems[0] as ShopMenuItemData);
-            m_CastleItem.visible = true;
+        if (m_AllCastlesHealthItems.Count > 0) {
+            m_CastleHealthItemController.SetMenuItemData(m_AllCastlesHealthItems[0] as ShopMenuItemData);
+            m_CastleHealthItem.visible = true;
         }
         else {
-            m_CastleItem.visible = false;
+            m_CastleHealthItem.visible = false;
+        }
+
+        if (m_AllCastlesDefenseItems.Count > 0) {
+            m_CastleDefenseItemController.SetMenuItemData(m_AllCastlesDefenseItems[0] as ShopMenuItemData);
+            m_CastleDefenseItem.visible = true;
+        }
+        else {
+            m_CastleDefenseItem.visible = false;
         }
 
         m_BuyButton.enabledSelf = false;
@@ -97,7 +121,8 @@ public class ShopMenuController
 
     public VisualElement GetGunItem() { return m_GunItem; }
     public VisualElement GetZoomItem() { return m_ZoomItem; }
-    public VisualElement GetCastleItem() { return m_CastleItem; }
+    public VisualElement GetCastleHealthItem() { return m_CastleHealthItem; }
+    public VisualElement GetCastleDefenseItem() { return m_CastleDefenseItem; }
     public Button GetBuyButton() { return m_BuyButton; }
 
     void UpdateCost(int amount) 
@@ -116,9 +141,14 @@ public class ShopMenuController
         return m_ZoomItemController.IsSelected();
     }
 
-    public bool IsCastleItemSelected() 
+    public bool IsCastleHealthItemSelected() 
     {
-        return m_CastleItemController.IsSelected();
+        return m_CastleHealthItemController.IsSelected();
+    }
+
+    public bool IsCastleDefenseItemSelected() 
+    {
+        return m_CastleDefenseItemController.IsSelected();
     }
 
     public void ToggleGunItemSelection() 
@@ -137,11 +167,19 @@ public class ShopMenuController
         UpdateCost(cost);
     }
 
-    public void ToggleCastleItemSelection() 
+    public void ToggleCastleHealthItemSelection() 
     {
-        m_CastleItemController.ToggleSelection();
-        ShopMenuCastleItemData item = m_AllCastlesItems[0];
-        int cost = IsCastleItemSelected() ? item.Cost : -item.Cost;
+        m_CastleHealthItemController.ToggleSelection();
+        ShopMenuCastleHealthItemData item = m_AllCastlesHealthItems[0];
+        int cost = IsCastleHealthItemSelected() ? item.Cost : -item.Cost;
+        UpdateCost(cost);
+    }
+
+    public void ToggleCastleDefenseItemSelection() 
+    {
+        m_CastleDefenseItemController.ToggleSelection();
+        ShopMenuCastleDefenseItemData item = m_AllCastlesDefenseItems[0];
+        int cost = IsCastleDefenseItemSelected() ? item.Cost : -item.Cost;
         UpdateCost(cost);
     }
 
@@ -155,9 +193,14 @@ public class ShopMenuController
         return m_AllZoomsItems[0];
     }
 
-    public ShopMenuCastleItemData GetSelectedCastleItem() 
+    public ShopMenuCastleHealthItemData GetSelectedCastleHealthItem() 
     {
-        return m_AllCastlesItems[0];
+        return m_AllCastlesHealthItems[0];
+    }
+
+    public ShopMenuCastleDefenseItemData GetSelectedCastleDefenseItem() 
+    {
+        return m_AllCastlesDefenseItems[0];
     }
 
     public void RemoveSelectedGunItem() 
@@ -172,10 +215,25 @@ public class ShopMenuController
         m_ZoomItemController.ToggleSelection();
     }
 
-    public void RemoveSelectedCastleItem() 
+    public void RemoveSelectedCastleHealthItem() 
     {
-        m_AllCastlesItems.RemoveAt(0);
-        m_CastleItemController.ToggleSelection();
+        if (m_CastleHealthItemsCount > 1) {
+            m_CastleHealthItemsCount -= 1;
+        }
+        else {
+            m_AllCastlesHealthItems.RemoveAt(0);
+        }
+        m_CastleHealthItemController.ToggleSelection();
+    }
+
+    public void RemoveSelectedCastleDefenseItem() 
+    {
+        if (m_CastleDefenseItemsCount > 1) {
+            m_CastleDefenseItemsCount -= 1;
+        } else {
+            m_AllCastlesDefenseItems.RemoveAt(0);
+        }
+        m_CastleDefenseItemController.ToggleSelection();
     }
 
     public int GetTotalCost()
