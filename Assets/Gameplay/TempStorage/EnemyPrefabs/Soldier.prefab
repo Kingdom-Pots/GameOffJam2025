@@ -1211,7 +1211,7 @@ MonoBehaviour:
   - Castle
   staggerDuration: 0.5
   staggerSpeedMultiplier: 0.2
-  currencyAdd: 0
+  currencyAdd: 5
   autoSetupChildColliders: 1
   OnDead:
     m_PersistentCalls:

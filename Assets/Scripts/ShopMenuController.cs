@@ -10,9 +10,21 @@ public class ShopMenuController
     Button m_BuyButton;
     
     // UI element references
-    ListView m_MenuItemList;
-    List<ShopMenuItemData> m_AllItems;
-    ShopMenuItemData m_CurrentSelection;
+    ListView m_MenuGunsList;
+    List<ShopMenuGunItemData> m_AllGunsItems;
+    ShopMenuGunItemData m_CurrentGunSelection;
+
+    ListView m_MenuZoomsList;
+    List<ShopMenuZoomItemData> m_AllZoomsItems;
+    ShopMenuZoomItemData m_CurrentZoomSelection;
+
+    ListView m_MenuCastlesList;
+    List<ShopMenuCastleItemData> m_AllCastlesItems;
+    ShopMenuCastleItemData m_CurrentCastleSelection;
+    
+    CurrencyTracker m_CurrencyTracker;
+
+    public void SetCurrencyTracker(CurrencyTracker currencyTracker) => m_CurrencyTracker = currencyTracker;
     
     public void InitializeItemList(VisualElement root, VisualTreeAsset listElementTemplate)
     {
@@ -21,27 +33,43 @@ public class ShopMenuController
     
         // Store a reference to the character list element
         m_root = root.Q<VisualElement>("ShopMenu");
-        m_MenuItemList = root.Q<ListView>("ItemsToBuy");
-        m_BuyButton = root.Q<Button>("BuyButton");
 
+        m_MenuGunsList = root.Q<ListView>("GunsToBuy");
+        m_MenuZoomsList = root.Q<ListView>("ZoomsToBuy");
+        m_MenuCastlesList = root.Q<ListView>("CastlesToBuy");
+        
+        m_BuyButton = root.Q<Button>("BuyButton");
         m_BuyButton.enabledSelf = false;
     
-        FillItemList();
+        FillItemsLists();
+        ReduceItemsLists();
     
         // Register to get a callback when an item is selected
-        m_MenuItemList.selectionChanged += OnItemSelected;
+        m_MenuGunsList.selectionChanged += OnGunItemSelected;
     }
     
     public void EnumerateAllItems()
     {
-        m_AllItems = new List<ShopMenuItemData>();
-        m_AllItems.AddRange(Resources.LoadAll<ShopMenuItemData>("ShopMenuItems"));
+        m_AllGunsItems = new List<ShopMenuGunItemData>();
+        m_AllGunsItems.AddRange(Resources.LoadAll<ShopMenuGunItemData>("ShopMenuItems"));
+
+        m_AllZoomsItems = new List<ShopMenuZoomItemData>();
+        m_AllZoomsItems.AddRange(Resources.LoadAll<ShopMenuZoomItemData>("ShopMenuItems"));
+
+        m_AllCastlesItems = new List<ShopMenuCastleItemData>();
+        m_AllCastlesItems.AddRange(Resources.LoadAll<ShopMenuCastleItemData>("ShopMenuItems"));
+    }
+
+    void FillItemsLists() {
+        FillGunsItemsList();
+        FillZoomsItemsList();
+        FillCastlesItemsList();
     }
     
-    void FillItemList()
+    void FillGunsItemsList()
     {
         // Set up a make item function for a list entry
-        m_MenuItemList.makeItem = () =>
+        m_MenuGunsList.makeItem = () =>
         {
             // Instantiate the UXML template for the entry
             var newListEntry = m_ListEntryTemplate.Instantiate();
@@ -60,47 +88,136 @@ public class ShopMenuController
         };
     
         // Set up bind function for a specific list entry
-        m_MenuItemList.bindItem = (item, index) =>
+        m_MenuGunsList.bindItem = (item, index) =>
         {
-            if (m_AllItems.Count > 0) 
+            if (m_AllGunsItems.Count > 0) 
             {
-                (item.userData as ShopMenuItemController)?.SetMenuItemData(m_AllItems[index]);
+                (item.userData as ShopMenuItemController)?.SetMenuGunItemData(m_AllGunsItems[index]);
             }
             else {
-                m_MenuItemList.Clear();
+                m_MenuGunsList.Clear();
             }
         };
-    
-        // Set the actual item's source list/array
-        var subListSource = new List<ShopMenuItemData>();
-        if (m_AllItems.Count > 0)
-        {
-            subListSource = m_AllItems.GetRange(0, 1);
-        }
-        m_MenuItemList.itemsSource = subListSource;
     }
 
-    public void RemoveSelectedItem() {
-        var selectedIndex = m_MenuItemList.selectedIndex;
-        if (selectedIndex >= 0) {
-            m_AllItems.RemoveAt(0/*selectedIndex*/);
-
-            m_MenuItemList.selectedIndex = -1;
-            m_MenuItemList.RefreshItems();
-            m_CurrentSelection = null;
-        }
-    }
-
-    public ShopMenuItemData GetItemSelected()
+    void FillZoomsItemsList()
     {
-        return m_CurrentSelection;
+        // Set up a make item function for a list entry
+        m_MenuZoomsList.makeItem = () =>
+        {
+            // Instantiate the UXML template for the entry
+            var newListEntry = m_ListEntryTemplate.Instantiate();
+    
+            // Instantiate a controller for the data
+            var newListEntryLogic = new ShopMenuItemController();
+    
+            // Assign the controller script to the visual element
+            newListEntry.userData = newListEntryLogic;
+    
+            // Initialize the controller script
+            newListEntryLogic.SetVisualElement(newListEntry);
+    
+            // Return the root of the instantiated visual tree
+            return newListEntry;
+        };
+    
+        // Set up bind function for a specific list entry
+        m_MenuZoomsList.bindItem = (item, index) =>
+        {
+            if (m_AllZoomsItems.Count > 0) 
+            {
+                (item.userData as ShopMenuItemController)?.SetMenuZoomItemData(m_AllZoomsItems[index]);
+            }
+            else {
+                m_MenuZoomsList.Clear();
+            }
+        };
+    }
+
+    void FillCastlesItemsList()
+    {
+        // Set up a make item function for a list entry
+        m_MenuCastlesList.makeItem = () =>
+        {
+            // Instantiate the UXML template for the entry
+            var newListEntry = m_ListEntryTemplate.Instantiate();
+    
+            // Instantiate a controller for the data
+            var newListEntryLogic = new ShopMenuItemController();
+    
+            // Assign the controller script to the visual element
+            newListEntry.userData = newListEntryLogic;
+    
+            // Initialize the controller script
+            newListEntryLogic.SetVisualElement(newListEntry);
+    
+            // Return the root of the instantiated visual tree
+            return newListEntry;
+        };
+    
+        // Set up bind function for a specific list entry
+        m_MenuCastlesList.bindItem = (item, index) =>
+        {
+            if (m_AllCastlesItems.Count > 0) 
+            {
+                (item.userData as ShopMenuItemController)?.SetMenuCastleItemData(m_AllCastlesItems[index]);
+            }
+            else {
+                m_MenuCastlesList.Clear();
+            }
+        };
+    }
+
+    void ReduceItemsLists() {
+        // Set the actual item's source list/array
+        var subGunListSource = new List<ShopMenuGunItemData>();
+        if (m_AllGunsItems.Count > 0)
+        {
+            subGunListSource = m_AllGunsItems.GetRange(0, 1);
+        }
+        m_MenuGunsList.itemsSource = subGunListSource;
+
+        // Set the actual item's source list/array
+        var subZoomListSource = new List<ShopMenuZoomItemData>();
+        if (m_AllZoomsItems.Count > 0)
+        {
+            subZoomListSource = m_AllZoomsItems.GetRange(0, 1);
+        }
+        m_MenuZoomsList.itemsSource = subZoomListSource;
+
+        // Set the actual item's source list/array
+        var subCastleListSource = new List<ShopMenuCastleItemData>();
+        if (m_AllCastlesItems.Count > 0)
+        {
+            subCastleListSource = m_AllCastlesItems.GetRange(0, 1);
+        }
+        m_MenuCastlesList.itemsSource = subCastleListSource;
+    }
+
+    public void RemoveSelectedGunItem() {
+        var selectedIndex = m_MenuGunsList.selectedIndex;
+        if (selectedIndex >= 0) {
+            m_AllGunsItems.RemoveAt(0/*selectedIndex*/);
+
+            m_MenuGunsList.selectedIndex = -1;
+            m_MenuGunsList.RefreshItems();
+            m_CurrentGunSelection = null;
+        }
+    }
+
+    public ShopMenuGunItemData GetGunItemSelected()
+    {
+        return m_CurrentGunSelection;
     }
     
-    void OnItemSelected(IEnumerable<object> selectedItems)
+    void OnGunItemSelected(IEnumerable<object> selectedItems)
     {
         // Get the currently selected item directly from the ListView
-        m_CurrentSelection = m_MenuItemList.selectedItem as ShopMenuItemData;
-        m_BuyButton.enabledSelf = true;
-        Debug.Log($"Selected: {string.Join(", ", m_CurrentSelection)}");
+        m_CurrentGunSelection = m_MenuGunsList.selectedItem as ShopMenuGunItemData;
+        if (m_CurrentGunSelection && m_CurrencyTracker.EnoughCurrency(m_CurrentGunSelection.Cost)) 
+        {
+            Debug.Log($"Selected: {string.Join(", ", m_CurrentGunSelection)}");
+            m_BuyButton.enabledSelf = true;
+        }
     }
 }

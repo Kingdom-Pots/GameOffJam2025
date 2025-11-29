@@ -47,6 +47,7 @@ namespace Blobcreate.ProjectileToolkit.Demo
         private bool isMoving;
         
         private bool inputEnabled;
+        private float additionalDamage;
         
         #endregion
 
@@ -229,6 +230,10 @@ namespace Blobcreate.ProjectileToolkit.Demo
 
             // Instantiate projectile
             Rigidbody projectile = Instantiate(shell, launchPoint.position, Quaternion.identity);
+
+            ArtilleryShellBehavior shellBehavior = projectile.GetComponent<ArtilleryShellBehavior>();
+            shellBehavior.damage += additionalDamage;
+            Debug.Log($"bullet does {shellBehavior.damage} damage");
             
             // Initialize projectile behaviour if present
             var behaviour = projectile.GetComponent<Blobcreate.Universal.ProjectileBehaviour>();
@@ -304,6 +309,24 @@ namespace Blobcreate.ProjectileToolkit.Demo
         /// </summary>
         public bool IsAtVerticalMax() => constrainVertical && Mathf.Approximately(verticalRotation, verticalMax);
         
+        /// <summary>
+        /// Increases the launch speed by the specified amount
+        /// </summary>
+        /// <param name="amount">Amount to apply</param>
+        public void IncreaseLaunchSpeed(float amount) => launchSpeed += amount;
+        
+        /// <summary>
+        /// Increases the rotation speed by the specified amount
+        /// </summary>
+        /// <param name="amount">Amount to apply</param>
+        public void IncreaseRotationSpeed(float amount) => rotationSpeed += amount;
+
+        /// <summary>
+        /// Increases the damage of the shell by the specified amount
+        /// </summary>
+        /// <param name="amount">Amount to apply</param>
+        public void IncreaseDamage(float amount) => additionalDamage += amount;
+
         #endregion
     }
 }
