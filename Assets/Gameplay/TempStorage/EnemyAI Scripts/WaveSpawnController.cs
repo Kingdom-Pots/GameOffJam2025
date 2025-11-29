@@ -28,8 +28,6 @@ public class WaveSpawnController: MonoBehaviour
         public int unlockAtWave = 1;
         [Tooltip("Enemies available in this pool")]
         public List<GameObject> enemyPrefabs = new List<GameObject>();
-        [Tooltip("Number of enemies to spawn from this pool each wave")]
-        public int enemiesPerWave = 3;
     }
 
     [Header("Wave Configuration")]
@@ -43,8 +41,8 @@ public class WaveSpawnController: MonoBehaviour
     public List<EnemyPool> enemyPools = new List<EnemyPool>();
 
     [Header("Procedural Wave Settings")]
-    [Tooltip("Note: Enemy count = sum of all unlocked pool amounts")]
-    public bool showPoolNote = true;
+    public int proceduralStartingEnemies = 10;
+    public int enemyIncreasePerWave = 2;
     public float delayBetweenWaves = 5f;
     public bool autoStartNextWave = true;
 
@@ -179,44 +177,73 @@ public class WaveSpawnController: MonoBehaviour
 
     Wave GenerateProceduralWave(int waveNumber)
     {
-        Wave ProcWave = new Wave();
-        ProcWave.waveName = $"Wave {waveNumber}";
-        ProcWave.delayBeforeWave = 2f;
-        ProcWave.enemies = new List<EnemySpawnInfo>();
+        Wave procWave = new Wave();
+        procWave.waveName = $"Wave {waveNumber}";
+        procWave.delayBeforeWave = 2f;
+        procWave.enemies = new List<EnemySpawnInfo>();
+
+        // Calculates how many waves past the predetermined ones
+        int proceduralWaveNumber = waveNumber - waves.Count;
+
+        // Calculate total enemies for this wave
+        int totalEnemies = proceduralStartingEnemies + (proceduralWaveNumber * enemyIncreasePerWave);
+        totalEnemies = Mathf.Max(1, totalEnemies);
 
         if (showDebugInfo)
-            Debug.Log($"Generating wave {waveNumber}");
+            Debug.Log($"Generating procedural wave {waveNumber} with {totalEnemies} total enemies");
 
-        // Get available enemy pools for this wave
+        // Get all unlocked enemy types from all pools
+        List<GameObject> availableEnemyTypes = new List<GameObject>();
         List<EnemyPool> availablePools = GetAvailablePoolsForWave(waveNumber);
 
-        if (availablePools.Count == 0)
-        {
-            Debug.LogWarning($"No enemy pools available for wave {waveNumber}! Make sure at least one pool has unlockAtWave <= 1");
-            return ProcWave;
-        }
-
-        // Spawn exact amount from each pool
         foreach (EnemyPool pool in availablePools)
         {
-            if (pool.enemyPrefabs.Count == 0) continue;
-
-            int countFromPool = pool.enemiesPerWave;
-
-            // Pick random enemy from pool
-            GameObject randomEnemy = pool.enemyPrefabs[Random.Range(0, pool.enemyPrefabs.Count)];
-
-            EnemySpawnInfo spawnInfo = new EnemySpawnInfo();
-            spawnInfo.enemyPrefab = randomEnemy;
-            spawnInfo.count = countFromPool;
-
-            ProcWave.enemies.Add(spawnInfo);
-
-            if (showDebugInfo)
-                Debug.Log($"  - {countFromPool}x {randomEnemy.name} from {pool.poolName}");
+            foreach (GameObject enemyPrefab in pool.enemyPrefabs)
+            {
+                if (enemyPrefab != null && !availableEnemyTypes.Contains(enemyPrefab))
+                {
+                    availableEnemyTypes.Add(enemyPrefab);
+                }
+            }
         }
 
-        return ProcWave;
+        if (availableEnemyTypes.Count == 0)
+        {
+            Debug.LogWarning($"No enemy types available for wave {waveNumber}!");
+            return procWave;
+        }
+
+        // Randomly distribute total enemies across all available enemy types
+        int[] enemyCounts = new int[availableEnemyTypes.Count];
+
+        // Give at least 1 to each type
+        for (int i = 0; i < availableEnemyTypes.Count; i++)
+        {
+            enemyCounts[i] = 1;
+        }
+
+        int remainingEnemies = totalEnemies - availableEnemyTypes.Count;
+
+        // Randomly distribute remaining enemies
+        for (int i = 0; i < remainingEnemies; i++)
+        {
+            int randomIndex = Random.Range(0, availableEnemyTypes.Count);
+            enemyCounts[randomIndex]++;
+        }
+
+        // Create spawn info for each enemy type
+        for (int i = 0; i < availableEnemyTypes.Count; i++)
+        {
+            EnemySpawnInfo spawnInfo = new EnemySpawnInfo();
+            spawnInfo.enemyPrefab = availableEnemyTypes[i];
+            spawnInfo.count = enemyCounts[i];
+            procWave.enemies.Add(spawnInfo);
+
+            if (showDebugInfo)
+                Debug.Log($"  - {enemyCounts[i]}x {availableEnemyTypes[i].name}");
+        }
+
+        return procWave;
     }
 
     List<EnemyPool> GetAvailablePoolsForWave(int waveNumber)
