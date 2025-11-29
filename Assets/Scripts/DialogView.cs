@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
     
@@ -23,7 +24,23 @@ public class DialogView : MonoBehaviour
 
     public void Talk(string character, string text)
     {
+        // StartCoroutine(FactionService.GetFactions(OnFactionsLoaded));
+        // StartCoroutine(FactionService.AddToFactionTotal("United States of South America", 5, OnFactionUpdated));
         m_CharacterName.text = character;
         m_CharacterLine.text = text;
     }
+    // void OnFactionsLoaded(List<Faction> factions)
+    // {
+    //     foreach (var faction in factions)
+    //     {
+    //         Debug.Log($"Faction: {faction.factionname}, Total: {faction.total}");
+    //     }
+    // }   
+    // void OnFactionUpdated(bool success)
+    // {
+    //     if (success)
+    //         Debug.Log("Faction total updated successfully!");
+    //     else
+    //         Debug.Log("Faction update failed.");
+    // } 
 }
