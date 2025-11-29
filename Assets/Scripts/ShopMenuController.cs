@@ -86,34 +86,30 @@ public class ShopMenuController
         m_TotalCost = 0;
         if (m_AllGunsItems.Count > 0) {
             m_GunItemController.SetMenuItemData(m_AllGunsItems[0] as ShopMenuItemData);
-            m_GunItem.visible = true;
         }
         else {
-            m_GunItem.visible = false;
+            m_GunItemController.SoldOut();
         }
 
         if (m_AllZoomsItems.Count > 0) {
             m_ZoomItemController.SetMenuItemData(m_AllZoomsItems[0] as ShopMenuItemData);
-            m_ZoomItem.visible = true;
         }
         else {
-            m_ZoomItem.visible = false;
+            m_ZoomItemController.SoldOut();
         }
 
         if (m_AllCastlesHealthItems.Count > 0) {
             m_CastleHealthItemController.SetMenuItemData(m_AllCastlesHealthItems[0] as ShopMenuItemData);
-            m_CastleHealthItem.visible = true;
         }
         else {
-            m_CastleHealthItem.visible = false;
+            m_CastleHealthItemController.SoldOut();
         }
 
         if (m_AllCastlesDefenseItems.Count > 0) {
             m_CastleDefenseItemController.SetMenuItemData(m_AllCastlesDefenseItems[0] as ShopMenuItemData);
-            m_CastleDefenseItem.visible = true;
         }
         else {
-            m_CastleDefenseItem.visible = false;
+            m_CastleDefenseItemController.SoldOut();
         }
 
         m_BuyButton.enabledSelf = false;
