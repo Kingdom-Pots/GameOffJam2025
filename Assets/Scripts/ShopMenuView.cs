@@ -7,9 +7,6 @@ using Blobcreate.ProjectileToolkit.Demo;
 public class ShopMenuView : MonoBehaviour
 {
     [SerializeField]
-    VisualTreeAsset m_ListEntryTemplate;
-
-    [SerializeField]
     GameObject m_TargetArtilleryGun;
 
     [SerializeField]
@@ -21,21 +18,43 @@ public class ShopMenuView : MonoBehaviour
     [SerializeField]
     GameObject m_NPCDialog;
 
+    [SerializeField]
+    GameObject m_Castle;
+
+    /// number of times the castle health item can be used
+    [SerializeField]
+    int m_CastleHealthItemRecycling;
+
+    /// number of times the castle defense item can be used
+    [SerializeField]
+    int m_CastleDefenseItemRecycling;
+
     // UI element references
+    VisualElement m_GunItem;
+    VisualElement m_ZoomItem;
+    VisualElement m_CastleHealthItem;
+    VisualElement m_CastleDefenseItem;
     Button m_BuyButton;
+
     ShopMenuController m_ShopMenuController;
     CurrencyTracker m_CurrencyTracker;
+    Damageable m_CastleDamageable;
+
     DialogView m_NPCDialogView;
 
     void Awake() {
+        // get currency tracker
         m_CurrencyTracker = m_CurrencySystem.GetComponent<CurrencyTracker>();
         Debug.Log($"Currency: {m_CurrencyTracker.currency}");
 
+        // get NPC dialog view
         m_NPCDialogView = m_NPCDialog.GetComponent<DialogView>();
 
-        // Initialize the character list controller
+        // get castle damageable script
+        m_CastleDamageable = m_Castle.GetComponent<Damageable>();
+
+        // Initialize the shop controller
         m_ShopMenuController = new ShopMenuController();
-        m_ShopMenuController.SetCurrencyTracker(m_CurrencyTracker);
         m_ShopMenuController.EnumerateAllItems();
     }
     
@@ -43,45 +62,126 @@ public class ShopMenuView : MonoBehaviour
     {
         // The UXML is already instantiated by the UIDocument component
         var uiDocument = GetComponent<UIDocument>();
-        m_ShopMenuController.InitializeItemList(uiDocument.rootVisualElement, m_ListEntryTemplate);
+        m_ShopMenuController.InitializeItems(uiDocument.rootVisualElement, m_CastleHealthItemRecycling, m_CastleDefenseItemRecycling);
 
-        var root = uiDocument.rootVisualElement;
-        m_BuyButton = root.Q<Button>("BuyButton");
+        m_GunItem = m_ShopMenuController.GetGunItem();
+        m_GunItem.RegisterCallback<ClickEvent>(OnGunItemSelected);
+
+        m_ZoomItem = m_ShopMenuController.GetZoomItem();
+        m_ZoomItem.RegisterCallback<ClickEvent>(OnZoomItemSelected);
+
+        m_CastleHealthItem = m_ShopMenuController.GetCastleHealthItem();
+        m_CastleHealthItem.RegisterCallback<ClickEvent>(OnCastleHealthItemSelected);
+
+        m_CastleDefenseItem = m_ShopMenuController.GetCastleDefenseItem();
+        m_CastleDefenseItem.RegisterCallback<ClickEvent>(OnCastleDefenseItemSelected);
+
+        m_BuyButton = m_ShopMenuController.GetBuyButton();
         m_BuyButton.clicked += OnBuyItemClicked;
 
-        m_NPCDialogView.Talk("Mary", "Welcome to my store, Serenella !");
+        m_NPCDialogView.Talk(Character.Mary, $"Welcome to my store, {Character.Serenella} !");
     }
 
     void OnDisable() {
+        m_GunItem.UnregisterCallback<ClickEvent>(OnGunItemSelected);
+        m_ZoomItem.UnregisterCallback<ClickEvent>(OnZoomItemSelected);
+        m_CastleHealthItem.UnregisterCallback<ClickEvent>(OnCastleHealthItemSelected);
+        m_CastleDefenseItem.UnregisterCallback<ClickEvent>(OnCastleDefenseItemSelected);
         m_BuyButton.clicked -= OnBuyItemClicked;
+    }
+
+    void CheckBuyButton() 
+    {
+        int total = m_ShopMenuController.GetTotalCost();
+        if (total == 0)
+        {
+            return;
+        }
+
+        if (m_CurrencyTracker.EnoughCurrency(total)) 
+        {
+            m_BuyButton.enabledSelf = true;
+            m_NPCDialogView.Talk(Character.Mary, "Do you need anything else ?");
+        }
+        else 
+        {
+            m_BuyButton.enabledSelf = false;
+            m_NPCDialogView.Talk(Character.Mary, "You don't have enough coins, go kill monster !!");
+        }
+    }
+
+    void OnGunItemSelected(ClickEvent evt)
+    {
+        m_ShopMenuController.ToggleGunItemSelection();
+        CheckBuyButton();
+    }
+
+    void OnZoomItemSelected(ClickEvent evt)
+    {
+        m_ShopMenuController.ToggleZoomItemSelection();
+        CheckBuyButton();
+    }
+
+    void OnCastleHealthItemSelected(ClickEvent evt)
+    {
+        m_ShopMenuController.ToggleCastleHealthItemSelection();
+        CheckBuyButton();
+    }
+
+    void OnCastleDefenseItemSelected(ClickEvent evt)
+    {
+        m_ShopMenuController.ToggleCastleDefenseItemSelection();
+        CheckBuyButton();
     }
 
     void OnBuyItemClicked() 
     {
-        ShopMenuGunItemData selectedItemData = m_ShopMenuController.GetGunItemSelected();
-        if (selectedItemData)
-        {
+        // check for gun
+        if (m_ShopMenuController.IsGunItemSelected()) {
+            ShopMenuGunItemData selectedItemData = m_ShopMenuController.GetSelectedGunItem();
             if (m_CurrencyTracker.Use(selectedItemData.Cost)) {
                 m_ShopMenuController.RemoveSelectedGunItem();
-
-                UpgradeArtillery(selectedItemData);
-
-                // send the cancel event to quit menu
-                m_NPCDialogView.Talk("Mary", "Thanks a lot !!");
-                InputSystem.QueueStateEvent(Keyboard.current, new KeyboardState(Key.Escape));
-            }
-            else
-            {
-                m_NPCDialogView.Talk("Mary", "You don't have enough coins, go kill monster !!");
+                UpgradeArtilleryGun(selectedItemData.GameObject);
+                UpgradeArtilleryShellDamage(selectedItemData.DamageGain);
+                UpgradeArtillerySpeed(selectedItemData.SpeedGain);
             }
         }
-    }
 
-    void UpgradeArtillery(ShopMenuGunItemData item) {
-        UpgradeArtilleryGun(item.GameObject);
-        //UpgradeArtilleryZoom(item.ZoomGain);
-        //UpgradeArtillerySpeed(item.SpeedGain);
-        UpgradeArtilleryShellDamage(item.DamageGain);
+        // check for zoom
+        if (m_ShopMenuController.IsZoomItemSelected()) {
+            ShopMenuZoomItemData selectedItemData = m_ShopMenuController.GetSelectedZoomItem();
+            if (m_CurrencyTracker.Use(selectedItemData.Cost)) {
+                m_ShopMenuController.RemoveSelectedZoomItem();
+                UpgradeArtilleryZoom(selectedItemData.ZoomGain);
+            }
+        }
+
+        // check for castle health
+        if (m_ShopMenuController.IsCastleHealthItemSelected()) {
+            ShopMenuCastleHealthItemData selectedItemData = m_ShopMenuController.GetSelectedCastleHealthItem();
+            if (m_CurrencyTracker.Use(selectedItemData.Cost)) {
+                m_ShopMenuController.RemoveSelectedCastleHealthItem();
+                HealCastle(selectedItemData.HealthGain);
+            }
+        }
+
+        // check for castle
+        if (m_ShopMenuController.IsCastleDefenseItemSelected()) {
+            ShopMenuCastleDefenseItemData selectedItemData = m_ShopMenuController.GetSelectedCastleDefenseItem();
+            if (m_CurrencyTracker.Use(selectedItemData.Cost)) {
+                m_ShopMenuController.RemoveSelectedCastleDefenseItem();
+                UpgradeCastleDefense(selectedItemData.DefenseGain);
+            }
+        }
+
+        // message from NPC
+        m_NPCDialogView.Talk(Character.Mary, "Thanks a lot !!");
+        
+        // update the elements
+        m_ShopMenuController.FillStore();
+        
+        // send the cancel event to quit menu
+        //InputSystem.QueueStateEvent(Keyboard.current, new KeyboardState(Key.Escape));
     }
 
     void UpgradeArtilleryGun(GameObject prefab) {
@@ -109,5 +209,13 @@ public class ShopMenuView : MonoBehaviour
     void UpgradeArtilleryShellDamage(float damageGain) {
         ArtilleryManager artilleryManager = m_Artillery.GetComponent<ArtilleryManager>();
         artilleryManager.IncreaseDamage(damageGain);
+    }
+
+    void UpgradeCastleDefense(float defenseGain) {
+        m_CastleDamageable.IncreaseMaxHealth(defenseGain);
+    }
+
+    void HealCastle(float healthGain) {
+        m_CastleDamageable.Heal(healthGain);
     }
 }
