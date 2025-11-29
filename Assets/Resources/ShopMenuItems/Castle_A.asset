@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 240e451f439970f4ebe709f4b1806b9c, type: 3}
   m_Name: Castle_A
   m_EditorClassIdentifier: Assembly-CSharp::ShopMenuCastleItemData
-  Name: Castle A
-  Description: A health supply
+  Name: Castle Health Type A
+  Description: Rebuild your ruins
   Cost: 20
   Sprite: {fileID: 495841091, guid: 13ffce466226de74fa1fcf2777977e2b, type: 3}
   HealthGain: 50

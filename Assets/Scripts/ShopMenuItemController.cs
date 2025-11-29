@@ -11,6 +11,7 @@ public class ShopMenuItemController
     VisualElement m_Background;
 
     bool m_Selected = false;
+    bool m_SoldOut = false;
 
     // This function retrieves a reference to the 
     // root visual element containg all the other elements
@@ -30,8 +31,10 @@ public class ShopMenuItemController
         m_NameLabel.text = itemData.Name;
         m_DescriptionLabel.text = itemData.Description;
         m_CostLabel.text = itemData.Cost.ToString();
-        m_SoldOutLabel.visible = false;
         m_Sprite.style.backgroundImage = new StyleBackground(itemData.Sprite);
+
+        m_SoldOut = false;
+        m_SoldOutLabel.visible = false;
     }
 
     public void ToggleSelection()
@@ -48,11 +51,16 @@ public class ShopMenuItemController
     }
 
     public void SoldOut() {
+        m_SoldOut = true;
         m_NameLabel.text = "Out of Store";
         m_DescriptionLabel.text = "Come back next year";
         m_CostLabel.text = "0";
         m_SoldOutLabel.visible = true;
         m_Sprite.style.backgroundImage = new StyleBackground();
+    }
+
+    public bool IsSoldOut() {
+        return m_SoldOut;
     }
 
     public bool IsSelected() 

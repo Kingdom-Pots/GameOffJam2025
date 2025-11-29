@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf2465c1b6501fe44a4b84ebd528a117, type: 3}
   m_Name: Castle_B
   m_EditorClassIdentifier: Assembly-CSharp::ShopMenuCastleItemData
-  Name: Castle Defense A
-  Description: Upgrade your castle max health
+  Name: Castle Defense Type A
+  Description: Upgrade your defense !
   Cost: 50
   Sprite: {fileID: 590657861, guid: 13ffce466226de74fa1fcf2777977e2b, type: 3}
   DefenseGain: 50

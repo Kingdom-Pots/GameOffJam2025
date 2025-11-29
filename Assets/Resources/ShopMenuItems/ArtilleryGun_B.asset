@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7f8d9890c2f33848adf23a4ade1ee83, type: 3}
   m_Name: ArtilleryGun_B
   m_EditorClassIdentifier: Assembly-CSharp::ShopMenuGunItemData
-  Name: Artillery Gun B
-  Description: A better gun
+  Name: Artillery Canon Type B
+  Description: A better canon
   Cost: 30
   Sprite: {fileID: 1902452542, guid: 13ffce466226de74fa1fcf2777977e2b, type: 3}
   DamageGain: 10

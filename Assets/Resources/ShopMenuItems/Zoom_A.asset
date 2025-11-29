@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 159fb62728b5488489ca867f4d0c6398, type: 3}
   m_Name: Zoom_A
   m_EditorClassIdentifier: Assembly-CSharp::ShopMenuZoomItemData
-  Name: Zoom A
+  Name: Scope Type A
   Description: A better zoom
   Cost: 10
   Sprite: {fileID: -1801345397, guid: 13ffce466226de74fa1fcf2777977e2b, type: 3}

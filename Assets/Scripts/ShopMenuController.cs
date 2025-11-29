@@ -83,7 +83,7 @@ public class ShopMenuController
 
     public void FillStore()
     {
-        m_TotalCost = 0;
+        ResetTotalCost();
         if (m_AllGunsItems.Count > 0) {
             m_GunItemController.SetMenuItemData(m_AllGunsItems[0] as ShopMenuItemData);
         }
@@ -121,7 +121,12 @@ public class ShopMenuController
     public VisualElement GetCastleDefenseItem() { return m_CastleDefenseItem; }
     public Button GetBuyButton() { return m_BuyButton; }
 
-    void UpdateCost(int amount) 
+    void ResetTotalCost() {
+        m_TotalCost = 0;
+        m_TotalCostLabel.text = m_TotalCost.ToString();
+    }
+
+    void UpdateTotalCost(int amount) 
     {
         m_TotalCost += amount;
         m_TotalCostLabel.text = m_TotalCost.ToString();
@@ -149,34 +154,42 @@ public class ShopMenuController
 
     public void ToggleGunItemSelection() 
     {
-        m_GunItemController.ToggleSelection();
-        ShopMenuGunItemData item = m_AllGunsItems[0];
-        int cost = IsGunItemSelected() ? item.Cost : -item.Cost;
-        UpdateCost(cost);
+        if (!m_GunItemController.IsSoldOut()) {
+            m_GunItemController.ToggleSelection();
+            ShopMenuGunItemData item = m_AllGunsItems[0];
+            int cost = IsGunItemSelected() ? item.Cost : -item.Cost;
+            UpdateTotalCost(cost);
+        }
     }
 
     public void ToggleZoomItemSelection() 
     {
-        m_ZoomItemController.ToggleSelection();
-        ShopMenuZoomItemData item = m_AllZoomsItems[0];
-        int cost = IsZoomItemSelected() ? item.Cost : -item.Cost;
-        UpdateCost(cost);
+        if (!m_ZoomItemController.IsSoldOut()) {
+            m_ZoomItemController.ToggleSelection();
+            ShopMenuZoomItemData item = m_AllZoomsItems[0];
+            int cost = IsZoomItemSelected() ? item.Cost : -item.Cost;
+            UpdateTotalCost(cost);
+        }
     }
 
     public void ToggleCastleHealthItemSelection() 
     {
-        m_CastleHealthItemController.ToggleSelection();
-        ShopMenuCastleHealthItemData item = m_AllCastlesHealthItems[0];
-        int cost = IsCastleHealthItemSelected() ? item.Cost : -item.Cost;
-        UpdateCost(cost);
+        if (!m_CastleHealthItemController.IsSoldOut()) {
+            m_CastleHealthItemController.ToggleSelection();
+            ShopMenuCastleHealthItemData item = m_AllCastlesHealthItems[0];
+            int cost = IsCastleHealthItemSelected() ? item.Cost : -item.Cost;
+            UpdateTotalCost(cost);
+        }
     }
 
     public void ToggleCastleDefenseItemSelection() 
     {
-        m_CastleDefenseItemController.ToggleSelection();
-        ShopMenuCastleDefenseItemData item = m_AllCastlesDefenseItems[0];
-        int cost = IsCastleDefenseItemSelected() ? item.Cost : -item.Cost;
-        UpdateCost(cost);
+        if (!m_CastleDefenseItemController.IsSoldOut()) {
+            m_CastleDefenseItemController.ToggleSelection();
+            ShopMenuCastleDefenseItemData item = m_AllCastlesDefenseItems[0];
+            int cost = IsCastleDefenseItemSelected() ? item.Cost : -item.Cost;
+            UpdateTotalCost(cost);
+        }
     }
 
     public ShopMenuGunItemData GetSelectedGunItem() 
