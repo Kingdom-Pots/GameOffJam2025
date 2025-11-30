@@ -3084,9 +3084,9 @@ MonoBehaviour:
         z: 0.77400935
       Rotation:
         value:
-          x: -0.047263637
+          x: -0.047263633
           y: 0.7002113
-          z: 0.055213343
+          z: 0.055213336
           w: 0.71022654
     - Position:
         x: 1.9300003
@@ -3763,8 +3763,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6213914603574119173}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.23769218, y: 0.3565572, z: 0.09431478, w: 0.8985957}
-  m_LocalPosition: {x: 98.99716, y: 20.577, z: 117.567406}
+  m_LocalRotation: {x: -0.31543705, y: 0.34831643, z: 0.12575397, w: 0.8737054}
+  m_LocalPosition: {x: 98.99573, y: 20.57714, z: 117.56842}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3827,7 +3827,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineSplineDolly
   m_SplineSettings:
     Spline: {fileID: 1039983131685284519}
-    Position: 0.5214301
+    Position: 0.5212177
     Units: 1
   SplineOffset: {x: 0, y: 0, z: 0}
   CameraRotation: 0
@@ -3922,7 +3922,7 @@ Transform:
   m_GameObject: {fileID: 6599716145643557813}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.68, z: -1.98}
+  m_LocalPosition: {x: 0, y: 1.58, z: -1.86}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5214,22 +5214,22 @@ PrefabInstance:
     - target: {fileID: 5799230654676080790, guid: 64d6f2d98b1c4ff459fff2ba7544e87f,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.5860645
+      value: 0.5860257
       objectReference: {fileID: 0}
     - target: {fileID: 5799230654676080790, guid: 64d6f2d98b1c4ff459fff2ba7544e87f,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.0062346575
+      value: -0.009185666
       objectReference: {fileID: 0}
     - target: {fileID: 5799230654676080790, guid: 64d6f2d98b1c4ff459fff2ba7544e87f,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.81019455
+      value: -0.8101409
       objectReference: {fileID: 0}
     - target: {fileID: 5799230654676080790, guid: 64d6f2d98b1c4ff459fff2ba7544e87f,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.008618992
+      value: -0.012698563
       objectReference: {fileID: 0}
     - target: {fileID: 5799230654676080790, guid: 64d6f2d98b1c4ff459fff2ba7544e87f,
         type: 3}
@@ -5691,22 +5691,22 @@ PrefabInstance:
     - target: {fileID: 8538961615754487424, guid: 9861455ac7ac93f4c86bc785c297780d,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.5860645
+      value: 0.5860257
       objectReference: {fileID: 0}
     - target: {fileID: 8538961615754487424, guid: 9861455ac7ac93f4c86bc785c297780d,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.0062346575
+      value: -0.009185665
       objectReference: {fileID: 0}
     - target: {fileID: 8538961615754487424, guid: 9861455ac7ac93f4c86bc785c297780d,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.81019455
+      value: -0.8101409
       objectReference: {fileID: 0}
     - target: {fileID: 8538961615754487424, guid: 9861455ac7ac93f4c86bc785c297780d,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.008618992
+      value: -0.012698562
       objectReference: {fileID: 0}
     - target: {fileID: 8538961615754487424, guid: 9861455ac7ac93f4c86bc785c297780d,
         type: 3}
@@ -5905,7 +5905,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: -5704596755773921299, guid: 7b28ada896e7aa744b18753810630eab,
+      objectReference: {fileID: 9056240367812842077, guid: 120a58f3a7afb8141bcc087143bf45d5,
         type: 3}
     - target: {fileID: 919132149155446097, guid: 7b28ada896e7aa744b18753810630eab,
         type: 3}
@@ -6139,7 +6139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Blobcreate.ProjectileToolkit.Demo.ArtilleryManager
   shell: {fileID: 4250376250867435935, guid: e2a817361a2883f419baf25118697b68, type: 3}
   launchPoint: {fileID: 6660211593462046755}
-  launchSpeed: 140
+  launchSpeed: 30
   horizontalRotator: {fileID: 8143940121686234396}
   verticalRotator: {fileID: 2011826036121275310}
   rotationSpeed: 5

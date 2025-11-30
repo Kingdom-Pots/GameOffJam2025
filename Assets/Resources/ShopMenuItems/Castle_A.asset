@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ShopMenuCastleItemData
   Name: Castle Health Type A
   Description: Rebuild your ruins
-  Cost: 20
+  Cost: 34
   Sprite: {fileID: 495841091, guid: 13ffce466226de74fa1fcf2777977e2b, type: 3}
-  HealthGain: 50
+  HealthGain: 40
