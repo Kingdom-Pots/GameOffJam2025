@@ -11,7 +11,14 @@ public class AnimatorBoolHelper : MonoBehaviour
     [SerializeField] private bool followY = true;
     [SerializeField] private bool followZ = true;
     
+    [Header("Move to Nearest Settings")]
+    [SerializeField] private string targetTag = "Player";
+    
     private bool isFollowing = false;
+    private Transform originalFollowTarget;
+    private GameObject objectToMove;
+    private Transform nearestTarget;
+    private bool isMovingToNearest = false;
     
     private void Awake()
     {
@@ -20,6 +27,9 @@ public class AnimatorBoolHelper : MonoBehaviour
         {
             animator = GetComponent<Animator>();
         }
+        
+        // Store original target from inspector
+        originalFollowTarget = followTarget;
     }
     
     private void Update()
@@ -39,6 +49,23 @@ public class AnimatorBoolHelper : MonoBehaviour
             
             // Smoothly interpolate to the desired position
             transform.position = Vector3.Lerp(currentPos, desiredPos, smoothSpeed * Time.deltaTime);
+        }
+        
+        // Execute smooth follow to nearest target (continuous following)
+        if (isMovingToNearest && objectToMove != null && nearestTarget != null)
+        {
+            Vector3 currentPos = objectToMove.transform.position;
+            Vector3 targetPos = nearestTarget.position;
+            
+            // Create desired position based on which axes to follow
+            Vector3 desiredPos = new Vector3(
+                followX ? targetPos.x : currentPos.x,
+                followY ? targetPos.y : currentPos.y,
+                followZ ? targetPos.z : currentPos.z
+            );
+            
+            // Smoothly interpolate to the desired position (continuous follow)
+            objectToMove.transform.position = Vector3.Lerp(currentPos, desiredPos, smoothSpeed * Time.deltaTime);
         }
     }
     
@@ -74,6 +101,58 @@ public class AnimatorBoolHelper : MonoBehaviour
     public void SetFollowTarget(Transform newTarget)
     {
         followTarget = newTarget;
+    }
+    
+    // Move object to nearest target with specified tag (smooth follow)
+    public void MoveObjectToNearestTarget(GameObject objectToMove)
+    {
+        if (objectToMove == null)
+        {
+            Debug.LogError("Object to move is not assigned!");
+            return;
+        }
+        
+        GameObject[] taggedObjects = GameObject.FindGameObjectsWithTag(targetTag);
+        
+        if (taggedObjects.Length == 0)
+        {
+            Debug.LogWarning($"No objects found with tag '{targetTag}'!");
+            return;
+        }
+        
+        // Find the nearest object
+        GameObject nearest = null;
+        float minDistance = Mathf.Infinity;
+        
+        foreach (GameObject obj in taggedObjects)
+        {
+            float distance = Vector3.Distance(objectToMove.transform.position, obj.transform.position);
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                nearest = obj;
+            }
+        }
+        
+        if (nearest != null)
+        {
+            this.objectToMove = objectToMove;
+            nearestTarget = nearest.transform;
+            isMovingToNearest = true;
+        }
+    }
+    
+    // Stop moving to nearest target
+    public void StopMovingToNearest()
+    {
+        isMovingToNearest = false;
+    }
+    
+    // Reset to original target from inspector
+    public void ResetFollowTarget()
+    {
+        followTarget = originalFollowTarget;
+        isMovingToNearest = false;
     }
     
     // Toggle a bool parameter (flip its current value)
