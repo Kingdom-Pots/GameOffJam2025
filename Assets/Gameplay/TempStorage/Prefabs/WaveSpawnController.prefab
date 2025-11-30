@@ -79,7 +79,7 @@ Transform:
   m_GameObject: {fileID: 6707767770852707964}
   serializedVersion: 2
   m_LocalRotation: {x: 0.054039538, y: 0.002408266, z: 0.02739177, w: 0.9981601}
-  m_LocalPosition: {x: 63, y: -2.28624, z: 256}
+  m_LocalPosition: {x: 87.31773, y: -10.21735, z: 244.28415}
   m_LocalScale: {x: 1.861, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -308,7 +308,6 @@ MonoBehaviour:
   enemyIncreasePerWave: 5
   delayBetweenWaves: 5
   autoStartNextWave: 1
-  spawnArea: {fileID: 8191680723731439659}
   minSpawnDistance: 2
   maxSpawnAttempts: 30
   spawnHeightOffset: 0

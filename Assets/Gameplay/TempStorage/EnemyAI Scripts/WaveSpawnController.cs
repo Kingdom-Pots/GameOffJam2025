@@ -11,6 +11,9 @@ public class WaveSpawnController: MonoBehaviour
         public BoxCollider spawnArea;
         [Tooltip("Wave number this spawn point activates at (1 = always active)")]
         public int unlockAtWave = 1;
+        [Tooltip("Speed multiplier for enemies spawned here (1 = normal)")]
+        public float speedMultiplier = 2f;
+
     }
 
     [System.Serializable]
@@ -317,6 +320,13 @@ public class WaveSpawnController: MonoBehaviour
                 if (spawnPos != Vector3.zero)
                 {
                     GameObject enemy = Instantiate(enemyInfo.enemyPrefab, spawnPos, Quaternion.identity);
+
+                    // Apply speed multiplier if enemy has an EnemyController
+                    EnemyController ec = enemy.GetComponent<EnemyController>();
+                    if (ec != null)
+                    {
+                        ec.ApplySpawnSpeedModifier(chosen.speedMultiplier);
+                    }
 
                     if (parentToSpawner && enemyContainer != null)
                     {
