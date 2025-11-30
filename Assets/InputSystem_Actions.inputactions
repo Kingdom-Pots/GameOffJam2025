@@ -576,6 +576,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Spacebar",
+                    "type": "Button",
+                    "id": "644fc545-818c-4e92-872c-782372f7afe9",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -1016,6 +1025,17 @@
                     "processors": "",
                     "groups": ";Gamepad",
                     "action": "ToggleInventoryKey",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "90d6cb5f-ebe0-4e8f-9f0e-d751bd389bc5",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Spacebar",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

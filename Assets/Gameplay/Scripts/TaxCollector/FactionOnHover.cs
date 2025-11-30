@@ -1,10 +1,10 @@
-using Microsoft.Unity.VisualStudio.Editor;
+//using Microsoft.Unity.VisualStudio.Editor;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using System.Linq;
-using System.Collections.Generic;
+//using System.Linq;
+//using System.Collections.Generic;
 
 public class FactionOnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {

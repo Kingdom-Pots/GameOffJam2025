@@ -3,6 +3,7 @@ using UnityEngine.UIElements;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
 using Blobcreate.ProjectileToolkit.Demo;
+using UnityEngine.Events;
     
 public class ShopMenuView : MonoBehaviour
 {
@@ -28,6 +29,15 @@ public class ShopMenuView : MonoBehaviour
     /// number of times the castle defense item can be used
     [SerializeField]
     int m_CastleDefenseItemRecycling;
+
+    // Unity Events
+    [System.Serializable]
+    public class ShopMenuEvent : UnityEvent {}
+
+    [Header("Events")]
+    public ShopMenuEvent OnShopItemBought;
+    public ShopMenuEvent OnShopItemClicked;
+    public ShopMenuEvent OnShopItemHovered;
 
     // UI element references
     VisualElement m_GunItem;
@@ -60,21 +70,35 @@ public class ShopMenuView : MonoBehaviour
     
     void OnEnable()
     {
+        // Initialize events if they're null
+        if (OnShopItemBought == null)
+            OnShopItemBought = new ShopMenuEvent();
+
+        if (OnShopItemClicked == null)
+            OnShopItemClicked = new ShopMenuEvent();
+
+        if (OnShopItemHovered == null)
+            OnShopItemHovered = new ShopMenuEvent();
+
         // The UXML is already instantiated by the UIDocument component
         var uiDocument = GetComponent<UIDocument>();
         m_ShopMenuController.InitializeItems(uiDocument.rootVisualElement, m_CastleHealthItemRecycling, m_CastleDefenseItemRecycling);
 
         m_GunItem = m_ShopMenuController.GetGunItem();
         m_GunItem.RegisterCallback<ClickEvent>(OnGunItemSelected);
+        m_GunItem.RegisterCallback<MouseEnterEvent>(OnItemHovered);
 
         m_ZoomItem = m_ShopMenuController.GetZoomItem();
         m_ZoomItem.RegisterCallback<ClickEvent>(OnZoomItemSelected);
+        m_ZoomItem.RegisterCallback<MouseEnterEvent>(OnItemHovered);
 
         m_CastleHealthItem = m_ShopMenuController.GetCastleHealthItem();
         m_CastleHealthItem.RegisterCallback<ClickEvent>(OnCastleHealthItemSelected);
+        m_CastleHealthItem.RegisterCallback<MouseEnterEvent>(OnItemHovered);
 
         m_CastleDefenseItem = m_ShopMenuController.GetCastleDefenseItem();
         m_CastleDefenseItem.RegisterCallback<ClickEvent>(OnCastleDefenseItemSelected);
+        m_CastleDefenseItem.RegisterCallback<MouseEnterEvent>(OnItemHovered);
 
         m_BuyButton = m_ShopMenuController.GetBuyButton();
         m_BuyButton.clicked += OnBuyItemClicked;
@@ -84,10 +108,22 @@ public class ShopMenuView : MonoBehaviour
 
     void OnDisable() {
         m_GunItem.UnregisterCallback<ClickEvent>(OnGunItemSelected);
+        m_GunItem.UnregisterCallback<MouseEnterEvent>(OnItemHovered);
+
         m_ZoomItem.UnregisterCallback<ClickEvent>(OnZoomItemSelected);
+        m_ZoomItem.UnregisterCallback<MouseEnterEvent>(OnItemHovered);
+
         m_CastleHealthItem.UnregisterCallback<ClickEvent>(OnCastleHealthItemSelected);
+        m_CastleHealthItem.UnregisterCallback<MouseEnterEvent>(OnItemHovered);
+
         m_CastleDefenseItem.UnregisterCallback<ClickEvent>(OnCastleDefenseItemSelected);
+        m_CastleDefenseItem.UnregisterCallback<MouseEnterEvent>(OnItemHovered);
+
         m_BuyButton.clicked -= OnBuyItemClicked;
+    }
+
+    void OnItemHovered(MouseEnterEvent evt) {
+        OnShopItemHovered?.Invoke();
     }
 
     void CheckBuyButton() 
@@ -95,6 +131,7 @@ public class ShopMenuView : MonoBehaviour
         int total = m_ShopMenuController.GetTotalCost();
         if (total == 0)
         {
+            m_BuyButton.enabledSelf = false;
             return;
         }
 
@@ -114,24 +151,28 @@ public class ShopMenuView : MonoBehaviour
     {
         m_ShopMenuController.ToggleGunItemSelection();
         CheckBuyButton();
+        OnShopItemClicked?.Invoke();
     }
 
     void OnZoomItemSelected(ClickEvent evt)
     {
         m_ShopMenuController.ToggleZoomItemSelection();
         CheckBuyButton();
+        OnShopItemClicked?.Invoke();
     }
 
     void OnCastleHealthItemSelected(ClickEvent evt)
     {
         m_ShopMenuController.ToggleCastleHealthItemSelection();
         CheckBuyButton();
+        OnShopItemClicked?.Invoke();
     }
 
     void OnCastleDefenseItemSelected(ClickEvent evt)
     {
         m_ShopMenuController.ToggleCastleDefenseItemSelection();
         CheckBuyButton();
+        OnShopItemClicked?.Invoke();
     }
 
     void OnBuyItemClicked() 
@@ -143,7 +184,7 @@ public class ShopMenuView : MonoBehaviour
                 m_ShopMenuController.RemoveSelectedGunItem();
                 UpgradeArtilleryGun(selectedItemData.GameObject);
                 UpgradeArtilleryShellDamage(selectedItemData.DamageGain);
-                UpgradeArtillerySpeed(selectedItemData.SpeedGain);
+                UpgradeArtillerySpeed(selectedItemData.LaunchSpeedGain, selectedItemData.RotationSpeedGain);
             }
         }
 
@@ -174,14 +215,13 @@ public class ShopMenuView : MonoBehaviour
             }
         }
 
+        OnShopItemBought?.Invoke();
+
         // message from NPC
         m_NPCDialogView.Talk(Character.Mary, "Thanks a lot !!");
         
         // update the elements
         m_ShopMenuController.FillStore();
-        
-        // send the cancel event to quit menu
-        //InputSystem.QueueStateEvent(Keyboard.current, new KeyboardState(Key.Escape));
     }
 
     void UpgradeArtilleryGun(GameObject prefab) {
@@ -200,10 +240,10 @@ public class ShopMenuView : MonoBehaviour
         cineZoomCtl.IncreaseZoom(zoomGain);
     }
 
-    void UpgradeArtillerySpeed(float speedGain) {
+    void UpgradeArtillerySpeed(float launchSpeedGain, float rotationSpeedGain) {
         ArtilleryManager artilleryManager = m_Artillery.GetComponent<ArtilleryManager>();
-        artilleryManager.IncreaseLaunchSpeed(speedGain);
-        artilleryManager.IncreaseRotationSpeed(speedGain);
+        artilleryManager.IncreaseLaunchSpeed(launchSpeedGain);
+        artilleryManager.IncreaseRotationSpeed(rotationSpeedGain);
     }
 
     void UpgradeArtilleryShellDamage(float damageGain) {

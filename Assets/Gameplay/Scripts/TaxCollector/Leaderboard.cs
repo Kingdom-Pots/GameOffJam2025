@@ -1,13 +1,15 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using System.Linq;
 
 public class Leaderboard : MonoBehaviour
 {
     public GameObject rowPrefab;   // assign the Row prefab in Inspector
     public Transform panel;   
-    public TextMeshProUGUI donateField;
+    public TMP_InputField donateField;
     public Transform mainPanel;
+    public DonationValueValidator donationValueValidator; 
 
     int amountAdded = 0;
 
@@ -18,10 +20,11 @@ public class Leaderboard : MonoBehaviour
         cTracker = currencyTracker;
         // cTracker.currency = 20;
         var rowsCount = panel.transform.childCount;
+        List<Faction> sorted = factions.OrderByDescending(f => f.total).ToList();
         if (rowsCount > 0)
         {
             var counter = 0;
-            foreach (var faction in factions)
+            foreach (var faction in sorted)
             {
                 var texts = panel.GetChild(counter++).gameObject.GetComponentsInChildren<TextMeshProUGUI>();
                 texts[0].text = faction.factionname;
@@ -30,7 +33,7 @@ public class Leaderboard : MonoBehaviour
         }
         else
         {
-            foreach (var faction in factions)
+            foreach (var faction in sorted)
             {
                 GameObject row = Instantiate(rowPrefab, panel);
                 var texts = row.GetComponentsInChildren<TextMeshProUGUI>();
@@ -38,7 +41,8 @@ public class Leaderboard : MonoBehaviour
                 texts[1].text = faction.total.ToString();
             }
         }
-        donateField.text = currencyTracker.currency.ToString();        
+        donateField.text = currencyTracker.currency.ToString();   
+        donationValueValidator.maxValue = currencyTracker.currency;
     }
 
     public void Donate()
