@@ -4,6 +4,16 @@ using UnityEngine;
 public class WaveSpawnController: MonoBehaviour
 {
     [System.Serializable]
+    public class SpawnPoint
+    {
+        public string spawnPointName = "Spawn Point";
+        [Tooltip("Box collider defining this spawn area")]
+        public BoxCollider spawnArea;
+        [Tooltip("Wave number this spawn point activates at (1 = always active)")]
+        public int unlockAtWave = 1;
+    }
+
+    [System.Serializable]
     public class EnemySpawnInfo
     {
         public GameObject enemyPrefab;
@@ -30,6 +40,9 @@ public class WaveSpawnController: MonoBehaviour
         public List<GameObject> enemyPrefabs = new List<GameObject>();
     }
 
+    [Header("Spawn Points")]
+    public List<SpawnPoint> spawnPoints = new List<SpawnPoint>();
+
     [Header("Wave Configuration")]
     [Tooltip("Pre-configured waves (optional - used first if present)")]
     public List<Wave> waves = new List<Wave>();
@@ -47,9 +60,6 @@ public class WaveSpawnController: MonoBehaviour
     public bool autoStartNextWave = true;
 
     [Header("Spawn Settings")]
-    [Tooltip("Box collider defining spawn area")]
-    public BoxCollider spawnArea;
-
     [Tooltip("Minimum distance between spawned enemies")]
     public float minSpawnDistance = 2f;
     public int maxSpawnAttempts = 30;
@@ -75,16 +85,12 @@ public class WaveSpawnController: MonoBehaviour
 
     void Start()
     {
-        // Get spawn area
-        if (spawnArea == null)
+        // Get spawn areas (ensure at least one spawn point with a BoxCollider exists)
+        if (spawnPoints == null || spawnPoints.Count == 0 || spawnPoints.TrueForAll(sp => sp == null || sp.spawnArea == null))
         {
-            spawnArea = GetComponent<BoxCollider>();
-            if (spawnArea == null)
-            {
-                Debug.LogError("No BoxCollider assigned for spawn area!");
-                enabled = false;
-                return;
-            }
+            Debug.LogError("No valid spawn points configured!");
+            enabled = false;
+            return;
         }
 
         // Create enemy container
@@ -261,8 +267,35 @@ public class WaveSpawnController: MonoBehaviour
         return available;
     }
 
+    // Returns spawn points unlocked for the current wave index 
+    List<SpawnPoint> GetUnlockedSpawnPoints()
+    {
+        List<SpawnPoint> unlocked = new List<SpawnPoint>();
+
+        int waveNumber = currentWaveIndex + 1; 
+
+        foreach (var sp in spawnPoints)
+        {
+            if (sp != null && sp.spawnArea != null && waveNumber >= sp.unlockAtWave)
+            {
+                unlocked.Add(sp);
+            }
+        }
+
+        return unlocked;
+    }
+
+    // Spawn across unlocked spawn points randomly
     void SpawnWaveEnemies(Wave wave)
     {
+        List<SpawnPoint> availablePoints = GetUnlockedSpawnPoints();
+
+        if (availablePoints.Count == 0)
+        {
+            Debug.LogError("No spawn points unlocked for this wave!");
+            return;
+        }
+
         int totalSpawned = 0;
 
         foreach (EnemySpawnInfo enemyInfo in wave.enemies)
@@ -275,7 +308,11 @@ public class WaveSpawnController: MonoBehaviour
 
             for (int i = 0; i < enemyInfo.count; i++)
             {
-                Vector3 spawnPos = FindValidSpawnPosition();
+                // pick a random spawn point
+                SpawnPoint chosen = availablePoints[Random.Range(0, availablePoints.Count)];
+
+                // find a valid spot inside that spawn point's area
+                Vector3 spawnPos = FindValidSpawnPosition(chosen.spawnArea);
 
                 if (spawnPos != Vector3.zero)
                 {
@@ -290,22 +327,23 @@ public class WaveSpawnController: MonoBehaviour
                     totalSpawned++;
 
                     if (showDebugInfo)
-                        Debug.Log($"Spawned {enemyInfo.enemyPrefab.name} at {spawnPos}");
+                        Debug.Log($"Spawned {enemyInfo.enemyPrefab.name} at {spawnPos} in {chosen.spawnPointName}");
                 }
                 else
                 {
-                    Debug.LogWarning($"Failed to find spawn position for {enemyInfo.enemyPrefab.name}");
+                    Debug.LogWarning($"Failed to find valid spawn for {enemyInfo.enemyPrefab.name} in {chosen.spawnPointName}");
                 }
             }
         }
 
         if (showDebugInfo)
-            Debug.Log($"Wave spawned {totalSpawned} total enemies. Tracking {activeEnemies.Count} active.");
+            Debug.Log($"Wave spawned {totalSpawned} enemies across {availablePoints.Count} spawn points. Tracking {activeEnemies.Count} active.");
     }
 
-    Vector3 FindValidSpawnPosition()
+    // Find spawn position inside a specific BoxCollider
+    Vector3 FindValidSpawnPosition(BoxCollider area)
     {
-        Bounds bounds = spawnArea.bounds;
+        Bounds bounds = area.bounds;
 
         for (int attempt = 0; attempt < maxSpawnAttempts; attempt++)
         {
@@ -352,6 +390,7 @@ public class WaveSpawnController: MonoBehaviour
     bool AreAllEnemiesDead()
     {
         // If no enemies in list, consider wave complete
+        CleanUpDeadEnemies();
         if (activeEnemies.Count == 0)
             return true;
 
@@ -369,6 +408,11 @@ public class WaveSpawnController: MonoBehaviour
                 {
                     return false;
                 }
+            }
+            else
+            {
+                // If there's no EnemyController, if object still exists consider it alive
+                return false;
             }
         }
 
@@ -404,7 +448,7 @@ public class WaveSpawnController: MonoBehaviour
 
     public void ClearAllEnemies()
     {
-        foreach (GameObject enemy in activeEnemies)
+        foreach (GameObject enemy in new List<GameObject>(activeEnemies))
         {
             if (enemy != null)
             {
@@ -447,22 +491,43 @@ public class WaveSpawnController: MonoBehaviour
     // Visualize spawn area
     void OnDrawGizmos()
     {
-        if (!showSpawnArea || spawnArea == null) return;
+        if (!showSpawnArea) return;
 
-        Gizmos.color = new Color(1f, 0.5f, 0f, 0.3f);
-        Gizmos.matrix = spawnArea.transform.localToWorldMatrix;
-        Gizmos.DrawCube(spawnArea.center, spawnArea.size);
+        BoxCollider[] boxes = GetComponentsInChildren<BoxCollider>();
 
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireCube(spawnArea.center, spawnArea.size);
+        foreach (var box in boxes)
+        {
+            if (box == null) continue;
+
+            Gizmos.matrix = box.transform.localToWorldMatrix;
+
+            // Fill
+            Gizmos.color = new Color(1f, 0.5f, 0f, 0.3f);
+            Gizmos.DrawCube(box.center, box.size);
+
+            // Outline
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireCube(box.center, box.size);
+        }
+
+        Gizmos.matrix = Matrix4x4.identity;
     }
 
     void OnDrawGizmosSelected()
     {
-        if (spawnArea == null) return;
+        BoxCollider[] boxes = GetComponents<BoxCollider>();
 
-        Gizmos.color = Color.green;
-        Gizmos.matrix = spawnArea.transform.localToWorldMatrix;
-        Gizmos.DrawWireCube(spawnArea.center, spawnArea.size);
+        foreach (var box in boxes)
+        {
+            if (box == null) continue;
+
+            Gizmos.matrix = box.transform.localToWorldMatrix;
+
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireCube(box.center, box.size);
+        }
+
+        Gizmos.matrix = Matrix4x4.identity;
     }
+
 }
