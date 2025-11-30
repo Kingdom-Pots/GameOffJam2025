@@ -382,6 +382,12 @@ public class EnemyController : MonoBehaviour
         GiveCurrencyReward();
     }
 
+    public void DeathAnimationFinished()
+    {
+        CleanupAfterDeath();
+    }
+
+
     void GiveCurrencyReward()
     {
         CurrencyTracker currency = FindAnyObjectByType<CurrencyTracker>();
@@ -391,9 +397,47 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    // Call this after the death animation finishes
+    public void CleanupAfterDeath()
+    {
+        // Disable all colliders
+        foreach (Collider col in GetComponentsInChildren<Collider>())
+            col.enabled = false;
+
+        // Disable rigidbody
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.isKinematic = true;
+            rb.detectCollisions = false;
+        }
+
+        // Disable NavMeshAgent
+        if (agent != null)
+            agent.enabled = false;
+
+        // Disable scripts on the enemy except this one
+        MonoBehaviour[] scripts = GetComponents<MonoBehaviour>();
+        foreach (MonoBehaviour m in scripts)
+        {
+            if (m != this) m.enabled = false;
+        }
+    }
+
+
     #endregion
 
     #region Movement
+
+    public void ApplySpawnSpeedModifier(float multiplier)
+    {
+        moveSpeed *= multiplier;
+
+        if (agent != null)
+            agent.speed = moveSpeed;
+
+        originalSpeed = moveSpeed; // update stagger system
+    }
 
     void OnReachedDestination()
     {

@@ -93,7 +93,7 @@ MonoBehaviour:
   stoppingDistance: 0.5
   angularSpeed: 120
   moveOnStart: 1
-  maxHealth: 50
+  maxHealth: 100
   currentHealth: 0
   destroyOnDeath: 0
   attackDamage: 5
@@ -103,7 +103,7 @@ MonoBehaviour:
   - Castle
   staggerDuration: 0.5
   staggerSpeedMultiplier: 0.2
-  currencyAdd: 12
+  currencyAdd: 15
   autoSetupChildColliders: 1
   OnDead:
     m_PersistentCalls:
@@ -308,6 +308,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimatorBoolHelper
   animator: {fileID: 6140655578522342456}
+  followTarget: {fileID: 0}
+  smoothSpeed: 5
+  followX: 1
+  followY: 1
+  followZ: 1
+  targetTag: Player
 --- !u!1 &4484593033729588477
 GameObject:
   m_ObjectHideFlags: 0
