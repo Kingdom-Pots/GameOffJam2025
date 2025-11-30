@@ -425,8 +425,8 @@ TextureImporter:
         y: 0
         width: 256
         height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5095787, y: 0.27011496}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -435,6 +435,50 @@ TextureImporter:
       bones: []
       spriteID: 4ba58edb0e5603248a7872da02e9b797
       internalID: -194333556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WeaponIconsUI_V2_15
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 126
+        width: 256
+        height: 154
+      alignment: 9
+      pivot: {x: 0.49042034, y: 0.5754479}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6dc163908959a04bbd3f339382ba9f0
+      internalID: -224545182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WeaponIconsUI_V2_16
+      rect:
+        serializedVersion: 2
+        x: 767
+        y: 4
+        width: 256
+        height: 134
+      alignment: 9
+      pivot: {x: 0.5068121, y: 0.93278}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40bcb7cf2ee75e449bfd1c2c49bdc6b5
+      internalID: -22586577
       vertices: []
       indices: 
       edges: []
@@ -462,6 +506,8 @@ TextureImporter:
       WeaponIconsUI_V2_12: 495841091
       WeaponIconsUI_V2_13: 590657861
       WeaponIconsUI_V2_14: -194333556
+      WeaponIconsUI_V2_15: -224545182
+      WeaponIconsUI_V2_16: -22586577
       WeaponIconsUI_V2_2: 1578413687
       WeaponIconsUI_V2_3: 1821430290
       WeaponIconsUI_V2_4: -1391702750

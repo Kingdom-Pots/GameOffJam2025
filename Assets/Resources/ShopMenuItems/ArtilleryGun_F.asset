@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7f8d9890c2f33848adf23a4ade1ee83, type: 3}
   m_Name: ArtilleryGun_F
   m_EditorClassIdentifier: Assembly-CSharp::ShopMenuGunItemData
-  Name: Artillery Gun F
-  Description: The ultimate gun
-  Cost: 70
+  Name: Artillery Canon Type F
+  Description: The ultimate one
+  Cost: 1200
   Sprite: {fileID: 1090767896, guid: 13ffce466226de74fa1fcf2777977e2b, type: 3}
-  DamageGain: 10
-  SpeedGain: 10
+  DamageGain: 6
+  SpeedGain: 22
   GameObject: {fileID: 919132149155446097, guid: 5301ec009b2797847a4ee1bb7da91940,
     type: 3}

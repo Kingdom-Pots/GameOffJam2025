@@ -6,46 +6,66 @@ public class ShopMenuItemController
     Label m_NameLabel;
     Label m_DescriptionLabel;
     Label m_CostLabel;
+    Label m_SoldOutLabel;
     VisualElement m_Sprite;
     VisualElement m_Background;
-    
+
+    bool m_Selected = false;
+    bool m_SoldOut = false;
+
     // This function retrieves a reference to the 
-    // character name label inside the UI element.
+    // root visual element containg all the other elements
     public void SetVisualElement(VisualElement visualElement)
     {
         m_NameLabel = visualElement.Q<Label>("ItemName");
         m_DescriptionLabel = visualElement.Q<Label>("ItemDescription");
         m_CostLabel = visualElement.Q<Label>("ItemCost");
+        m_SoldOutLabel = visualElement.Q<Label>("SoldOut");
         m_Sprite = visualElement.Q<VisualElement>("ItemSprite");
         m_Background = visualElement.Q<VisualElement>("Background");
     }
     
-    // This function receives the item whose name this list 
-    // element is supposed to display. Since the elements list 
-    // in a `ListView` are pooled and reused, it's necessary to 
-    // have a `Set` function to change which character's data to display.
-    public void SetMenuGunItemData(ShopMenuGunItemData itemData)
+    // This function receives the item with all infos to display
+    public void SetMenuItemData(ShopMenuItemData itemData)
     {
         m_NameLabel.text = itemData.Name;
         m_DescriptionLabel.text = itemData.Description;
         m_CostLabel.text = itemData.Cost.ToString();
         m_Sprite.style.backgroundImage = new StyleBackground(itemData.Sprite);
+
+        m_SoldOut = false;
+        m_SoldOutLabel.visible = false;
     }
 
-    public void SetMenuCastleItemData(ShopMenuCastleItemData itemData)
+    public void ToggleSelection()
     {
-        m_NameLabel.text = itemData.Name;
-        m_DescriptionLabel.text = itemData.Description;
-        m_CostLabel.text = itemData.Cost.ToString();
-        m_Sprite.style.backgroundImage = new StyleBackground(itemData.Sprite);
+        m_Selected = !m_Selected;
+        if (m_Selected) 
+        {
+            m_Background.AddToClassList("selected");
+        }
+        else 
+        {
+            m_Background.RemoveFromClassList("selected");
+        }
     }
 
-    public void SetMenuZoomItemData(ShopMenuZoomItemData itemData)
+    public void SoldOut() {
+        m_SoldOut = true;
+        m_NameLabel.text = "Out of Store";
+        m_DescriptionLabel.text = "Come back next year";
+        m_CostLabel.text = "0";
+        m_SoldOutLabel.visible = true;
+        m_Sprite.style.backgroundImage = new StyleBackground();
+    }
+
+    public bool IsSoldOut() {
+        return m_SoldOut;
+    }
+
+    public bool IsSelected() 
     {
-        m_NameLabel.text = itemData.Name;
-        m_DescriptionLabel.text = itemData.Description;
-        m_CostLabel.text = itemData.Cost.ToString();
-        m_Sprite.style.backgroundImage = new StyleBackground(itemData.Sprite);
+        return m_Selected;
     }
 }
 

@@ -1,34 +1,57 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
-    
+
+public enum Character {
+    Mary,
+    Daigo,
+    Serenella,
+    Karen,
+}
+
 public class DialogView : MonoBehaviour
 {
     // UI element references
+    VisualElement m_Root;
     Label m_CharacterName;
     Label m_CharacterLine;
+    Button m_CloseButton;
     
     void OnEnable()
     {
         // The UXML is already instantiated by the UIDocument component
         var uiDocument = GetComponent<UIDocument>();
-        //m_DialogController.InitializeItemList(uiDocument.rootVisualElement, m_ListEntryTemplate);
 
-        var root = uiDocument.rootVisualElement;
-        m_CharacterName = root.Q<Label>("CharacterName");
-        m_CharacterLine = root.Q<Label>("CharacterLine");
+        m_Root = uiDocument.rootVisualElement;
 
-        m_CharacterName.text = "My Character";
-        m_CharacterLine.text = "Hello !";
+        m_CharacterName = m_Root.Q<Label>("CharacterName");
+        m_CharacterLine = m_Root.Q<Label>("CharacterLine");
+
+        m_CloseButton = m_Root.Q<Button>("CloseButton");
+        m_CloseButton.clicked += OnCloseButtonClicked;
+
+        m_CharacterName.text = "";
+        m_CharacterLine.text = "";
     }
 
-    public void Talk(string character, string text)
+    void OnDisable()
     {
+        m_CloseButton.clicked -= OnCloseButtonClicked;
+    }
+
+    public void OnCloseButtonClicked() {
+        m_Root.visible = false;
+    }
+
+    public void Talk(Character character, string text)
+    {
+        m_Root.visible = true;
         // StartCoroutine(FactionService.GetFactions(OnFactionsLoaded));
         // StartCoroutine(FactionService.AddToFactionTotal("United States of South America", 5, OnFactionUpdated));
-        m_CharacterName.text = character;
+        m_CharacterName.text = character.ToString();
         m_CharacterLine.text = text;
     }
+
     // void OnFactionsLoaded(List<Faction> factions)
     // {
     //     foreach (var faction in factions)

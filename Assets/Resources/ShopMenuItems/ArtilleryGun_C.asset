@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7f8d9890c2f33848adf23a4ade1ee83, type: 3}
   m_Name: ArtilleryGun_C
   m_EditorClassIdentifier: Assembly-CSharp::ShopMenuGunItemData
-  Name: Artillery Gun C
-  Description: A big gun
-  Cost: 40
+  Name: Artillery Canon Type C
+  Description: A longer range canon
+  Cost: 140
   Sprite: {fileID: 1578413687, guid: 13ffce466226de74fa1fcf2777977e2b, type: 3}
-  DamageGain: 10
-  SpeedGain: 10
+  DamageGain: 4
+  SpeedGain: 6
   GameObject: {fileID: 919132149155446097, guid: 75e9c153ea656074fa3c955b44204530,
     type: 3}

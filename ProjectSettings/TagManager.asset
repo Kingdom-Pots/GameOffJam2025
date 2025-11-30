@@ -11,6 +11,7 @@ TagManager:
   - Enemy
   - Breakable
   - Bullet
+  - Faction
   layers:
   - Default
   - TransparentFX

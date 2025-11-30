@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 
 [System.Serializable]
 public class Faction
@@ -19,12 +20,14 @@ public class FactionList
 
 public static class FactionService
 {
+    public static string FactionSelected = null;
     private static string apiUrl = "https://newdatabase-8dc6.restdb.io/rest/factions";
 #if UNITY_WEBGL
     const string apiKeyConst = "68862fc71d8067eda2a193f1";
 #else
     const string apiKeyConst = "061b0dd6e8052f2d503b103d77531b8182fbf";
 #endif
+
     /// <summary>
     /// Fetches factions from RestDB and returns them as a list.
     /// </summary>
@@ -92,6 +95,8 @@ public static class FactionService
                 Debug.LogError("Faction not found: " + factionName);
             }
         });
+
+        
 
         callback?.Invoke(success);
     }

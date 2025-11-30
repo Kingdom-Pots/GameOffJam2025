@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df7523a8aebbf084a9667c1d714d47f1, type: 3}
-  m_Name: Caslte_B
+  m_Script: {fileID: 11500000, guid: cf2465c1b6501fe44a4b84ebd528a117, type: 3}
+  m_Name: Castle_B
   m_EditorClassIdentifier: Assembly-CSharp::ShopMenuCastleItemData
-  Name: Castle B
-  Description: Upgrade the castle defense
-  Cost: 50
+  Name: Castle Defense Type A
+  Description: Upgrade your defense !
+  Cost: 200
   Sprite: {fileID: 590657861, guid: 13ffce466226de74fa1fcf2777977e2b, type: 3}
-  DefenseGain: 50
+  DefenseGain: 10

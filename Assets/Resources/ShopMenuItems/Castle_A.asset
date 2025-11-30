@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df7523a8aebbf084a9667c1d714d47f1, type: 3}
-  m_Name: Caslte_C
+  m_Script: {fileID: 11500000, guid: 240e451f439970f4ebe709f4b1806b9c, type: 3}
+  m_Name: Castle_A
   m_EditorClassIdentifier: Assembly-CSharp::ShopMenuCastleItemData
-  Name: Castle C
-  Description: Upgrade the castle defense
-  Cost: 50
-  Sprite: {fileID: -194333556, guid: 13ffce466226de74fa1fcf2777977e2b, type: 3}
-  DefenseGain: 50
+  Name: Castle Health Type A
+  Description: Rebuild your ruins
+  Cost: 34
+  Sprite: {fileID: 495841091, guid: 13ffce466226de74fa1fcf2777977e2b, type: 3}
+  HealthGain: 40

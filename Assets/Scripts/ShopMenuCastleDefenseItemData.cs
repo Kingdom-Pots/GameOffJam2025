@@ -1,7 +1,7 @@
 using UnityEngine;
-    
+
 [CreateAssetMenu]
-public class ShopMenuCastleItemData : ShopMenuItemData
+public class ShopMenuCastleDefenseItemData : ShopMenuItemData
 {
     public float DefenseGain;
 }
