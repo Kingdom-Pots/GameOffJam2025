@@ -7,6 +7,7 @@ public class Leaderboard : MonoBehaviour
     public GameObject rowPrefab;   // assign the Row prefab in Inspector
     public Transform panel;   
     public TextMeshProUGUI donateField;
+    public Transform mainPanel;
 
     int amountAdded = 0;
 
@@ -15,6 +16,7 @@ public class Leaderboard : MonoBehaviour
     public void UpdatePanel(List<Faction> factions, CurrencyTracker currencyTracker)
     {
         cTracker = currencyTracker;
+        // cTracker.currency = 20;
         var rowsCount = panel.transform.childCount;
         if (rowsCount > 0)
         {
@@ -56,17 +58,29 @@ public class Leaderboard : MonoBehaviour
 
     void OnFactionUpdated(bool success)
     {
-        var rowsCount = panel.transform.childCount;
+        var rowsCount = panel.childCount;
+        string textAmount = "";
         if (rowsCount > 0)
         {
             for (int a = 0; a < rowsCount; a++)
             {
-                if (panel.GetChild(a).transform.name == FactionService.FactionSelected)
+                if (panel.GetChild(a).gameObject.GetComponentsInChildren<TextMeshProUGUI>()[0].text == FactionService.FactionSelected)
                 {
                     var texts = panel.GetChild(a).gameObject.GetComponentsInChildren<TextMeshProUGUI>();
                     texts[1].text = (int.Parse(texts[1].text)+amountAdded).ToString();
+                    textAmount = texts[1].text;
+                    break;
                 }
             }      
+        }
+        var childCount = mainPanel.childCount;
+        for (int a = 0; a < childCount; a++)
+        {
+            if (mainPanel.GetChild(a).transform.name == FactionService.FactionSelected && textAmount != "")
+            {
+                mainPanel.GetChild(a).transform.GetComponentInChildren<TextMeshProUGUI>().text = textAmount;
+                break;
+            }
         }
     }     
 }
