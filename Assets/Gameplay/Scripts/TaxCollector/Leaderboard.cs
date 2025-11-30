@@ -15,7 +15,6 @@ public class Leaderboard : MonoBehaviour
     public void UpdatePanel(List<Faction> factions, CurrencyTracker currencyTracker)
     {
         cTracker = currencyTracker;
-        cTracker.currency = 10;
         var rowsCount = panel.transform.childCount;
         if (rowsCount > 0)
         {
