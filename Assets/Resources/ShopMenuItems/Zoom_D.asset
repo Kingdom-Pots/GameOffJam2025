@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ShopMenuZoomItemData
   Name: Scope Type D
   Description: A larger zoom
-  Cost: 40
+  Cost: 680
   Sprite: {fileID: 1185646816, guid: 13ffce466226de74fa1fcf2777977e2b, type: 3}
-  ZoomGain: 10
+  ZoomGain: 3

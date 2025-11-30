@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ShopMenuCastleItemData
   Name: Castle Defense Type A
   Description: Upgrade your defense !
-  Cost: 50
+  Cost: 200
   Sprite: {fileID: 590657861, guid: 13ffce466226de74fa1fcf2777977e2b, type: 3}
-  DefenseGain: 50
+  DefenseGain: 10
