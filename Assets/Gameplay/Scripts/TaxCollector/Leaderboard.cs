@@ -1,0 +1,73 @@
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+
+public class Leaderboard : MonoBehaviour
+{
+    public GameObject rowPrefab;   // assign the Row prefab in Inspector
+    public Transform panel;   
+    public TextMeshProUGUI donateField;
+
+    int amountAdded = 0;
+
+    CurrencyTracker cTracker;
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public void UpdatePanel(List<Faction> factions, CurrencyTracker currencyTracker)
+    {
+        cTracker = currencyTracker;
+        cTracker.currency = 10;
+        var rowsCount = panel.transform.childCount;
+        if (rowsCount > 0)
+        {
+            var counter = 0;
+            foreach (var faction in factions)
+            {
+                var texts = panel.GetChild(counter++).gameObject.GetComponentsInChildren<TextMeshProUGUI>();
+                texts[0].text = faction.factionname;
+                texts[1].text = faction.total.ToString();
+            }      
+        }
+        else
+        {
+            foreach (var faction in factions)
+            {
+                GameObject row = Instantiate(rowPrefab, panel);
+                var texts = row.GetComponentsInChildren<TextMeshProUGUI>();
+                texts[0].text = faction.factionname;
+                texts[1].text = faction.total.ToString();
+            }
+        }
+        donateField.text = currencyTracker.currency.ToString();        
+    }
+
+    public void Donate()
+    {
+        int amount = int.Parse(donateField.text);
+        if (amount > cTracker.currency)
+        {
+            amount = cTracker.currency;
+        }
+        if (amount == 0) return;
+        amountAdded = amount;
+        cTracker.Use(amount);
+        donateField.text = cTracker.currency.ToString();
+        StartCoroutine(FactionService.AddToFactionTotal(FactionService.FactionSelected, amount, OnFactionUpdated));
+    }
+    
+
+    void OnFactionUpdated(bool success)
+    {
+        var rowsCount = panel.transform.childCount;
+        if (rowsCount > 0)
+        {
+            for (int a = 0; a < rowsCount; a++)
+            {
+                if (panel.GetChild(a).transform.name == FactionService.FactionSelected)
+                {
+                    var texts = panel.GetChild(a).gameObject.GetComponentsInChildren<TextMeshProUGUI>();
+                    texts[1].text = (int.Parse(texts[1].text)+amountAdded).ToString();
+                }
+            }      
+        }
+    }     
+}

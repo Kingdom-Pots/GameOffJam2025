@@ -2,15 +2,21 @@ using System.Collections.Generic;
 using MoreMountains.Feedbacks;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UIElements;
+using System.Xml;
 
 public class TaxCollectorHelper : MonoBehaviour
 {
     public GameObject factionsPanel = null;
+    public GameObject donationPanel = null;
+    public TextMeshProUGUI currentGDP = null;
     GameManager gm = null;
+    CurrencyTracker currencyTracker = null;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         gm = FindFirstObjectByType<GameManager>();
+        currencyTracker = FindFirstObjectByType<CurrencyTracker>();
     }
 
     public void CursorLock()
@@ -47,5 +53,16 @@ public class TaxCollectorHelper : MonoBehaviour
                 }
             }
         }
-    }          
+        donationPanel.SetActive(true);
+        var script = donationPanel.GetComponent<Leaderboard>();   // get the script
+        script.UpdatePanel(factions, currencyTracker);
+    }  
+
+    public void ShowDonationPanel()
+    {
+        if (FactionService.FactionSelected != null)
+        {
+            SetFactionsValues();
+        }
+    }        
 }
