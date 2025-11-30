@@ -6,8 +6,9 @@ public class Leaderboard : MonoBehaviour
 {
     public GameObject rowPrefab;   // assign the Row prefab in Inspector
     public Transform panel;   
-    public TextMeshProUGUI donateField;
+    public TMP_InputField donateField;
     public Transform mainPanel;
+    public DonationValueValidator donationValueValidator; 
 
     int amountAdded = 0;
 
@@ -16,7 +17,7 @@ public class Leaderboard : MonoBehaviour
     public void UpdatePanel(List<Faction> factions, CurrencyTracker currencyTracker)
     {
         cTracker = currencyTracker;
-        // cTracker.currency = 20;
+        cTracker.currency = 20;
         var rowsCount = panel.transform.childCount;
         if (rowsCount > 0)
         {
@@ -38,7 +39,8 @@ public class Leaderboard : MonoBehaviour
                 texts[1].text = faction.total.ToString();
             }
         }
-        donateField.text = currencyTracker.currency.ToString();        
+        donateField.text = currencyTracker.currency.ToString();   
+        donationValueValidator.maxValue = currencyTracker.currency;
     }
 
     public void Donate()
