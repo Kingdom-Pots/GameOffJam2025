@@ -222,9 +222,6 @@ public class ShopMenuView : MonoBehaviour
         
         // update the elements
         m_ShopMenuController.FillStore();
-        
-        // send the cancel event to quit menu
-        //InputSystem.QueueStateEvent(Keyboard.current, new KeyboardState(Key.Escape));
     }
 
     void UpgradeArtilleryGun(GameObject prefab) {

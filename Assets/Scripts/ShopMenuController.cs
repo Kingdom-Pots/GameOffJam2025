@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
     
 public class ShopMenuController
 {
@@ -25,6 +27,7 @@ public class ShopMenuController
 
     Button m_BuyButton;
     Label m_TotalCostLabel;
+    Button m_CloseButton;
 
     int m_TotalCost = 0;
 
@@ -62,8 +65,17 @@ public class ShopMenuController
         
         // disable button on start
         m_BuyButton = root.Q<Button>("BuyButton");
+
+        // close button
+        m_CloseButton = root.Q<Button>("CloseButton");
+        m_CloseButton.clicked += OnCloseButtonClicked;
     
         FillStore();
+    }
+
+    void OnCloseButtonClicked() {
+        // send the cancel event to quit menu
+        InputSystem.QueueStateEvent(Keyboard.current, new KeyboardState(Key.Escape));
     }
 
     public void EnumerateAllItems()
