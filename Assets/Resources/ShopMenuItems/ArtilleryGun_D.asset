@@ -17,6 +17,7 @@ MonoBehaviour:
   Cost: 400
   Sprite: {fileID: 1821430290, guid: 13ffce466226de74fa1fcf2777977e2b, type: 3}
   DamageGain: 2
-  SpeedGain: 10
+  LaunchSpeedGain: 10
+  RotationSpeedGain: 2
   GameObject: {fileID: 919132149155446097, guid: 7b28ada896e7aa744b18753810630eab,
     type: 3}

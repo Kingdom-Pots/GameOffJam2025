@@ -143,7 +143,7 @@ public class ShopMenuView : MonoBehaviour
                 m_ShopMenuController.RemoveSelectedGunItem();
                 UpgradeArtilleryGun(selectedItemData.GameObject);
                 UpgradeArtilleryShellDamage(selectedItemData.DamageGain);
-                UpgradeArtillerySpeed(selectedItemData.SpeedGain);
+                UpgradeArtillerySpeed(selectedItemData.LaunchSpeedGain, selectedItemData.RotationSpeedGain);
             }
         }
 
@@ -200,10 +200,10 @@ public class ShopMenuView : MonoBehaviour
         cineZoomCtl.IncreaseZoom(zoomGain);
     }
 
-    void UpgradeArtillerySpeed(float speedGain) {
+    void UpgradeArtillerySpeed(float launchSpeedGain, float rotationSpeedGain) {
         ArtilleryManager artilleryManager = m_Artillery.GetComponent<ArtilleryManager>();
-        artilleryManager.IncreaseLaunchSpeed(speedGain);
-        artilleryManager.IncreaseRotationSpeed(speedGain);
+        artilleryManager.IncreaseLaunchSpeed(launchSpeedGain);
+        artilleryManager.IncreaseRotationSpeed(rotationSpeedGain);
     }
 
     void UpgradeArtilleryShellDamage(float damageGain) {
