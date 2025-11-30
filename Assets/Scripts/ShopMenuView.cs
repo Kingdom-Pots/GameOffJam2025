@@ -131,6 +131,7 @@ public class ShopMenuView : MonoBehaviour
         int total = m_ShopMenuController.GetTotalCost();
         if (total == 0)
         {
+            m_BuyButton.enabledSelf = false;
             return;
         }
 
