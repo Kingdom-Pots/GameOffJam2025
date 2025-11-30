@@ -39,7 +39,11 @@ public class DialogView : MonoBehaviour
         m_CloseButton.clicked -= OnCloseButtonClicked;
     }
 
-    public void OnCloseButtonClicked() {
+    void OnCloseButtonClicked() {
+        Hide();
+    }
+
+    public void Hide() {
         m_Root.visible = false;
     }
 
