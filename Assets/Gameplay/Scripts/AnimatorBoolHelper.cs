@@ -4,6 +4,15 @@ public class AnimatorBoolHelper : MonoBehaviour
 {
     [SerializeField] private Animator animator;
     
+    [Header("Smooth Follow Settings")]
+    [SerializeField] private Transform followTarget;
+    [SerializeField] private float smoothSpeed = 5f;
+    [SerializeField] private bool followX = true;
+    [SerializeField] private bool followY = true;
+    [SerializeField] private bool followZ = true;
+    
+    private bool isFollowing = false;
+    
     private void Awake()
     {
         // Auto-assign animator if not set
@@ -11,6 +20,60 @@ public class AnimatorBoolHelper : MonoBehaviour
         {
             animator = GetComponent<Animator>();
         }
+    }
+    
+    private void Update()
+    {
+        // Execute smooth follow if enabled and target is assigned
+        if (isFollowing && followTarget != null)
+        {
+            Vector3 currentPos = transform.position;
+            Vector3 targetPos = followTarget.position;
+            
+            // Create desired position based on which axes to follow
+            Vector3 desiredPos = new Vector3(
+                followX ? targetPos.x : currentPos.x,
+                followY ? targetPos.y : currentPos.y,
+                followZ ? targetPos.z : currentPos.z
+            );
+            
+            // Smoothly interpolate to the desired position
+            transform.position = Vector3.Lerp(currentPos, desiredPos, smoothSpeed * Time.deltaTime);
+        }
+    }
+    
+    // Start following the assigned target
+    public void StartFollowing()
+    {
+        if (followTarget == null)
+        {
+            Debug.LogWarning("Follow target is not assigned!");
+            return;
+        }
+        isFollowing = true;
+    }
+    
+    // Stop following
+    public void StopFollowing()
+    {
+        isFollowing = false;
+    }
+    
+    // Toggle following on/off
+    public void ToggleFollowing()
+    {
+        if (followTarget == null && !isFollowing)
+        {
+            Debug.LogWarning("Follow target is not assigned!");
+            return;
+        }
+        isFollowing = !isFollowing;
+    }
+    
+    // Set a new target and optionally start following
+    public void SetFollowTarget(Transform newTarget)
+    {
+        followTarget = newTarget;
     }
     
     // Toggle a bool parameter (flip its current value)
@@ -77,7 +140,7 @@ public class AnimatorBoolHelper : MonoBehaviour
         }
     }
 
-        // Move this object to a designated transform position
+    // Move this object to a designated transform position
     public void MoveToTransform(Transform targetTransform)
     {
         if (targetTransform == null)

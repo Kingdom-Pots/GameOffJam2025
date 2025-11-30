@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using TMPro;
 
 public class CurrencyTracker : MonoBehaviour
@@ -12,8 +13,22 @@ public class CurrencyTracker : MonoBehaviour
     // current currency value
     public int currency;
 
+    // Unity Events
+    [System.Serializable]
+    public class CurrencyEvent : UnityEvent<int> { }
+
+    [Header("Events")]
+    public CurrencyEvent OnCurrencyAdded;
+    public CurrencyEvent OnCurrencyDeducted;
+
     public void Awake()
     {
+        // Initialize events if they're null
+        if (OnCurrencyAdded == null)
+            OnCurrencyAdded = new CurrencyEvent();
+        if (OnCurrencyDeducted == null)
+            OnCurrencyDeducted = new CurrencyEvent();
+
         currency = defaultCurrency;
         UpdateUI();
     }
@@ -23,6 +38,9 @@ public class CurrencyTracker : MonoBehaviour
     {
         currency += val;
         UpdateUI();
+        
+        // Invoke the event with the amount added
+        OnCurrencyAdded?.Invoke(val);
     }
 
     // Lose currency
@@ -32,6 +50,9 @@ public class CurrencyTracker : MonoBehaviour
         {
             currency -= val;
             UpdateUI();
+            
+            // Invoke the event with the amount deducted
+            OnCurrencyDeducted?.Invoke(val);
             return true;
         }
         else
@@ -49,6 +70,7 @@ public class CurrencyTracker : MonoBehaviour
         else 
             return false;
     }
+    
     // Update text UI
     void UpdateUI()
     {
