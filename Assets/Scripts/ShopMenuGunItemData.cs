@@ -4,6 +4,7 @@ using UnityEngine;
 public class ShopMenuGunItemData : ShopMenuItemData
 {
     public float DamageGain;
-    public float SpeedGain;
+    public float LaunchSpeedGain;
+    public float RotationSpeedGain;
     public GameObject GameObject;
 }
