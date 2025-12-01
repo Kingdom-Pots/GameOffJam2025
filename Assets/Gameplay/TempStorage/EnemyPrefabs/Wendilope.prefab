@@ -873,6 +873,7 @@ GameObject:
   - component: {fileID: 7937007973823681307}
   - component: {fileID: -2052011878296948447}
   - component: {fileID: 4958667231988639565}
+  - component: {fileID: 2393507762370162473}
   m_Layer: 23
   m_Name: Wendilope
   m_TagString: Enemy
@@ -912,24 +913,28 @@ MonoBehaviour:
   targetPoint: {fileID: 0}
   targetTag: Castle
   targetName: Castle
-  moveSpeed: 3
+  moveSpeed: 5
   acceleration: 8
-  stoppingDistance: 0.5
+  stoppingDistance: 0.8
   angularSpeed: 120
   moveOnStart: 1
-  maxHealth: 200
+  speedRandomRange: 0.6
+  pathOffsetUpdateInterval: 3
+  maxPathOffset: 12
+  targetOffsetRadius: 0.8
+  maxHealth: 260
   currentHealth: 0
   destroyOnDeath: 0
-  attackDamage: 10
-  attackCooldown: 2.5
-  attackRange: 4
+  attackDamage: 16
+  attackCooldown: 2.6
+  attackRange: 5
   attackableTags:
   - Castle
   staggerDuration: 0.5
   staggerSpeedMultiplier: 0.2
-  currencyAdd: 20
-  maxDistanceBonus: 10
-  minMultiplier: 0.5
+  currencyAdd: 48
+  maxDistanceBonus: 60
+  minMultiplier: 0
   maxBonusDistance: 100
   autoSetupChildColliders: 1
   OnDead:
@@ -991,10 +996,34 @@ MonoBehaviour:
         m_CallState: 2
   OnMove:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2393507762370162473}
+        m_TargetAssemblyTypeName: AnimatorBoolHelper, Assembly-CSharp
+        m_MethodName: SetBoolTrue
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: IsMoving
+          m_BoolArgument: 0
+        m_CallState: 2
   OnStopMoving:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2393507762370162473}
+        m_TargetAssemblyTypeName: AnimatorBoolHelper, Assembly-CSharp
+        m_MethodName: SetBoolFalse
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: IsMoving
+          m_BoolArgument: 0
+        m_CallState: 2
   OnStagger:
     m_PersistentCalls:
       m_Calls: []
@@ -1086,6 +1115,25 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2393507762370162473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6008828751597086896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94fe7416e002a8b49a56c4f8ebf5f891, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimatorBoolHelper
+  animator: {fileID: 4958667231988639565}
+  followTarget: {fileID: 0}
+  smoothSpeed: 5
+  followX: 1
+  followY: 1
+  followZ: 1
+  targetTag: Player
 --- !u!1 &7388776619878621364
 GameObject:
   m_ObjectHideFlags: 0

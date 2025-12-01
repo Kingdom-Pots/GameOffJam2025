@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 public enum Character {
     Mary,
     Daigo,
-    Serenella,
+    Ella,
     Karen,
 }
 

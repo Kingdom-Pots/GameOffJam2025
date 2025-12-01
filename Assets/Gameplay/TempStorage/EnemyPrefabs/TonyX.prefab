@@ -93,10 +93,14 @@ MonoBehaviour:
   stoppingDistance: 0.5
   angularSpeed: 120
   moveOnStart: 1
+  speedRandomRange: 0.5
+  pathOffsetUpdateInterval: 2
+  maxPathOffset: 25
+  targetOffsetRadius: 0.5
   maxHealth: 100
   currentHealth: 0
   destroyOnDeath: 0
-  attackDamage: 5
+  attackDamage: 6
   attackCooldown: 1.5
   attackRange: 4
   attackableTags:
@@ -104,8 +108,8 @@ MonoBehaviour:
   staggerDuration: 0.5
   staggerSpeedMultiplier: 0.2
   currencyAdd: 15
-  maxDistanceBonus: 10
-  minMultiplier: 0.5
+  maxDistanceBonus: 40
+  minMultiplier: 0
   maxBonusDistance: 100
   autoSetupChildColliders: 1
   OnDead:

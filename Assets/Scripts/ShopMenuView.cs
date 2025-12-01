@@ -103,7 +103,7 @@ public class ShopMenuView : MonoBehaviour
         m_BuyButton = m_ShopMenuController.GetBuyButton();
         m_BuyButton.clicked += OnBuyItemClicked;
 
-        m_NPCDialogView.Talk(Character.Mary, $"Welcome to my store, {Character.Serenella} !");
+        m_NPCDialogView.Talk(Character.Mary, $"Welcome back, {Character.Ella}...");
     }
 
     void OnDisable() {
@@ -143,7 +143,7 @@ public class ShopMenuView : MonoBehaviour
         else 
         {
             m_BuyButton.enabledSelf = false;
-            m_NPCDialogView.Talk(Character.Mary, "You don't have enough coins, go kill monster !!");
+            m_NPCDialogView.Talk(Character.Mary, "You don't have enough coins, better luck next time.");
         }
     }
 

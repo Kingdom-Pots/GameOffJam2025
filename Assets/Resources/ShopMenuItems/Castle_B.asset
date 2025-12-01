@@ -16,4 +16,4 @@ MonoBehaviour:
   Description: Upgrade your defense !
   Cost: 200
   Sprite: {fileID: 590657861, guid: 13ffce466226de74fa1fcf2777977e2b, type: 3}
-  DefenseGain: 10
+  DefenseGain: 24

@@ -16,6 +16,16 @@ public class EnemyController : MonoBehaviour
     public float angularSpeed = 120f;
     public bool moveOnStart = true;
 
+    [Header("Spread Settings")]
+    [Tooltip("Random speed variation range (e.g., 0.5 means ±0.5 units/sec)")]
+    public float speedRandomRange = 0.5f;
+    [Tooltip("Time between path offset updates (seconds)")]
+    public float pathOffsetUpdateInterval = 1.5f;
+    [Tooltip("Maximum random offset from path (units)")]
+    public float maxPathOffset = 2f;
+    [Tooltip("Random radius around target point (units)")]
+    public float targetOffsetRadius = 3f;
+
     [Header("Health Settings")]
     public float maxHealth = 50f;
     public float currentHealth;
@@ -38,7 +48,7 @@ public class EnemyController : MonoBehaviour
     public int maxDistanceBonus = 10;
     [Tooltip("Minimum currency multiplier (0-1). At stopping distance, reward = currencyAdd * minMultiplier")]
     [Range(0f, 1f)]
-    public float minMultiplier = 0.5f;
+    public float minMultiplier = 0f;
     [Tooltip("Distance threshold for maximum bonus (units from target)")]
     public float maxBonusDistance = 100f;
 
@@ -76,12 +86,19 @@ public class EnemyController : MonoBehaviour
     private float lastAttackTime;
     private float staggerEndTime;
     private float originalSpeed;
+    private float speedRandomFactor;
+    
+    // Spread system
+    private Vector3 targetOffset;
+    private Vector3 currentPathOffset;
+    private float nextPathOffsetTime;
 
     #region Initialization
 
     void Start()
     {
         InitializeHealth();
+        InitializeSpreadFactors();
         InitializeAgent();
         
         if (autoSetupChildColliders)
@@ -99,6 +116,20 @@ public class EnemyController : MonoBehaviour
         currentHealth = maxHealth;
     }
 
+    void InitializeSpreadFactors()
+    {
+        // Random speed variation
+        speedRandomFactor = Random.Range(-speedRandomRange, speedRandomRange);
+        
+        // Random target offset (circular distribution)
+        Vector2 randomCircle = Random.insideUnitCircle * targetOffsetRadius;
+        targetOffset = new Vector3(randomCircle.x, 0, randomCircle.y);
+        
+        // Initialize path offset
+        currentPathOffset = Vector3.zero;
+        nextPathOffsetTime = Time.time + pathOffsetUpdateInterval;
+    }
+
     void InitializeAgent()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -108,12 +139,16 @@ public class EnemyController : MonoBehaviour
             Debug.Log("NavMeshAgent component added automatically.");
         }
 
-        agent.speed = moveSpeed;
+        // Apply speed with random factor
+        float finalSpeed = moveSpeed + speedRandomFactor;
+        agent.speed = finalSpeed;
         agent.acceleration = acceleration;
         agent.stoppingDistance = stoppingDistance;
         agent.angularSpeed = angularSpeed;
         
-        originalSpeed = moveSpeed;
+        originalSpeed = finalSpeed;
+        
+        Debug.Log($"{gameObject.name} speed set to {finalSpeed} (base: {moveSpeed}, factor: {speedRandomFactor:F2})");
     }
 
     void InitializeTarget()
@@ -184,6 +219,7 @@ public class EnemyController : MonoBehaviour
         if (isDead) return;
 
         UpdateStagger();
+        UpdatePathOffset();
         UpdateTargetDamageable();
         UpdateCombatBehavior();
         UpdateMovementEvents();
@@ -194,6 +230,40 @@ public class EnemyController : MonoBehaviour
         if (isStaggered && Time.time >= staggerEndTime)
         {
             EndStagger();
+        }
+    }
+
+    void UpdatePathOffset()
+    {
+        // Only apply offset while moving and not in combat and not close to target
+        if (Time.time >= nextPathOffsetTime && IsMoving() && !isAttacking)
+        {
+            // Don't apply path offset if we're close to the target
+            float distanceToTarget = GetDistanceToTargetEdge();
+            if (distanceToTarget > attackRange * 2f) // Only offset when far from target
+            {
+                ApplyRandomPathOffset();
+            }
+            nextPathOffsetTime = Time.time + pathOffsetUpdateInterval;
+        }
+    }
+
+    void ApplyRandomPathOffset()
+    {
+        if (targetPoint == null || agent == null || !agent.enabled) return;
+
+        // Generate random offset perpendicular to movement direction
+        Vector2 randomCircle = Random.insideUnitCircle * maxPathOffset;
+        Vector3 newOffset = new Vector3(randomCircle.x, 0, randomCircle.y);
+        
+        // Calculate offset position
+        Vector3 offsetPosition = targetPoint.position + targetOffset + newOffset;
+        
+        // Validate position is on NavMesh
+        if (NavMesh.SamplePosition(offsetPosition, out NavMeshHit hit, maxPathOffset * 2f, NavMesh.AllAreas))
+        {
+            currentPathOffset = newOffset;
+            agent.SetDestination(hit.position);
         }
     }
 
@@ -210,6 +280,14 @@ public class EnemyController : MonoBehaviour
         if (targetPoint == null || !agent.enabled) return;
 
         float distanceToTarget = GetDistanceToTargetEdge();
+
+        // Debug logging to diagnose issues
+        if (hasReachedDestination && !isAttacking && Time.frameCount % 60 == 0)
+        {
+            Debug.Log($"{gameObject.name} - Distance: {distanceToTarget:F2}, AttackRange: {attackRange}, " +
+                     $"HasDamageable: {targetDamageable != null}, IsStaggered: {isStaggered}, " +
+                     $"CanAttack: {Time.time >= lastAttackTime + attackCooldown}");
+        }
 
         if (distanceToTarget <= attackRange)
         {
@@ -230,18 +308,37 @@ public class EnemyController : MonoBehaviour
             hasReachedDestination = true;
         }
 
+        // Check if we can attack
         if (Time.time >= lastAttackTime + attackCooldown && !isStaggered)
         {
-            Attack();
+            // If targetDamageable is null, try to get it again
+            if (targetDamageable == null && targetPoint != null)
+            {
+                targetDamageable = targetPoint.GetComponent<Damageable>();
+                
+                if (targetDamageable == null)
+                {
+                    Debug.LogWarning($"{gameObject.name}: Target {targetPoint.name} has no Damageable component!");
+                }
+            }
+            
+            if (targetDamageable != null)
+            {
+                Attack();
+            }
         }
     }
 
     void HandleOutOfAttackRange(float distanceToTarget)
     {
+        // Resume movement if stopped and not staggered
         if (agent.isStopped && !isStaggered)
         {
             agent.isStopped = false;
             hasReachedDestination = false;
+            
+            // Re-set destination to ensure agent continues moving
+            MoveToTarget();
         }
 
         isAttacking = false;
@@ -253,12 +350,26 @@ public class EnemyController : MonoBehaviour
                 if (agent.velocity.sqrMagnitude < 0.1f && !hasReachedDestination)
                 {
                     OnReachedDestination();
+                    
+                    // If we've reached destination but still out of attack range,
+                    // try moving to target again (in case offset is too far)
+                    if (distanceToTarget > attackRange)
+                    {
+                        Debug.Log($"{gameObject.name}: Reached destination but out of attack range. Re-pathing...");
+                        MoveToTarget();
+                    }
                 }
             }
             else
             {
                 hasReachedDestination = false;
             }
+        }
+        else if (!agent.hasPath && !hasReachedDestination)
+        {
+            // No path and haven't reached destination - try to repath
+            Debug.Log($"{gameObject.name}: Lost path, attempting to repath to target...");
+            MoveToTarget();
         }
     }
 
@@ -471,9 +582,9 @@ public class EnemyController : MonoBehaviour
         moveSpeed *= multiplier;
 
         if (agent != null)
-            agent.speed = moveSpeed;
+            agent.speed = moveSpeed + speedRandomFactor;
 
-        originalSpeed = moveSpeed; // update stagger system
+        originalSpeed = moveSpeed + speedRandomFactor; // update stagger system
     }
 
     void OnReachedDestination()
@@ -490,7 +601,9 @@ public class EnemyController : MonoBehaviour
             return;
         }
 
-        MoveToPosition(targetPoint.position);
+        // Apply target offset for spread
+        Vector3 targetPos = targetPoint.position + targetOffset;
+        MoveToPosition(targetPos);
     }
 
     public void MoveToPosition(Vector3 position)
@@ -606,6 +719,14 @@ public class EnemyController : MonoBehaviour
             Gizmos.color = isAttacking ? Color.red : new Color(1f, 0.5f, 0f, 0.3f);
             Gizmos.DrawWireSphere(transform.position, attackRange);
         }
+        
+        // Show target offset in editor
+        if (targetPoint != null && Application.isPlaying)
+        {
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawWireSphere(targetPoint.position + targetOffset, 0.5f);
+            Gizmos.DrawLine(targetPoint.position, targetPoint.position + targetOffset);
+        }
     }
 
     void OnDrawGizmosSelected()
@@ -614,6 +735,13 @@ public class EnemyController : MonoBehaviour
         {
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, attackRange);
+        }
+        
+        // Show spread radius around target
+        if (targetPoint != null)
+        {
+            Gizmos.color = new Color(0f, 1f, 1f, 0.2f);
+            Gizmos.DrawWireSphere(targetPoint.position, targetOffsetRadius);
         }
     }
 

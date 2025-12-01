@@ -1603,19 +1603,23 @@ MonoBehaviour:
   stoppingDistance: 0.5
   angularSpeed: 120
   moveOnStart: 1
+  speedRandomRange: 0.1
+  pathOffsetUpdateInterval: 4
+  maxPathOffset: 16
+  targetOffsetRadius: 0.5
   maxHealth: 50
   currentHealth: 0
   destroyOnDeath: 0
-  attackDamage: 5
-  attackCooldown: 1.5
+  attackDamage: 4
+  attackCooldown: 1.4
   attackRange: 4
   attackableTags:
   - Castle
   staggerDuration: 0.5
   staggerSpeedMultiplier: 0.2
-  currencyAdd: 5
-  maxDistanceBonus: 10
-  minMultiplier: 0.5
+  currencyAdd: 12
+  maxDistanceBonus: 30
+  minMultiplier: 0
   maxBonusDistance: 100
   autoSetupChildColliders: 1
   OnDead:

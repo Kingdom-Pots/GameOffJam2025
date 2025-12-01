@@ -16,8 +16,8 @@ MonoBehaviour:
   Description: A basic canon
   Cost: 40
   Sprite: {fileID: -1216339555, guid: 13ffce466226de74fa1fcf2777977e2b, type: 3}
-  DamageGain: 1
-  LaunchSpeedGain: 10
+  DamageGain: 2
+  LaunchSpeedGain: 4
   RotationSpeedGain: 2
   GameObject: {fileID: 919132149155446097, guid: 120a58f3a7afb8141bcc087143bf45d5,
     type: 3}

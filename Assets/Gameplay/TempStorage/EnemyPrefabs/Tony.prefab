@@ -729,22 +729,26 @@ MonoBehaviour:
   targetName: Castle
   moveSpeed: 4
   acceleration: 8
-  stoppingDistance: 0.5
+  stoppingDistance: 0.6
   angularSpeed: 120
   moveOnStart: 1
+  speedRandomRange: 0.6
+  pathOffsetUpdateInterval: 3
+  maxPathOffset: 8
+  targetOffsetRadius: 0.6
   maxHealth: 50
   currentHealth: 0
   destroyOnDeath: 1
-  attackDamage: 5
-  attackCooldown: 1.5
+  attackDamage: 2
+  attackCooldown: 1.1
   attackRange: 4
   attackableTags:
   - Castle
   staggerDuration: 0.5
   staggerSpeedMultiplier: 0.2
-  currencyAdd: 10
-  maxDistanceBonus: 10
-  minMultiplier: 0.5
+  currencyAdd: 14
+  maxDistanceBonus: 50
+  minMultiplier: 0
   maxBonusDistance: 100
   autoSetupChildColliders: 1
   OnDead:
