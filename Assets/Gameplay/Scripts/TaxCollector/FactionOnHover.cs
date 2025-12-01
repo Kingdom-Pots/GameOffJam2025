@@ -16,6 +16,13 @@ public class FactionOnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public TextMeshProUGUI textConfirmSelection = null;
     public static string lastSelectedFaction = "";
 
+    public void Awake()
+    {
+        selectionEnabled = true;
+        lastSelectedFaction = "";
+        FactionService.FactionSelected = null;        
+    }
+    
     public void Start()
     {
         //Button btn = confirmSelection.transform.Find("ButtonOK")?.GetComponent<Button>();
