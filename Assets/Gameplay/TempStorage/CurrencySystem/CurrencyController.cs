@@ -1,12 +1,9 @@
 using UnityEngine;
 using UnityEngine.Events;
 using TMPro;
-using MoreMountains.Feedbacks;
 
 public class CurrencyTracker : MonoBehaviour
 {
-    public MMF_Player TargetPlayer;
-
     // Currency Text UI
     public TMP_Text txt_Currency;
 
@@ -39,9 +36,7 @@ public class CurrencyTracker : MonoBehaviour
     // Gain currency
     public void Gain(int val)
     {
-        MMF_FloatingText floatingTextFeedback = TargetPlayer.GetFeedbackOfType<MMF_FloatingText>();
         currency += val;
-        floatingTextFeedback.Value = $"+{val}";
         UpdateUI();
         
         // Invoke the event with the amount added
