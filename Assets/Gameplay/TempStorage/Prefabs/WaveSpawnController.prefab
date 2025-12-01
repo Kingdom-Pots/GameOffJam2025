@@ -104,12 +104,15 @@ MonoBehaviour:
   - spawnPointName: Point A
     spawnArea: {fileID: 8191680723731439659}
     unlockAtWave: 1
+    speedMultiplier: 2
   - spawnPointName: Point B
     spawnArea: {fileID: 8821512710219407566}
     unlockAtWave: 2
+    speedMultiplier: 2
   - spawnPointName: Point C
     spawnArea: {fileID: 2650330752935626699}
     unlockAtWave: 3
+    speedMultiplier: 2
   waves:
   - waveName: Wave 1
     enemies:
@@ -312,9 +315,12 @@ MonoBehaviour:
   maxSpawnAttempts: 30
   spawnHeightOffset: 0
   parentToSpawner: 1
-  showDebugInfo: 1
+  showDebugInfo: 0
   showSpawnArea: 1
   startOnAwake: 1
+  OnEnemySpawned:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7742479520941019702
 GameObject:
   m_ObjectHideFlags: 0

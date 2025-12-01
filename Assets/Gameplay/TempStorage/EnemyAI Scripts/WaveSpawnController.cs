@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class WaveSpawnController: MonoBehaviour
 {
@@ -86,6 +87,9 @@ public class WaveSpawnController: MonoBehaviour
     private bool waitingForWaveClear = false;
     private Transform enemyContainer;
 
+    [Header("Events")]
+    public UnityEvent OnEnemySpawned;
+
     void Start()
     {
         // Get spawn areas (ensure at least one spawn point with a BoxCollider exists)
@@ -143,6 +147,7 @@ public class WaveSpawnController: MonoBehaviour
 
     void SpawnNextWave()
     {
+        OnEnemySpawned.Invoke();
         // Check if using pre-configured waves
         if (currentWaveIndex < waves.Count)
         {

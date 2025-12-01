@@ -34,6 +34,13 @@ public class EnemyController : MonoBehaviour
 
     [Header("Rewards")]
     public int currencyAdd;
+    [Tooltip("Maximum bonus currency when enemy is killed far from target")]
+    public int maxDistanceBonus = 10;
+    [Tooltip("Minimum currency multiplier (0-1). At stopping distance, reward = currencyAdd * minMultiplier")]
+    [Range(0f, 1f)]
+    public float minMultiplier = 0.5f;
+    [Tooltip("Distance threshold for maximum bonus (units from target)")]
+    public float maxBonusDistance = 100f;
 
     [Header("Setup")]
     [Tooltip("Auto setup child colliders for damage")]
@@ -393,8 +400,38 @@ public class EnemyController : MonoBehaviour
         CurrencyTracker currency = FindAnyObjectByType<CurrencyTracker>();
         if (currency != null)
         {
-            currency.Gain(currencyAdd);
+            int finalReward = CalculateDistanceBasedReward();
+            currency.Gain(finalReward);
+            Debug.Log($"{gameObject.name} gave {finalReward} currency (base: {currencyAdd}, distance modifier applied)");
         }
+    }
+
+    int CalculateDistanceBasedReward()
+    {
+        if (targetPoint == null)
+        {
+            return currencyAdd; // No modifier if no target
+        }
+
+        float distanceToTarget = GetDistanceToTargetEdge();
+        
+        // Normalize distance: 0 at stopping distance, 1 at max bonus distance or beyond
+        float normalizedDistance = Mathf.Clamp01(
+            (distanceToTarget - agent.stoppingDistance) / 
+            (maxBonusDistance - agent.stoppingDistance)
+        );
+        
+        // Calculate multiplier: ranges from minMultiplier to 1.0
+        float multiplier = Mathf.Lerp(minMultiplier, 1f, normalizedDistance);
+        
+        // Calculate bonus: ranges from 0 to maxDistanceBonus
+        int bonus = Mathf.RoundToInt(maxDistanceBonus * normalizedDistance);
+        
+        // Final reward = (base currency * multiplier) + bonus
+        int baseReward = Mathf.RoundToInt(currencyAdd * multiplier);
+        int finalReward = baseReward + bonus;
+        
+        return Mathf.Max(1, finalReward); // Ensure at least 1 currency
     }
 
     // Call this after the death animation finishes
