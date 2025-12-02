@@ -40,8 +40,6 @@ public class FactionOnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         {
             gameObject.GetComponent<UnityEngine.UI.Image>().color = Color.green;
             lastSelectedFaction = gameObject.name;
-            textConfirmSelection.text = textConfirmSelection.text.Replace("<chosen faction>", gameObject.name);        
-            
         }
         popup.SetActive(true);
         popup.GetComponents<TextMeshProUGUI>()[0].text = gameObject.name;

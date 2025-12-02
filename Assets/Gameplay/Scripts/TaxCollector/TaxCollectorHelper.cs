@@ -9,7 +9,6 @@ public class TaxCollectorHelper : MonoBehaviour
 {
     public GameObject factionsPanel = null;
     public GameObject donationPanel = null;
-    public TextMeshProUGUI currentGDP = null;
     GameManager gm = null;
     CurrencyTracker currencyTracker = null;
     // Start is called once before the first execution of Update after the MonoBehaviour is created

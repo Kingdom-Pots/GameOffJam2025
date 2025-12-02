@@ -21,6 +21,8 @@ public class FactionList
 public static class FactionService
 {
     public static string FactionSelected = null;
+    static List<Faction> factions;
+    public static string lastSelectedFaction = "";
     private static string apiUrl = "https://newdatabase-8dc6.restdb.io/rest/factions";
 #if UNITY_WEBGL
     const string apiKeyConst = "68862fc71d8067eda2a193f1";
@@ -45,7 +47,7 @@ public static class FactionService
             string wrappedJson = "{\"factions\":" + json + "}";
 
             FactionList factionList = JsonUtility.FromJson<FactionList>(wrappedJson);
-            List<Faction> factions = new List<Faction>(factionList.factions);
+            factions = new List<Faction>(factionList.factions);
 
             callback?.Invoke(factions);
         }
@@ -63,41 +65,25 @@ public static class FactionService
     {
         // First fetch factions to find the ID
         bool success = false;
-        yield return GetFactions(factions =>
+        Faction target = factions.Find(f => f.factionname == factionName);
+        if (target != null)
         {
-            Faction target = factions.Find(f => f.factionname == factionName);
-            if (target != null)
-            {
-                int newTotal = target.total + valueToAdd;
+            int newTotal = target.total + valueToAdd;
 
-                string bodyJson = "{\"total\":" + newTotal + "}";
+            string bodyJson = "{\"total\":" + newTotal + "}";
 
-                UnityWebRequest patchRequest = UnityWebRequest.Put(apiUrl + "/" + target._id, bodyJson);
-                patchRequest.method = "PATCH"; // override to PATCH
-                patchRequest.SetRequestHeader("Content-Type", "application/json");
-                patchRequest.SetRequestHeader("x-apikey", apiKeyConst);
-
-                var operation = patchRequest.SendWebRequest();
-                while (!operation.isDone) { }
-
-                if (patchRequest.result == UnityWebRequest.Result.Success)
-                {
-                    Debug.Log($"Updated {factionName} total to {newTotal}");
-                    success = true;
-                }
-                else
-                {
-                    Debug.LogError("Update Error: " + patchRequest.error);
-                }
-            }
-            else
-            {
-                Debug.LogError("Faction not found: " + factionName);
-            }
-        });
-
-        
-
+            UnityWebRequest patchRequest = UnityWebRequest.Put(apiUrl + "/" + target._id, bodyJson);
+            patchRequest.method = "PATCH"; // override to PATCH
+            patchRequest.SetRequestHeader("Content-Type", "application/json");
+            patchRequest.SetRequestHeader("x-apikey", apiKeyConst);
+            yield return patchRequest.SendWebRequest();
+            success = patchRequest.result == UnityWebRequest.Result.Success;
+            if (success) target.total = newTotal;
+        }
+        else
+        {
+            Debug.LogError("Faction not found: " + factionName);
+        }        
         callback?.Invoke(success);
     }
 }
